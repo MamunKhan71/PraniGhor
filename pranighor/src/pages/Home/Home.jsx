@@ -4,6 +4,8 @@ import { MdShoppingCartCheckout } from "react-icons/md";
 import Category from "./Category";
 import { FeaturedSection } from "./FeaturedSection";
 import HomeAbout from "./HomeAbout";
+import CompanySlider from "./CompanySlider";
+
 const Home = () => {
     return (
         <div className=" space-y-40">
@@ -27,7 +29,14 @@ const Home = () => {
                 <FeaturedSection />
             </div>
             <div>
-                <HomeAbout/>
+                <HomeAbout />
+            </div>
+            <div className="space-y-16">
+                <h1 className="text-3xl font-bold text-center">Our proud partners</h1>
+                <CompanySlider />
+            </div>
+            <div>
+                
             </div>
         </div>
     );
