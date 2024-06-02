@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import Hero from "./Hero";
 import { MdShoppingCartCheckout } from "react-icons/md";
 import Category from "./Category";
+import { FeaturedSection } from "./FeaturedSection";
+import HomeAbout from "./HomeAbout";
 const Home = () => {
     return (
         <div className=" space-y-40">
@@ -19,6 +21,13 @@ const Home = () => {
             <div className="space-y-16">
                 <h1 className="text-3xl font-bold text-center">Browse by category</h1>
                 <Category />
+            </div>
+            <div className="space-y-16">
+                <h1 className="text-3xl font-bold text-center">Featured products</h1>
+                <FeaturedSection />
+            </div>
+            <div>
+                <HomeAbout/>
             </div>
         </div>
     );
