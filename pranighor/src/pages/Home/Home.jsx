@@ -5,10 +5,12 @@ import Category from "./Category";
 import { FeaturedSection } from "./FeaturedSection";
 import HomeAbout from "./HomeAbout";
 import CompanySlider from "./CompanySlider";
-
+import { BestPets } from "./BestPets";
+import { GoMoveToEnd } from "react-icons/go";
+import { ShopByPets } from "./ShopByPets";
 const Home = () => {
     return (
-        <div className=" space-y-40">
+        <div className="space-y-40">
             <div className="relative">
                 <Hero />
                 <div className="absolute top-1/2 -translate-y-1/2 z-20 p-20 max-w-3xl text-white space-y-4">
@@ -35,8 +37,16 @@ const Home = () => {
                 <h1 className="text-3xl font-bold text-center">Our proud partners</h1>
                 <CompanySlider />
             </div>
-            <div>
-                
+            <div className="space-y-16">
+                <h1 className="text-3xl font-bold text-center">Best selling products</h1>
+                <BestPets />
+                <div className="w-full flex items-center justify-center">
+                    <Button><div className="flex items-center gap-2 justify-center">View More <GoMoveToEnd /></div></Button>
+                </div>
+            </div>
+            <div className="space-y-16">
+                <h1 className="text-3xl font-bold text-center">Shop by pet</h1>
+                <ShopByPets></ShopByPets>
             </div>
         </div>
     );
