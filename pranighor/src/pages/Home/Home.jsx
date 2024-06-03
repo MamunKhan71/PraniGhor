@@ -8,6 +8,8 @@ import CompanySlider from "./CompanySlider";
 import { BestPets } from "./BestPets";
 import { GoMoveToEnd } from "react-icons/go";
 import { ShopByPets } from "./ShopByPets";
+import { Link } from "react-router-dom";
+import CallToAction from "./CallToAction";
 const Home = () => {
     return (
         <div className="space-y-40">
@@ -17,9 +19,9 @@ const Home = () => {
                     <p className="text-primaryCol font-semibold">Pet shop</p>
                     <h1 className="text-6xl font-black leading-[60px]">A pet store with everything you need</h1>
                     <h3 className="text-lg">Sociis blandit et pellentesque aliquet at quisque tortor lacinia nullam. Mattis aenean scelerisque dui libero</h3>
-                    <Button>
+                    <Link to={'/all-pets'}><Button>
                         <MdShoppingCartCheckout className="mr-2 h-4 w-4" /> Shop Now
-                    </Button>
+                    </Button></Link>
                 </div>
             </div>
             <div className="space-y-16">
@@ -47,6 +49,22 @@ const Home = () => {
             <div className="space-y-16">
                 <h1 className="text-3xl font-bold text-center">Shop by pet</h1>
                 <ShopByPets></ShopByPets>
+            </div>
+            <div className="space-y-16">
+                <div className="space-y-2 text-center">
+                    <h2 className="text-3xl font-bold">Get in touch</h2>
+                    <p className="text-gray-500 dark:text-gray-400">
+                        Feel free to leave any enquiries below, or give us a call to speak with our helpful sales team.
+                    </p>
+                </div>
+                <div className="flex gap-6 items-center">
+                    <div className="flex-1 w-full">
+                        <img className="rounded-lg object-cover" src="header1.jpg" alt="" />
+                    </div>
+                    <div className="flex-1 h-full w-full">
+                        <CallToAction />
+                    </div>
+                </div>
             </div>
         </div>
     );
