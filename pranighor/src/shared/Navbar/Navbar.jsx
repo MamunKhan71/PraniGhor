@@ -2,7 +2,7 @@ import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 import { SiDatadog } from "react-icons/si";
-import { Avatar } from "../ui/avatar";
+import { Avatar } from "../../components/ui/avatar";
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { CgLogOut } from "react-icons/cg";
 import { TbLayoutDashboard } from "react-icons/tb";
@@ -14,10 +14,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu"
+} from "../../components/ui/dropdown-menu"
 
 export default function Navbar() {
-  const user = true
+  const user = false
   return (
     <header className="flex w-full shrink-0 items-center bg-gray-100 px-6 py-4 rounded-full my-8">
       <Sheet>
@@ -99,7 +99,7 @@ export default function Navbar() {
             </DropdownMenu>
 
           </Link> : <Link
-            href="#"
+            to={'/login'}
             className="group inline-flex h-9 w-max items-center justify-center rounded-full  px-4 py-2 text-lg font-medium transition-colors  hover:text-primaryCol focus:bg-primaryCol focus:text-black focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
             prefetch={false}
           >

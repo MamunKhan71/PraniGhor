@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar/Navbar";
+import Navbar from "@/shared/Navbar/Navbar";
 import Footer from "@/shared/Footer";
 import { Outlet } from "react-router-dom";
 
@@ -7,8 +7,9 @@ const MainLayouts = () => {
         <div className="font-primary">
             <div className="container mx-auto">
                 <Navbar />
-                <Outlet />
-
+                <div>
+                    <Outlet />
+                </div>
             </div>
             <Footer />
         </div>
