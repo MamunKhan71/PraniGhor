@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/select"
 import { FaCalendar } from "react-icons/fa";
 import FilterSection from "./FilterSection";
+import { Link } from "react-router-dom";
 const AllPets = () => {
     return (
         <div className="w-full space-y-4">
@@ -62,8 +63,8 @@ const AllPets = () => {
                                             <CardDescription className="text-sm text-gray-600">Location: Dhaka, Bangladesh</CardDescription>
                                         </div>
                                     </div>
-                                    <Button className="w-full">Adopt Now</Button>
                                 </div>
+                                    <Link to={'/details'}><Button className="w-full">View Details</Button></Link>
                             </CardHeader>
                         </Card>
                         <Card>
@@ -87,8 +88,9 @@ const AllPets = () => {
                                             <CardDescription className="text-sm text-gray-600">Location: Dhaka, Bangladesh</CardDescription>
                                         </div>
                                     </div>
-                                    <Button className="w-full">View Details</Button>
+                                    
                                 </div>
+                                    <Link to={'/details'}><Button className="w-full">View Details</Button></Link>
                             </CardHeader>
                         </Card>
 

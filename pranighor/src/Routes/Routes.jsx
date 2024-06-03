@@ -3,6 +3,7 @@ import AboutUs from "@/pages/About Us/AboutUs";
 import AllPets from "@/pages/All Pets/AllPets";
 import Home from "@/pages/Home/Home";
 import Login from "@/pages/Login/Login";
+import PetDetails from "@/pages/Pet Details/PetDetails";
 import { createBrowserRouter } from "react-router-dom";
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
             {
                 path: '/about-us',
                 element: <AboutUs />
+            },
+            {
+                path: '/details',
+                element: <PetDetails />
             }
         ]
     },
