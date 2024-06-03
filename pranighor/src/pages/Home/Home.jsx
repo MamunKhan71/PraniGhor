@@ -52,9 +52,9 @@ const Home = () => {
             </div>
             <div className="space-y-16">
                 <div className="space-y-2 text-center">
-                    <h2 className="text-3xl font-bold">Get in touch</h2>
+                    <h2 className="text-3xl font-bold">Find Your Furry Friend Today</h2>
                     <p className="text-gray-500 dark:text-gray-400">
-                        Feel free to leave any enquiries below, or give us a call to speak with our helpful sales team.
+                    Give a loving home to a pet in need. Adopt today and make a friend for life!
                     </p>
                 </div>
                 <div className="flex gap-6 items-center">

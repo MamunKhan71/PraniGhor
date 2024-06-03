@@ -1,4 +1,5 @@
 import MainLayouts from "@/Layouts/MainLayouts";
+import AboutUs from "@/pages/About Us/AboutUs";
 import AllPets from "@/pages/All Pets/AllPets";
 import Home from "@/pages/Home/Home";
 import Login from "@/pages/Login/Login";
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
             {
                 path: '/all-pets',
                 element: <AllPets />
+            },
+            {
+                path: '/about-us',
+                element: <AboutUs />
             }
         ]
     },
