@@ -116,7 +116,7 @@ const DonationCampaign = () => {
                                     </div>
                                 </div>
                             </div>
-                            <Link to={'/details'}>
+                            <Link to={'/donation-details'}>
                                 <Button className="w-full">View Details</Button>
                             </Link>
                         </CardHeader>

@@ -2,6 +2,7 @@ import MainLayouts from "@/Layouts/MainLayouts";
 import AboutUs from "@/pages/About Us/AboutUs";
 import AllPets from "@/pages/All Pets/AllPets";
 import DonationCampaign from "@/pages/Campaign Page/DonationCampaign";
+import DonationDetails from "@/pages/Donation Details/DonationDetails";
 import Home from "@/pages/Home/Home";
 import Login from "@/pages/Login/Login";
 import PetDetails from "@/pages/Pet Details/PetDetails";
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
             {
                 path: '/donation',
                 element: <DonationCampaign />
+            },
+            {
+                path: '/donation-details',
+                element: <DonationDetails />
             }
         ]
     },
