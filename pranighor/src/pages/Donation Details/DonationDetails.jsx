@@ -80,7 +80,7 @@ export default function DonationDetails() {
                             <DialogHeader>
                                 <Lottie animationData={cards}></Lottie>
                                 <div className="text-center space-y-4">
-                                    <DialogTitle>Donate to Rebuild After Disaster</DialogTitle>
+                                    <DialogTitle className="text-2xl">Donate to Rebuild After Disaster</DialogTitle>
                                     <DialogDescription>
                                         Enter your donation amount and payment details to complete your contribution.
                                     </DialogDescription>

@@ -17,7 +17,7 @@ import {
 } from "../../components/ui/dropdown-menu"
 
 export default function Navbar() {
-  const user = false
+  const user = true
   return (
     <header className="flex w-full shrink-0 items-center bg-gray-100 px-6 py-4 rounded-full my-8">
       <Sheet>
@@ -91,7 +91,7 @@ export default function Navbar() {
               <DropdownMenuContent>
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem><div className="flex items-center justify-center gap-2"><TbLayoutDashboard /> Dashboard</div></DropdownMenuItem>
+                <DropdownMenuItem><Link to={'/dashboard'} className="flex items-center justify-center gap-2 hover:cursor-pointer"><TbLayoutDashboard /> Dashboard</Link></DropdownMenuItem>
                 <DropdownMenuItem><div className="flex items-center justify-center gap-2">
                   <CgLogOut /> Logout
                 </div></DropdownMenuItem>
