@@ -33,11 +33,11 @@ const AuthProvider = ({ children }) => {
         setLoading(true)
         return signInWithPopup(auth, twitterProvider)
     }
-    const userUpdate = (userName, userPhoto) => {
+    const userUpdate = (name, photo) => {
         setLoading(true)
         return updateProfile(auth.currentUser, {
-            displayName: userName,
-            photoURL: userPhoto
+            displayName: name, 
+            photoURL: photo
         })
     }
     const userSignOut = () => {

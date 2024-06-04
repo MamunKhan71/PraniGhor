@@ -4,9 +4,11 @@ import { Input } from "@/components/ui/input"
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { Link, Outlet } from "react-router-dom"
 import { FaMoneyBill, FaPaw, FaUser } from "react-icons/fa"
+import UseAuth from "@/hooks/useAuth"
 
 export default function Dashboard() {
     const isAdmin = true
+    const { user } = UseAuth()
     return (
         <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
             <div className="hidden border-r bg-gray-100/40 lg:block dark:bg-gray-800/40">
@@ -128,12 +130,13 @@ export default function Dashboard() {
                                 size="icon"
                                 className="rounded-full border border-gray-200 w-8 h-8 dark:border-gray-800"
                             >
-                                <img src="/placeholder.svg" width="32" height="32" className="rounded-full" alt="Avatar" />
+
+                                <img src={`${user?.photoURL || "https://github.com/shadcn.png"}`} width="32" height="32" className="rounded-full" alt="Avatar" />
                                 <span className="sr-only">Toggle user menu</span>
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>John Doe</DropdownMenuLabel>
+                            <DropdownMenuLabel>{user.displayName}</DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>Settings</DropdownMenuItem>
                             <DropdownMenuItem>Support</DropdownMenuItem>

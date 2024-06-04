@@ -9,7 +9,7 @@ import UseAuth from "@/hooks/useAuth"
 import useAxiosPublic from "@/hooks/useAxiosPublic"
 
 export default function RegisterForm({ switchToLogin }) {
-    const { signUpUser, handleGoogleAuth, handleTwitterAuth, userUpdate } = UseAuth()
+    const { user, signUpUser, handleGoogleAuth, handleTwitterAuth, userUpdate } = UseAuth()
     const axiosPublic = useAxiosPublic()
     const {
         register,
@@ -18,23 +18,32 @@ export default function RegisterForm({ switchToLogin }) {
     } = useForm()
     const handleFormSubmit = data => {
         const userName = data.name
-        const userImage = data.image
         const userEmail = data.email
         const userPassword = data.password
+        const imageFile = { image: data.image[0] }
         const newUser = {
             userName,
             userEmail,
-            userImage,
             userPassword
         }
         signUpUser(userEmail, userPassword)
-            .then(()=> {
-                axiosPublic.get('')
+            .then(async () => {
+                const res = await axiosPublic.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_api}`, imageFile, {
+                    headers: {
+                        'content-type': 'multipart/form-data'
+                    }
+                })
+                newUser.userImage = (res.data?.data?.display_url)
             })
-            .then(() => {
-                userUpdate(userName, userImage)
-                    .then(res => console.log(res))
-            })
+        .then(() => {
+            const name = userName
+            const photo = newUser.userImage
+            userUpdate(name, photo)
+            .then(()=> console.log("Successful!"))
+            
+        })
+
+
     }
     const handleGoogleSignUp = () => {
         handleGoogleAuth()
