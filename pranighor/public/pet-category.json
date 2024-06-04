@@ -1,0 +1,44 @@
+{
+    "categories": [
+        {
+            "name": "Dog",
+            "description": "Loyal and friendly pets known for their companionship."
+        },
+        {
+            "name": "Cat",
+            "description": "Independent and affectionate pets with a playful nature."
+        },
+        {
+            "name": "Rabbit",
+            "description": "Cute and cuddly pets that enjoy hopping around."
+        },
+        {
+            "name": "Parrot",
+            "description": "Colorful and talkative birds that are very social."
+        },
+        {
+            "name": "Turtle",
+            "description": "Calm and steady pets that enjoy basking in the sun."
+        },
+        {
+            "name": "Hamster",
+            "description": "Small and active pets that love running on wheels."
+        },
+        {
+            "name": "Frog",
+            "description": "Lively pets that are fascinating to observe."
+        },
+        {
+            "name": "Pigeon",
+            "description": "Gentle birds known for their homing ability."
+        },
+        {
+            "name": "Goldfish",
+            "description": "Bright and peaceful fish that add color to aquariums."
+        },
+        {
+            "name": "Dove",
+            "description": "Calm and gentle birds that bring a sense of peace."
+        }
+    ]
+}

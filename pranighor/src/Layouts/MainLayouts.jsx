@@ -1,7 +1,7 @@
 import Navbar from "@/shared/Navbar/Navbar";
 import Footer from "@/shared/Footer";
 import { Outlet, useLocation } from "react-router-dom";
-
+import { Toaster } from "@/components/ui/toaster"
 const MainLayouts = () => {
     const location = useLocation()
     return (
@@ -12,8 +12,8 @@ const MainLayouts = () => {
                     <Outlet />
                 </div>
             </div>
-            {!location.pathname.startsWith("/dashboard")  && <Footer />}
-
+            {!location.pathname.startsWith("/dashboard") && <Footer />}
+            <Toaster />
         </div>
     );
 };

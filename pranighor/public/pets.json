@@ -1,0 +1,172 @@
+[
+    {
+        "image": "https://example.com/images/dog.jpg",
+        "name": "Buddy",
+        "age": "2 years",
+        "category": "Dog",
+        "location": "Dhaka, Bangladesh",
+        "shortDescription": "Friendly and energetic golden retriever.",
+        "longDescription": "Buddy is a 2-year-old golden retriever who loves to play fetch and is great with kids. He is vaccinated and neutered.",
+        "detailsButton": "View Details",
+        "status": "Not Adopted",
+        "postedBy": {
+            "name": "Md. Mamun",
+            "email": "mkmamun031@gmail.com",
+            "phone": "+880 1643091606",
+            "postedTime": "2024-06-05T10:00:00Z"
+        }
+    },
+    {
+        "image": "https://example.com/images/cat.jpg",
+        "name": "Whiskers",
+        "age": "3 years",
+        "category": "Cat",
+        "location": "Chittagong, Bangladesh",
+        "shortDescription": "Calm and affectionate tabby cat.",
+        "longDescription": "Whiskers is a 3-year-old tabby cat who enjoys lounging in sunny spots. She is litter trained and spayed.",
+        "detailsButton": "View Details",
+        "status": "Not Adopted",
+        "postedBy": {
+            "name": "Md. Mamun",
+            "email": "mkmamun031@gmail.com",
+            "phone": "+880 1643091606",
+            "postedTime": "2024-06-05T10:00:00Z"
+        }
+    },
+    {
+        "image": "https://example.com/images/rabbit.jpg",
+        "name": "Flopsy",
+        "age": "1 year",
+        "category": "Rabbit",
+        "location": "Sylhet, Bangladesh",
+        "shortDescription": "Cute and cuddly rabbit.",
+        "longDescription": "Flopsy is a 1-year-old rabbit who loves to munch on carrots and play with toys. She is very friendly and enjoys being held.",
+        "detailsButton": "View Details",
+        "status": "Not Adopted",
+        "postedBy": {
+            "name": "Md. Mamun",
+            "email": "mkmamun031@gmail.com",
+            "phone": "+880 1643091606",
+            "postedTime": "2024-06-05T10:00:00Z"
+        }
+    },
+    {
+        "image": "https://example.com/images/parrot.jpg",
+        "name": "Polly",
+        "age": "4 years",
+        "category": "Parrot",
+        "location": "Khulna, Bangladesh",
+        "shortDescription": "Talkative and colorful parrot.",
+        "longDescription": "Polly is a 4-year-old parrot who loves to mimic sounds and words. She is very social and enjoys human interaction.",
+        "detailsButton": "View Details",
+        "status": "Not Adopted",
+        "postedBy": {
+            "name": "Md. Mamun",
+            "email": "mkmamun031@gmail.com",
+            "phone": "+880 1643091606",
+            "postedTime": "2024-06-05T10:00:00Z"
+        }
+    },
+    {
+        "image": "https://example.com/images/turtle.jpg",
+        "name": "Shelly",
+        "age": "5 years",
+        "category": "Turtle",
+        "location": "Rajshahi, Bangladesh",
+        "shortDescription": "Calm and easy-going turtle.",
+        "longDescription": "Shelly is a 5-year-old turtle who enjoys basking under the sun. She is low maintenance and has a calm demeanor.",
+        "detailsButton": "View Details",
+        "status": "Not Adopted",
+        "postedBy": {
+            "name": "Md. Mamun",
+            "email": "mkmamun031@gmail.com",
+            "phone": "+880 1643091606",
+            "postedTime": "2024-06-05T10:00:00Z"
+        }
+    },
+    {
+        "image": "https://example.com/images/hamster.jpg",
+        "name": "Nibbles",
+        "age": "6 months",
+        "category": "Hamster",
+        "location": "Barisal, Bangladesh",
+        "shortDescription": "Playful and curious hamster.",
+        "longDescription": "Nibbles is a 6-month-old hamster who loves to explore and run on his wheel. He is very active and fun to watch.",
+        "detailsButton": "View Details",
+        "status": "Not Adopted",
+        "postedBy": {
+            "name": "Md. Mamun",
+            "email": "mkmamun031@gmail.com",
+            "phone": "+880 1643091606",
+            "postedTime": "2024-06-05T10:00:00Z"
+        }
+    },
+    {
+        "image": "https://example.com/images/frog.jpg",
+        "name": "Hoppy",
+        "age": "8 months",
+        "category": "Frog",
+        "location": "Comilla, Bangladesh",
+        "shortDescription": "Small and lively frog.",
+        "longDescription": "Hoppy is an 8-month-old frog who loves to jump around and catch insects. He is fascinating to observe.",
+        "detailsButton": "View Details",
+        "status": "Not Adopted",
+        "postedBy": {
+            "name": "Md. Mamun",
+            "email": "mkmamun031@gmail.com",
+            "phone": "+880 1643091606",
+            "postedTime": "2024-06-05T10:00:00Z"
+        }
+    },
+    {
+        "image": "https://example.com/images/pigeon.jpg",
+        "name": "Sky",
+        "age": "2 years",
+        "category": "Pigeon",
+        "location": "Mymensingh, Bangladesh",
+        "shortDescription": "Gentle and homing pigeon.",
+        "longDescription": "Sky is a 2-year-old pigeon who enjoys flying and returning home. He is easy to care for and very gentle.",
+        "detailsButton": "View Details",
+        "status": "Not Adopted",
+        "postedBy": {
+            "name": "Md. Mamun",
+            "email": "mkmamun031@gmail.com",
+            "phone": "+880 1643091606",
+            "postedTime": "2024-06-05T10:00:00Z"
+        }
+    },
+    {
+        "image": "https://example.com/images/goldfish.jpg",
+        "name": "Goldie",
+        "age": "1 year",
+        "category": "Goldfish",
+        "location": "Rangpur, Bangladesh",
+        "shortDescription": "Bright and beautiful goldfish.",
+        "longDescription": "Goldie is a 1-year-old goldfish who enjoys swimming around and adds color to your aquarium. She is easy to care for and very peaceful.",
+        "detailsButton": "View Details",
+        "status": "Not Adopted",
+        "postedBy": {
+            "name": "Md. Mamun",
+            "email": "mkmamun031@gmail.com",
+            "phone": "+880 1643091606",
+            "postedTime": "2024-06-05T10:00:00Z"
+        }
+    },
+    {
+        "image": "https://example.com/images/dove.jpg",
+        "name": "Peace",
+        "age": "3 years",
+        "category": "Dove",
+        "location": "Jessore, Bangladesh",
+        "shortDescription": "Gentle and serene dove.",
+        "longDescription": "Peace is a 3-year-old dove who loves to coo and brings a sense of calm to any home. She is very gentle and easy to care for.",
+        "detailsButton": "View Details",
+        "status": "Not Adopted",
+        "postedBy": {
+            "name": "Md. Mamun",
+            "email": "mkmamun031@gmail.com",
+            "phone": "+880 1643091606",
+            "postedTime": "2024-06-05T10:00:00Z"
+        }
+    }
+]

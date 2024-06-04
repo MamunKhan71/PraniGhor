@@ -7,9 +7,11 @@ import { FaGoogle, FaTwitter } from "react-icons/fa"
 import { useForm } from "react-hook-form"
 import UseAuth from "@/hooks/useAuth"
 import useAxiosPublic from "@/hooks/useAxiosPublic"
+import { useToast } from "@/components/ui/use-toast"
 
 export default function RegisterForm({ switchToLogin }) {
     const { user, signUpUser, handleGoogleAuth, handleTwitterAuth, userUpdate } = UseAuth()
+    const { toast } = useToast()
     const axiosPublic = useAxiosPublic()
     const {
         register,
@@ -35,15 +37,16 @@ export default function RegisterForm({ switchToLogin }) {
                 })
                 newUser.userImage = (res.data?.data?.display_url)
             })
-        .then(() => {
-            const name = userName
-            const photo = newUser.userImage
-            userUpdate(name, photo)
-            .then(()=> console.log("Successful!"))
-            
-        })
+            .then(() => {
+                const name = userName
+                const photo = newUser.userImage
+                userUpdate(name, photo)
+                    .then(() => toast({
+                        title: "Successful!",
+                        description: "Account Created Successfully!",
+                    }))
 
-
+            })
     }
     const handleGoogleSignUp = () => {
         handleGoogleAuth()
@@ -78,9 +81,6 @@ export default function RegisterForm({ switchToLogin }) {
                             <div className="relative space-y-2">
                                 <div className="flex items-center">
                                     <Label htmlFor="password">Password</Label>
-                                    <Link href="#" className="ml-auto inline-block text-sm underline" prefetch={false}>
-                                        Forgot your password?
-                                    </Link>
                                 </div>
                                 <Input {...register('password')} id="password" type="password" required />
                                 <Button variant="ghost" size="icon" className="absolute bottom-1 right-1 h-7 w-7">
