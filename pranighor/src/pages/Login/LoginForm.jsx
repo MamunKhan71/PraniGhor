@@ -4,8 +4,29 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 import { FaGoogle, FaTwitter } from "react-icons/fa"
-
+import { useForm } from "react-hook-form"
+import UseAuth from "@/hooks/useAuth"
 export default function LoginForm({ switchToRegister }) {
+    const { signInUser, handleGoogleAuth, handleTwitterAuth } = UseAuth()
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm()
+    const handleFormSubmit = data => {
+        const email = data.email
+        const password = data.password
+        signInUser(email, password)
+            .then(res => console.log(res))
+    }
+    const handleGoogleLogin = () => {
+        handleGoogleAuth()
+            .then(res => console.log(res))
+    }
+    const handleTwitterLogin = () => {
+        handleTwitterAuth()
+            .then(res => console.log(res))
+    }
     return (
         <div className="mx-auto">
             <Card>
@@ -15,31 +36,33 @@ export default function LoginForm({ switchToRegister }) {
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="email">Email</Label>
-                            <Input id="email" type="email" placeholder="m@example.com" required />
-                        </div>
-                        <div className="relative space-y-2">
-                            <div className="flex items-center">
-                                <Label htmlFor="password">Password</Label>
-                                <Link href="#" className="ml-auto inline-block text-sm underline" prefetch={false}>
-                                    Forgot your password?
-                                </Link>
+                        <form className="space-y-4" onSubmit={handleSubmit(handleFormSubmit)}>
+                            <div className="space-y-2">
+                                <Label htmlFor="email">Email</Label>
+                                <Input {...register('email')} id="email" type="email" placeholder="m@example.com" required />
                             </div>
-                            <Input id="password" type="password" required />
-                            <Button variant="ghost" size="icon" className="absolute bottom-1 right-1 h-7 w-7">
-                                <EyeIcon className="h-4 w-4" />
-                                <span className="sr-only">Toggle password visibility</span>
+                            <div className="relative space-y-2">
+                                <div className="flex items-center">
+                                    <Label htmlFor="password">Password</Label>
+                                    <Link href="#" className="ml-auto inline-block text-sm underline" prefetch={false}>
+                                        Forgot your password?
+                                    </Link>
+                                </div>
+                                <Input {...register('password')} id="password" type="password" placeholder="your password" required />
+                                <Button variant="ghost" size="icon" className="absolute bottom-1 right-1 h-7 w-7">
+                                    <EyeIcon className="h-4 w-4" />
+                                    <span className="sr-only">Toggle password visibility</span>
+                                </Button>
+                            </div>
+                            <Button type="submit" className="w-full">
+                                Login
                             </Button>
-                        </div>
-                        <Button type="submit" className="w-full">
-                            Login
-                        </Button>
+                        </form>
                         <div className="flex items-center justify-center gap-4">
-                            <Button variant="outline" className="w-full">
+                            <Button onClick={handleGoogleLogin} variant="outline" className="w-full">
                                 <FaGoogle />
                             </Button>
-                            <Button variant="outline" className="w-full">
+                            <Button onClick={handleTwitterLogin} variant="outline" className="w-full">
                                 <FaTwitter />
                             </Button>
                         </div>

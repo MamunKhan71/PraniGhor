@@ -4,8 +4,46 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 import { FaGoogle, FaTwitter } from "react-icons/fa"
+import { useForm } from "react-hook-form"
+import UseAuth from "@/hooks/useAuth"
+import useAxiosPublic from "@/hooks/useAxiosPublic"
 
 export default function RegisterForm({ switchToLogin }) {
+    const { signUpUser, handleGoogleAuth, handleTwitterAuth, userUpdate } = UseAuth()
+    const axiosPublic = useAxiosPublic()
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm()
+    const handleFormSubmit = data => {
+        const userName = data.name
+        const userImage = data.image
+        const userEmail = data.email
+        const userPassword = data.password
+        const newUser = {
+            userName,
+            userEmail,
+            userImage,
+            userPassword
+        }
+        signUpUser(userEmail, userPassword)
+            .then(()=> {
+                axiosPublic.get('')
+            })
+            .then(() => {
+                userUpdate(userName, userImage)
+                    .then(res => console.log(res))
+            })
+    }
+    const handleGoogleSignUp = () => {
+        handleGoogleAuth()
+            .then(res => console.log(res))
+    }
+    const handleTwitterSignUp = () => {
+        handleTwitterAuth()
+            .then(res => console.log(res))
+    }
     return (
         <div className="mx-auto">
             <Card>
@@ -15,39 +53,41 @@ export default function RegisterForm({ switchToLogin }) {
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="name">Name</Label>
-                            <Input id="name" type="text" placeholder="John Doe" required />
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="email">Email</Label>
-                            <Input id="email" type="email" placeholder="m@example.com" required />
-                        </div>
-                        <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="picture">Profile Picture</Label>
-                            <Input id="picture" type="file" />
-                        </div>
-                        <div className="relative space-y-2">
-                            <div className="flex items-center">
-                                <Label htmlFor="password">Password</Label>
-                                <Link href="#" className="ml-auto inline-block text-sm underline" prefetch={false}>
-                                    Forgot your password?
-                                </Link>
+                        <form className="space-y-4" onSubmit={handleSubmit(handleFormSubmit)}>
+                            <div className="space-y-2">
+                                <Label htmlFor="name">Name</Label>
+                                <Input {...register('name')} id="name" type="text" placeholder="John Doe" required />
                             </div>
-                            <Input id="password" type="password" required />
-                            <Button variant="ghost" size="icon" className="absolute bottom-1 right-1 h-7 w-7">
-                                <EyeIcon className="h-4 w-4" />
-                                <span className="sr-only">Toggle password visibility</span>
+                            <div className="space-y-2">
+                                <Label htmlFor="email">Email</Label>
+                                <Input {...register('email')} id="email" type="email" placeholder="m@example.com" required />
+                            </div>
+                            <div className="grid w-full items-center gap-1.5">
+                                <Label htmlFor="picture">Profile Picture</Label>
+                                <Input {...register('image')} id="picture" type="file" />
+                            </div>
+                            <div className="relative space-y-2">
+                                <div className="flex items-center">
+                                    <Label htmlFor="password">Password</Label>
+                                    <Link href="#" className="ml-auto inline-block text-sm underline" prefetch={false}>
+                                        Forgot your password?
+                                    </Link>
+                                </div>
+                                <Input {...register('password')} id="password" type="password" required />
+                                <Button variant="ghost" size="icon" className="absolute bottom-1 right-1 h-7 w-7">
+                                    <EyeIcon className="h-4 w-4" />
+                                    <span className="sr-only">Toggle password visibility</span>
+                                </Button>
+                            </div>
+                            <Button type="submit" className="w-full">
+                                Register
                             </Button>
-                        </div>
-                        <Button type="submit" className="w-full">
-                            Register
-                        </Button>
+                        </form>
                         <div className="flex items-center justify-center gap-4">
-                            <Button variant="outline" className="w-full">
+                            <Button onClick={handleGoogleSignUp} variant="outline" className="w-full">
                                 <FaGoogle />
                             </Button>
-                            <Button variant="outline" className="w-full">
+                            <Button onClick={handleTwitterSignUp} variant="outline" className="w-full">
                                 <FaTwitter />
                             </Button>
                         </div>

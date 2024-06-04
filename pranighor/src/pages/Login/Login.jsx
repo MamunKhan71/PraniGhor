@@ -1,9 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import LoginForm from "./LoginForm";
 import RegisterForm from "../Register/Register";
 
@@ -18,7 +14,7 @@ export default function Login() {
                     <TabsTrigger value="register">Register</TabsTrigger>
                 </TabsList>
                 <TabsContent value="login">
-                    <LoginForm switchToRegister={()=> setTab('register')} />
+                    <LoginForm switchToRegister={() => setTab('register')} />
                 </TabsContent>
                 <TabsContent value="register">
                     <RegisterForm switchToLogin={() => setTab("login")} />

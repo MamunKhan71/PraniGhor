@@ -15,9 +15,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../../components/ui/dropdown-menu"
+import UseAuth from "@/hooks/useAuth";
 
 export default function Navbar() {
-  const user = true
+  const { user } = UseAuth()
   return (
     <header className="flex w-full shrink-0 items-center bg-gray-100 px-6 py-4 rounded-full my-8">
       <Sheet>
