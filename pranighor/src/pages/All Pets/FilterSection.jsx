@@ -1,6 +1,16 @@
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { FaFilter } from "react-icons/fa";
 
 const FilterSection = () => {
+    const { isPending, error, data: categories } = useQuery({
+        queryKey: ['petCategory'],
+        queryFn: async () => {
+            const res = await axios.get('pet-category.json')
+            return res.data.categories;
+        }
+    })
+    console.log(categories);
     return (
         <div>
             <section className="relative w-full">
@@ -23,13 +33,12 @@ const FilterSection = () => {
                                             id="FROM"
                                             className="h-12 border border-gray-300 text-gray-900 text-xs font-medium rounded-lg block w-full py-2.5 px-4 appearance-none relative focus:outline-none bg-white"
                                         >
-                                            <option selected="">Select</option>
-                                            <option value="option 1">option 1</option>
-                                            <option value="option 2">option 2</option>
-                                            <option value="option 3">option 3</option>
-                                            <option value="option 4">option 4</option>
+                                            <option selected="" disabled>Select</option>
+                                            {
+                                                categories?.map(category => <option value={category.name}>{category.name}</option>)
+                                            }
                                         </select>
-                                                            
+
                                     </div>
                                 </div>
                                 <label
@@ -85,7 +94,7 @@ const FilterSection = () => {
                                     Search
                                 </button>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>

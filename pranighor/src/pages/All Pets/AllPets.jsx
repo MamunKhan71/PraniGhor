@@ -70,7 +70,7 @@ const AllPets = () => {
                                                 <Card>
                                                     <CardHeader>
                                                         <div className="space-y-4">
-                                                            <img className="rounded-xl" src="header1.jpg" alt="" />
+                                                            <img className="rounded-xl h-52 w-full object-cover" src={pet.image} alt="" />
                                                             <div className="flex justify-between items-center w-full">
                                                                 <div className="space-y-4 w-full">
                                                                     <div className="flex justify-between items-center w-full">
