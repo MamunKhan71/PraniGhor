@@ -136,7 +136,7 @@ export default function Dashboard() {
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>{user.displayName}</DropdownMenuLabel>
+                            <DropdownMenuLabel>{user?.displayName}</DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>Settings</DropdownMenuItem>
                             <DropdownMenuItem>Support</DropdownMenuItem>

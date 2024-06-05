@@ -2,7 +2,6 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Link } from "react-router-dom"
 import { FaGoogle, FaTwitter } from "react-icons/fa"
 import { useForm } from "react-hook-form"
 import UseAuth from "@/hooks/useAuth"

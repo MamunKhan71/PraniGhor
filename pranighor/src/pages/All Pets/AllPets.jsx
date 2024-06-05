@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { IoFilter } from "react-icons/io5";
 import {
     Pagination,
     PaginationContent,
@@ -29,6 +28,7 @@ const AllPets = () => {
     const axiosPublic = useAxiosPublic()
     const [search, setSearch] = useState([])
     const [filteredSearch, setFilteredSearch] = useState([])
+
     const { isPending, error, data: pets } = useQuery({
         queryKey: ['petData'],
         queryFn: () =>
@@ -46,6 +46,10 @@ const AllPets = () => {
         const filteredData = pets.filter(pet => pet.name === data)
         setFilteredSearch(filteredData);
     }
+    const handleCategoryFilter = (data) => {
+        // TODO
+        axiosPublic.get(`filter-pet?age=${ageFilter}`)
+    }
     return (
         <div className="w-full space-y-4">
             <div className="bg-primary h-48 rounded-lg flex flex-col items-center justify-center">
@@ -53,7 +57,7 @@ const AllPets = () => {
                 <p className=" text-gray-400 text-center">Browse the list of available pets</p>
             </div>
             <div className="mx-auto space-y-4 h-24">
-                <div className="flex relative items-center justify-end gap-4 w-full">
+                <div className="flex relative items-center justify-end gap-4 w-full mt-16">
                     <div className="w-1/2 mx-auto relative">
                         <div className="absolute z-30 w-full">
                             <ReactSearchBox
@@ -78,13 +82,12 @@ const AllPets = () => {
                     <SelectContent>
                         <SelectItem value="light">Date</SelectItem>
                         <SelectItem value="dark">Popularity</SelectItem>
-                        <SelectItem value="system">Price</SelectItem>
                     </SelectContent>
                 </Select>
             </div>
             <div className="flex gap-8 font-primary">
                 <div className="basis-1/5 w-full">
-                    <FilterSection />
+                    <FilterSection setFilteredSearch={setFilteredSearch} />
                 </div>
                 <div className="flex-1">
                     <div className="grid grid-cols-3 gap-4">

@@ -1,8 +1,13 @@
+import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useState } from "react";
 import { FaFilter } from "react-icons/fa";
 
-const FilterSection = () => {
+const FilterSection = ({ setFilteredSearch }) => {
+    const [catFilter, setCatFilter] = useState("")
+    const [ageFilter, setAgeFilter] = useState("")
+    const axiosPublic = useAxiosPublic()
     const { isPending, error, data: categories } = useQuery({
         queryKey: ['petCategory'],
         queryFn: async () => {
@@ -10,6 +15,9 @@ const FilterSection = () => {
             return res.data;
         }
     })
+    const handleAge = data => {
+        axiosPublic.get(`filter-pet?age=${data}`)
+    }
     return (
         <div>
             <section className="relative w-full">
@@ -47,15 +55,13 @@ const FilterSection = () => {
                                     By Age
                                 </label>
                                 <div className="relative w-full mb-8">
-                                    <select
+                                    <select onChange={(e) => handleAge(e.target.value)}
                                         id="FROM"
                                         className="h-12 border border-gray-300 text-gray-900 text-xs font-medium rounded-lg block w-full py-2.5 px-4 appearance-none relative focus:outline-none bg-white"
                                     >
-                                        <option selected="">Write code</option>
-                                        <option value="option 1">option 1</option>
-                                        <option value="option 2">option 2</option>
-                                        <option value="option 3">option 3</option>
-                                        <option value="option 4">option 4</option>
+                                        <option selected="" disabled>Select one</option>
+                                        <option value={1}>Ascending</option>
+                                        <option value={-1}>Descending</option>
                                     </select>
                                     <svg
                                         className="absolute top-1/2 -translate-y-1/2 right-4 z-50"
