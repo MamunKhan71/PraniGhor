@@ -1,184 +1,280 @@
 [
     {
-        "id" : "615c2fa0be80062b90e12ba2",
         "image": "https://i.ibb.co/G0CvXjJ/pexels-charlesdeluvio-1851164.jpg",
         "name": "Buddy",
         "age": "2 years",
         "category": "Dog",
+        "categoryId": "665fd0333bce62ea0ae75b00",
         "location": "Dhaka, Bangladesh",
         "shortDescription": "Friendly and energetic golden retriever.",
         "longDescription": "Buddy is a 2-year-old golden retriever who loves to play fetch and is great with kids. He is vaccinated and neutered.",
-        "detailsButton": "View Details",
         "status": "Not Adopted",
         "postedBy": {
             "name": "Md. Mamun",
             "email": "mkmamun031@gmail.com",
             "phone": "+880 1643091606",
             "postedTime": "2024-06-05T10:00:00Z"
-        }
+        },
+        "postedDate": "2024-06-05T10:00:00Z",
+        "interactionCount": 150,
+        "adoptionUrgency": false,
+        "vaccinated": true,
+        "neutered": true,
+        "featuredStatus": false
     },
     {
-        "id" : "615c2fa0be80062b90e12ba3",
         "image": "https://i.ibb.co/TBcbt4s/pexels-pixabay-45201.jpg",
         "name": "Whiskers",
         "age": "3 years",
         "category": "Cat",
+        "categoryId": "665fd0333bce62ea0ae75b01",
         "location": "Chittagong, Bangladesh",
         "shortDescription": "Calm and affectionate tabby cat.",
         "longDescription": "Whiskers is a 3-year-old tabby cat who enjoys lounging in sunny spots. She is litter trained and spayed.",
-        "detailsButton": "View Details",
         "status": "Not Adopted",
         "postedBy": {
             "name": "Md. Mamun",
             "email": "mkmamun031@gmail.com",
             "phone": "+880 1643091606",
             "postedTime": "2024-06-05T10:00:00Z"
-        }
+        },
+        "postedDate": "2024-06-05T10:00:00Z",
+        "interactionCount": 150,
+        "adoptionUrgency": false,
+        "vaccinated": true,
+        "neutered": true,
+        "featuredStatus": false
     },
     {
-        "id" : "615c2fa0be80062b90e12ba4",
         "image": "https://i.ibb.co/BCqKj6T/pexels-nikiemmert-20257368.jpg",
         "name": "Flopsy",
         "age": "1 year",
         "category": "Rabbit",
+        "categoryId": "665fd0333bce62ea0ae75b02",
         "location": "Sylhet, Bangladesh",
         "shortDescription": "Cute and cuddly rabbit.",
         "longDescription": "Flopsy is a 1-year-old rabbit who loves to munch on carrots and play with toys. She is very friendly and enjoys being held.",
-        "detailsButton": "View Details",
         "status": "Not Adopted",
         "postedBy": {
             "name": "Md. Mamun",
             "email": "mkmamun031@gmail.com",
             "phone": "+880 1643091606",
             "postedTime": "2024-06-05T10:00:00Z"
-        }
+        },
+        "postedDate": "2024-06-05T10:00:00Z",
+        "interactionCount": 150,
+        "adoptionUrgency": false,
+        "vaccinated": true,
+        "neutered": true,
+        "featuredStatus": false
     },
     {
-        "id" : "615c2fa0be80062b90e12ba5",
         "image": "https://i.ibb.co/8bYhSXw/pexels-captainfrank-696992066-18082515.jpg",
         "name": "Polly",
         "age": "4 years",
         "category": "Parrot",
+        "categoryId": "665fd0333bce62ea0ae75b03",
         "location": "Khulna, Bangladesh",
         "shortDescription": "Talkative and colorful parrot.",
         "longDescription": "Polly is a 4-year-old parrot who loves to mimic sounds and words. She is very social and enjoys human interaction.",
-        "detailsButton": "View Details",
         "status": "Not Adopted",
         "postedBy": {
             "name": "Md. Mamun",
             "email": "mkmamun031@gmail.com",
             "phone": "+880 1643091606",
             "postedTime": "2024-06-05T10:00:00Z"
-        }
+        },
+        "postedDate": "2024-06-05T10:00:00Z",
+        "interactionCount": 150,
+        "adoptionUrgency": false,
+        "vaccinated": true,
+        "neutered": true,
+        "featuredStatus": false
     },
     {
-        "id" : "615c2fa0be80062b90e12ba6",
         "image": "https://i.ibb.co/FWh5jQK/pexels-nici-gottstein-138431104-14680060.jpg",
         "name": "Shelly",
         "age": "5 years",
         "category": "Turtle",
+        "categoryId": "665fd0333bce62ea0ae75b04",
         "location": "Rajshahi, Bangladesh",
         "shortDescription": "Calm and easy-going turtle.",
         "longDescription": "Shelly is a 5-year-old turtle who enjoys basking under the sun. She is low maintenance and has a calm demeanor.",
-        "detailsButton": "View Details",
         "status": "Not Adopted",
         "postedBy": {
             "name": "Md. Mamun",
             "email": "mkmamun031@gmail.com",
             "phone": "+880 1643091606",
             "postedTime": "2024-06-05T10:00:00Z"
-        }
+        },
+        "postedDate": "2024-06-05T10:00:00Z",
+        "interactionCount": 150,
+        "adoptionUrgency": false,
+        "vaccinated": true,
+        "neutered": true,
+        "featuredStatus": false
     },
     {
-        "id" : "615c2fa0be80062b90e12ba7",
         "image": "https://i.ibb.co/9HqVHcd/pexels-farisclicks-4383761.jpg",
         "name": "Nibbles",
         "age": "6 months",
         "category": "Hamster",
+        "categoryId": "665fd0333bce62ea0ae75b05",
         "location": "Barisal, Bangladesh",
         "shortDescription": "Playful and curious hamster.",
         "longDescription": "Nibbles is a 6-month-old hamster who loves to explore and run on his wheel. He is very active and fun to watch.",
-        "detailsButton": "View Details",
         "status": "Not Adopted",
         "postedBy": {
             "name": "Md. Mamun",
             "email": "mkmamun031@gmail.com",
             "phone": "+880 1643091606",
             "postedTime": "2024-06-05T10:00:00Z"
-        }
+        },
+        "postedDate": "2024-06-05T10:00:00Z",
+        "interactionCount": 150,
+        "adoptionUrgency": false,
+        "vaccinated": true,
+        "neutered": false,
+        "featuredStatus": false
     },
     {
-        "id" : "615c2fa0be80062b90e12ba8",
         "image": "https://i.ibb.co/SV29y04/pexels-wwarby-19613762.jpg",
         "name": "Hoppy",
         "age": "8 months",
         "category": "Frog",
+        "categoryId": "665fd0333bce62ea0ae75b06",
         "location": "Comilla, Bangladesh",
         "shortDescription": "Small and lively frog.",
         "longDescription": "Hoppy is an 8-month-old frog who loves to jump around and catch insects. He is fascinating to observe.",
-        "detailsButton": "View Details",
         "status": "Not Adopted",
         "postedBy": {
             "name": "Md. Mamun",
             "email": "mkmamun031@gmail.com",
             "phone": "+880 1643091606",
             "postedTime": "2024-06-05T10:00:00Z"
-        }
+        },
+        "postedDate": "2024-06-05T10:00:00Z",
+        "interactionCount": 150,
+        "adoptionUrgency": false,
+        "vaccinated": false,
+        "neutered": false,
+        "featuredStatus": false
     },
     {
-        "id" : "615c2fa0be80062b90e12ba9",
         "image": "https://i.ibb.co/7nJ4xkc/pexels-wanderinglenses-15950118.jpg",
         "name": "Sky",
         "age": "2 years",
         "category": "Pigeon",
+        "categoryId": "665fd0333bce62ea0ae75b07",
         "location": "Mymensingh, Bangladesh",
         "shortDescription": "Gentle and homing pigeon.",
         "longDescription": "Sky is a 2-year-old pigeon who enjoys flying and returning home. He is easy to care for and very gentle.",
-        "detailsButton": "View Details",
         "status": "Not Adopted",
         "postedBy": {
             "name": "Md. Mamun",
             "email": "mkmamun031@gmail.com",
             "phone": "+880 1643091606",
             "postedTime": "2024-06-05T10:00:00Z"
-        }
+        },
+        "postedDate": "2024-06-05T10:00:00Z",
+        "interactionCount": 150,
+        "adoptionUrgency": false,
+        "vaccinated": true,
+        "neutered": false,
+        "featuredStatus": false
     },
     {
-        "id" : "615c2fa0be80062b90e12bb1",
+        "image": "https://i.ibb.co/M9WKxF7/pexels-karolina-grabowska-5732997.jpg",
+        "name": "Scooter",
+        "age": "2 years",
+        "category": "Guinea Pig",
+        "categoryId": "665fd0333bce62ea0ae75b08",
+        "location": "Dinajpur, Bangladesh",
+        "shortDescription": "Adorable and cuddly guinea pig.",
+        "longDescription": "Scooter is a 2-year-old guinea pig who enjoys nibbling on vegetables and cuddling in warm blankets. He is very friendly and loves attention.",
+        "status": "Not Adopted",
+        "postedBy": {
+            "name": "Md. Mamun",
+            "email": "mkmamun031@gmail.com",
+            "phone": "+880 1643091606",
+            "postedTime": "2024-06-05T10:00:00Z"
+        },
+        "postedDate": "2024-06-05T10:00:00Z",
+        "interactionCount": 150,
+        "adoptionUrgency": false,
+        "vaccinated": false,
+        "neutered": false,
+        "featuredStatus": false
+    },
+    {
+        "image": "https://i.ibb.co/5BGrdWv/pexels-kevin-bidwell-9185190.jpg",
+        "name": "Wiggles",
+        "age": "6 months",
+        "category": "Snake",
+        "categoryId": "665fd0333bce62ea0ae75b09",
+        "location": "Rangpur, Bangladesh",
+        "shortDescription": "Slithery and curious snake.",
+        "longDescription": "Wiggles is a 6-month-old snake who enjoys exploring his terrarium and basking under his heat lamp. He is non-venomous and easy to care for.",
+        "status": "Not Adopted",
+        "postedBy": {
+            "name": "Md. Mamun",
+            "email": "mkmamun031@gmail.com",
+            "phone": "+880 1643091606",
+            "postedTime": "2024-06-05T10:00:00Z"
+        },
+        "postedDate": "2024-06-05T10:00:00Z",
+        "interactionCount": 150,
+        "adoptionUrgency": false,
+        "vaccinated": false,
+        "neutered": false,
+        "featuredStatus": false
+    },
+    {
+        "_id": "665fcc453bce62ea0ae1858b",
         "image": "https://i.ibb.co/z2QrH4R/pexels-ulises-leon-155336674-10673932.jpg",
         "name": "Goldie",
         "age": "1 year",
         "category": "Goldfish",
+        "categoryId": "665fd0333bce62ea0ae75b0a",
         "location": "Rangpur, Bangladesh",
         "shortDescription": "Bright and beautiful goldfish.",
         "longDescription": "Goldie is a 1-year-old goldfish who enjoys swimming around and adds color to your aquarium. She is easy to care for and very peaceful.",
-        "detailsButton": "View Details",
         "status": "Not Adopted",
         "postedBy": {
             "name": "Md. Mamun",
             "email": "mkmamun031@gmail.com",
             "phone": "+880 1643091606",
             "postedTime": "2024-06-05T10:00:00Z"
-        }
+        },
+        "postedDate": "2024-06-05T10:00:00Z",
+        "interactionCount": 220,
+        "adoptionUrgency": true,
+        "vaccinated": false,
+        "neutered": false,
+        "featuredStatus": false
     },
     {
-        "id" : "615c2fa0be80062b90e12bb2",
+        "_id": "665fcc453bce62ea0ae1858c",
         "image": "https://i.ibb.co/r59BxFK/pexels-ezaz-15096021.jpg",
         "name": "Peace",
         "age": "3 years",
         "category": "Dove",
+        "categoryId": "665fd0333bce62ea0ae75b0b",
         "location": "Jessore, Bangladesh",
         "shortDescription": "Gentle and serene dove.",
         "longDescription": "Peace is a 3-year-old dove who loves to coo and brings a sense of calm to any home. She is very gentle and easy to care for.",
-        "detailsButton": "View Details",
         "status": "Not Adopted",
         "postedBy": {
             "name": "Md. Mamun",
             "email": "mkmamun031@gmail.com",
             "phone": "+880 1643091606",
             "postedTime": "2024-06-05T10:00:00Z"
-        }
+        },
+        "postedDate": "2024-06-05T10:00:00Z",
+        "interactionCount": 180,
+        "adoptionUrgency": false,
+        "vaccinated": false,
+        "neutered": false,
+        "featuredStatus": false
     }
 ]
-
-

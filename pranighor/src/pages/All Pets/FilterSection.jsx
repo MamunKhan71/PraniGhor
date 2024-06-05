@@ -7,10 +7,9 @@ const FilterSection = () => {
         queryKey: ['petCategory'],
         queryFn: async () => {
             const res = await axios.get('pet-category.json')
-            return res.data.categories;
+            return res.data;
         }
     })
-    console.log(categories);
     return (
         <div>
             <section className="relative w-full">

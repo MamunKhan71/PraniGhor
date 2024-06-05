@@ -50,11 +50,17 @@ export default function RegisterForm({ switchToLogin }) {
     }
     const handleGoogleSignUp = () => {
         handleGoogleAuth()
-            .then(res => console.log(res))
+            .then(() => toast({
+                title: "Successful!",
+                description: "Account Created Successfully!",
+            }))
     }
     const handleTwitterSignUp = () => {
         handleTwitterAuth()
-            .then(res => console.log(res))
+            .then(() => toast({
+                title: "Successful!",
+                description: "Account Created Successfully!",
+            }))
     }
     return (
         <div className="mx-auto">
