@@ -77,7 +77,6 @@ const AddPet = () => {
             neutered: neuteredCheck,
             featuredStatus: false
         };
-
         axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_api}`, { image: data.petPicture[0] }, {
             headers: {
                 'content-type': 'multipart/form-data'

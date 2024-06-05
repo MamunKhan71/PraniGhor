@@ -2,9 +2,20 @@ import { createColumnHelper, flexRender, getCoreRowModel, getPaginationRowModel,
 import { USERS } from "./data";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import UseAuth from "@/hooks/useAuth";
 
 
 const MyPets = () => {
+    const { user } = UseAuth()
+    const axiosPublic = useAxiosPublic()
+    const { isPending, error, data: myPets } = useQuery({
+        queryKey: ['myPets'],
+        queryFn: async () =>
+            await axiosPublic.get(`my-pets?email=${user?.email}`).then((res) => { return res.data })
+    })
+    console.log(myPets);
     const columnHelper = createColumnHelper()
     const columns = [
         columnHelper.accessor("", {
@@ -12,31 +23,32 @@ const MyPets = () => {
             cell: (info) => <span>{info.row.index + 1}</span>,
             header: "Serial Number"
         }),
-        columnHelper.accessor("firstName", {
+        columnHelper.accessor("name", {
             cell: (info) => <span>{info.getValue()}</span>,
             header: "Pet Name",
         }),
-        columnHelper.accessor("lastName", {
+        columnHelper.accessor("category", {
             cell: (info) => <span>{info.getValue()}</span>,
             header: "Pet Category",
         }),
-        columnHelper.accessor("avatar", {
+        columnHelper.accessor("image", {
             cell: (info) => <div className="w-full flex items-center justify-center"><img src={info.getValue()} className="h-12 w-12 rounded-full object-cover"></img></div>,
             header: "Pet Image",
         }),
-        columnHelper.accessor("age", {
+        columnHelper.accessor("status", {
             cell: (info) => <span>{info.getValue()}</span>,
             header: "Adoption Status",
         }),
         columnHelper.accessor("age", {
             cell: (info) => <div className="inline-flex items-center justify-center gap-4">
-                <Link to={'update-pet'} className="btn bg-green-400 py-1 px-2 rounded-md">Update</Link><Link  className="btn bg-red-400 text-white py-1 px-2 rounded-md">Delete</Link><Link  className="btn bg-blue-400 text-white py-1 px-2 rounded-md">Adopted</Link>
+                <Link to={'update-pet'} className="btn bg-green-400 py-1 px-2 rounded-md">Update</Link><Link className="btn bg-red-400 text-white py-1 px-2 rounded-md">Delete</Link><Link className="btn bg-blue-400 text-white py-1 px-2 rounded-md">Adopted</Link>
             </div>,
             header: "Actions",
         }),
 
     ]
-    const [data] = useState(() => [...USERS]);
+
+    const data = myPets ?? []
 
     const table = useReactTable({
         data,
