@@ -42,7 +42,9 @@ export default function CreateDonationCampaign() {
       campaignName,
       campaignImage: null,
       campDeadline,
+      raisedMoney: 0,
       maxDonation,
+      campaignCategory : selectedOption,
       shortDescription,
       longDescription,
       authorInfo: {

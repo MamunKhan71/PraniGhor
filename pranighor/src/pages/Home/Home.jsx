@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Hero from "./Hero";
 import { MdShoppingCartCheckout } from "react-icons/md";
-import Category from "./Category";
 import { FeaturedSection } from "./FeaturedSection";
 import HomeAbout from "./HomeAbout";
 import CompanySlider from "./CompanySlider";
@@ -19,17 +18,19 @@ const Home = () => {
                     <p className="text-primaryCol font-semibold">Pet shop</p>
                     <h1 className="text-6xl font-black leading-[60px]">A pet store with everything you need</h1>
                     <h3 className="text-lg">Sociis blandit et pellentesque aliquet at quisque tortor lacinia nullam. Mattis aenean scelerisque dui libero</h3>
-                    <Link to={'/all-pets'}><Button>
-                        <MdShoppingCartCheckout className="mr-2 h-4 w-4" /> Shop Now
-                    </Button></Link>
+                    <div>
+                        <Link to={'/all-pets'}><Button>
+                            <MdShoppingCartCheckout className="mr-2 h-4 w-4" /> Adopt Now
+                        </Button></Link>
+                    </div>
                 </div>
             </div>
-            <div className="space-y-16">
+            <div className="space-y-16 relative">
                 <h1 className="text-3xl font-bold text-center">Browse by category</h1>
-                <Category />
+                <ShopByPets></ShopByPets>
             </div>
             <div className="space-y-16">
-                <h1 className="text-3xl font-bold text-center">Featured products</h1>
+                <h1 className="text-3xl font-bold text-center">Featured Pets</h1>
                 <FeaturedSection />
             </div>
             <div>
@@ -43,18 +44,18 @@ const Home = () => {
                 <h1 className="text-3xl font-bold text-center">Best selling products</h1>
                 <BestPets />
                 <div className="w-full flex items-center justify-center">
-                    <Button><div className="flex items-center gap-2 justify-center">View More <GoMoveToEnd /></div></Button>
+                    <div className="flex items-center gap-2 justify-center">
+                        <Link to={'/all-pets'}><Button className="inline-flex gap-2 items-center">View More <GoMoveToEnd /></Button></Link>
+                    </div>
+
                 </div>
             </div>
-            <div className="space-y-16">
-                <h1 className="text-3xl font-bold text-center">Shop by pet</h1>
-                <ShopByPets></ShopByPets>
-            </div>
+
             <div className="space-y-16">
                 <div className="space-y-2 text-center">
                     <h2 className="text-3xl font-bold">Find Your Furry Friend Today</h2>
                     <p className="text-gray-500 dark:text-gray-400">
-                    Give a loving home to a pet in need. Adopt today and make a friend for life!
+                        Give a loving home to a pet in need. Adopt today and make a friend for life!
                     </p>
                 </div>
                 <div className="flex gap-6 items-center">

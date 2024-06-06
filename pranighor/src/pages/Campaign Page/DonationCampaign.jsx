@@ -8,9 +8,18 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { TiMediaFastForwardOutline, TiMediaRewindOutline  } from "react-icons/ti";
-import { TbColumns2, TbColumns3  } from "react-icons/tb";
+import { TiMediaFastForwardOutline, TiMediaRewindOutline } from "react-icons/ti";
+import { TbColumns2, TbColumns3 } from "react-icons/tb";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
 const DonationCampaign = () => {
+    const axiosPublic = useAxiosPublic()
+    const { data: campaigns, isPending, isLoading, error } = useQuery({
+        queryKey: ['allCampaign'],
+        queryFn: async () => await axiosPublic.get('campaigns').then((res) => {
+            return res.data
+        })
+    })
     return (
         <div className="space-y-16">
             <div className="h-96 w-full relative rounded-xl">
@@ -43,84 +52,39 @@ const DonationCampaign = () => {
             </div>
             <div className="space-y-8">
                 <div className="grid grid-cols-3 gap-6">
-                    <Card>
-                        <CardHeader>
-                            <div className="space-y-4">
-                                <img className="rounded-xl" src="header1.jpg" alt="Pet Image" />
-                                <div className="flex justify-between items-center w-full">
-                                    <div className="space-y-4 w-full">
-                                        <div className="flex justify-between items-center w-full">
-                                            <div>
-                                                <CardTitle>Fluffy</CardTitle> {/* Pet Name */}
-                                            </div>
-                                            <div className="hover:cursor-pointer">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                    <path d="M17.3651 3.84166C16.9395 3.41583 16.4342 3.07803 15.8779 2.84757C15.3217 2.6171 14.7255 2.49847 14.1235 2.49847C13.5214 2.49847 12.9252 2.6171 12.369 2.84757C11.8128 3.07803 11.3074 3.41583 10.8818 3.84166L9.99847 4.725L9.11514 3.84166C8.25539 2.98192 7.08933 2.49892 5.87347 2.49892C4.65761 2.49892 3.49155 2.98192 2.6318 3.84166C1.77206 4.70141 1.28906 5.86747 1.28906 7.08333C1.28906 8.29919 1.77206 9.46525 2.6318 10.325L3.51514 11.2083L9.99847 17.6917L16.4818 11.2083L17.3651 10.325C17.791 9.89937 18.1288 9.39401 18.3592 8.83779C18.5897 8.28158 18.7083 7.6854 18.7083 7.08333C18.7083 6.48126 18.5897 5.88508 18.3592 5.32887C18.1288 4.77265 17.791 4.26729 17.3651 3.84166Z" stroke="#FD7E14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <CardDescription>Maximum Donation: $500</CardDescription> {/* Maximum Donation Amount */}
-                                        <CardDescription>Donated Amount: $150</CardDescription> {/* Donated Amount */}
-                                    </div>
-                                </div>
-                            </div>
-                            <Link to={'/details'}>
-                                <Button className="w-full">View Details</Button>
-                            </Link>
-                        </CardHeader>
-                    </Card>
-                    <Card>
-                        <CardHeader>
-                            <div className="space-y-4">
-                                <img className="rounded-xl" src="header1.jpg" alt="Pet Image" />
-                                <div className="flex justify-between items-center w-full">
-                                    <div className="space-y-4 w-full">
-                                        <div className="flex justify-between items-center w-full">
-                                            <div>
-                                                <CardTitle>Fluffy</CardTitle> {/* Pet Name */}
-                                            </div>
-                                            <div className="hover:cursor-pointer">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                    <path d="M17.3651 3.84166C16.9395 3.41583 16.4342 3.07803 15.8779 2.84757C15.3217 2.6171 14.7255 2.49847 14.1235 2.49847C13.5214 2.49847 12.9252 2.6171 12.369 2.84757C11.8128 3.07803 11.3074 3.41583 10.8818 3.84166L9.99847 4.725L9.11514 3.84166C8.25539 2.98192 7.08933 2.49892 5.87347 2.49892C4.65761 2.49892 3.49155 2.98192 2.6318 3.84166C1.77206 4.70141 1.28906 5.86747 1.28906 7.08333C1.28906 8.29919 1.77206 9.46525 2.6318 10.325L3.51514 11.2083L9.99847 17.6917L16.4818 11.2083L17.3651 10.325C17.791 9.89937 18.1288 9.39401 18.3592 8.83779C18.5897 8.28158 18.7083 7.6854 18.7083 7.08333C18.7083 6.48126 18.5897 5.88508 18.3592 5.32887C18.1288 4.77265 17.791 4.26729 17.3651 3.84166Z" stroke="#FD7E14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
+
+                    {
+                        campaigns?.map(campaign => (
+                            <>
+                                <Card>
+                                    <CardHeader>
+                                        <div className="space-y-4">
+                                            <img className="rounded-xl h-52 w-full object-cover" src={campaign?.campaignImage} alt={campaign?.campaignName} />
+                                            <div className="flex justify-between items-center w-full">
+                                                <div className="space-y-4 w-full">
+                                                    <div className="flex justify-between items-center w-full">
+                                                        <div>
+                                                            <CardTitle>{campaign?.campaignName}</CardTitle> {/* Pet Name */}
+                                                        </div>
+                                                        <div className="hover:cursor-pointer">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                <path d="M17.3651 3.84166C16.9395 3.41583 16.4342 3.07803 15.8779 2.84757C15.3217 2.6171 14.7255 2.49847 14.1235 2.49847C13.5214 2.49847 12.9252 2.6171 12.369 2.84757C11.8128 3.07803 11.3074 3.41583 10.8818 3.84166L9.99847 4.725L9.11514 3.84166C8.25539 2.98192 7.08933 2.49892 5.87347 2.49892C4.65761 2.49892 3.49155 2.98192 2.6318 3.84166C1.77206 4.70141 1.28906 5.86747 1.28906 7.08333C1.28906 8.29919 1.77206 9.46525 2.6318 10.325L3.51514 11.2083L9.99847 17.6917L16.4818 11.2083L17.3651 10.325C17.791 9.89937 18.1288 9.39401 18.3592 8.83779C18.5897 8.28158 18.7083 7.6854 18.7083 7.08333C18.7083 6.48126 18.5897 5.88508 18.3592 5.32887C18.1288 4.77265 17.791 4.26729 17.3651 3.84166Z" stroke="#FD7E14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <CardDescription>Maximum Donation: ${campaign?.maxDonation}</CardDescription> {/* Maximum Donation Amount */}
+                                                    <CardDescription>Donated Amount: ${campaign?.raisedMoney}</CardDescription> {/* Donated Amount */}
+                                                </div>
                                             </div>
                                         </div>
-                                        <CardDescription>Maximum Donation: $500</CardDescription> {/* Maximum Donation Amount */}
-                                        <CardDescription>Donated Amount: $150</CardDescription> {/* Donated Amount */}
-                                    </div>
-                                </div>
-                            </div>
-                            <Link to={'/details'}>
-                                <Button className="w-full">View Details</Button>
-                            </Link>
-                        </CardHeader>
-                    </Card>
-                    <Card>
-                        <CardHeader>
-                            <div className="space-y-4">
-                                <img className="rounded-xl" src="header1.jpg" alt="Pet Image" />
-                                <div className="flex justify-between items-center w-full">
-                                    <div className="space-y-4 w-full">
-                                        <div className="flex justify-between items-center w-full">
-                                            <div>
-                                                <CardTitle>Fluffy</CardTitle> {/* Pet Name */}
-                                            </div>
-                                            <div className="hover:cursor-pointer">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                    <path d="M17.3651 3.84166C16.9395 3.41583 16.4342 3.07803 15.8779 2.84757C15.3217 2.6171 14.7255 2.49847 14.1235 2.49847C13.5214 2.49847 12.9252 2.6171 12.369 2.84757C11.8128 3.07803 11.3074 3.41583 10.8818 3.84166L9.99847 4.725L9.11514 3.84166C8.25539 2.98192 7.08933 2.49892 5.87347 2.49892C4.65761 2.49892 3.49155 2.98192 2.6318 3.84166C1.77206 4.70141 1.28906 5.86747 1.28906 7.08333C1.28906 8.29919 1.77206 9.46525 2.6318 10.325L3.51514 11.2083L9.99847 17.6917L16.4818 11.2083L17.3651 10.325C17.791 9.89937 18.1288 9.39401 18.3592 8.83779C18.5897 8.28158 18.7083 7.6854 18.7083 7.08333C18.7083 6.48126 18.5897 5.88508 18.3592 5.32887C18.1288 4.77265 17.791 4.26729 17.3651 3.84166Z" stroke="#FD7E14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <CardDescription>Maximum Donation: $500</CardDescription> {/* Maximum Donation Amount */}
-                                        <CardDescription>Donated Amount: $150</CardDescription> {/* Donated Amount */}
-                                    </div>
-                                </div>
-                            </div>
-                            <Link to={'/donation-details'}>
-                                <Button className="w-full">View Details</Button>
-                            </Link>
-                        </CardHeader>
-                    </Card>
+                                        <Link to={`/campaign-details/${campaign?._id}`}>
+                                            <Button className="w-full">View Details</Button>
+                                        </Link>
+                                    </CardHeader>
+                                </Card>
+                            </>
+                        ))
+                    }
 
                 </div>
             </div>
