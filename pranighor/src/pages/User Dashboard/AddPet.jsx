@@ -39,8 +39,6 @@ const AddPet = () => {
     }, [category])
     const { register, handleSubmit } = useForm();
 
-
-    console.log(urgent, vaccinated, neutered, adoptionStatus);
     const handleAddPet = async (data) => {
         const petName = data.petName;
         const petAge = data.petAge;

@@ -13,15 +13,44 @@ import moment from "moment"
 import { MdShareLocation } from "react-icons/md";
 import { HiOutlineStatusOnline } from "react-icons/hi";
 import { FaHeart } from "react-icons/fa"
+import { useForm } from "react-hook-form";
+import UseAuth from "@/hooks/useAuth";
 export default function PetDetails() {
-
+    const { user } = UseAuth()
     const petId = useParams()
     const axiosPublic = useAxiosPublic()
+    const { register, handleSubmit } = useForm();
+
     const { isPending, error, data: pet } = useQuery({
         queryKey: [`petDetails/${petId.id}`],
         queryFn: async () =>
             await axiosPublic.get(`pet-details/${petId.id}`).then((res) => { return res.data })
     })
+    const handleAdoption = data => {
+        const requestorName = user?.displayName
+        const requestorEmail = user?.email
+        const requestorPhone = data?.phone
+        const requestorAddress = data?.address
+        const requestorInfo = {
+            postInfo: {
+                petId: pet?._id,
+                petName: pet?.name,
+                petCategory: pet?.category
+            },
+            requestorInfo: {
+                requestorName,
+                requestorEmail,
+                requestorPhone,
+                requestorAddress,
+            },
+            authorInfo: {
+                authorName: pet?.postedBy.name,
+                authorEmail: pet?.postedBy.email
+            }
+        }
+        axiosPublic.post(`adoption-requests`, requestorInfo)
+            .then(res => console.log(res.data))
+    }
     return (
         <div className="w-full max-w-6xl mx-auto px-4 py-12 md:px-6 md:py-16 lg:px-8 lg:py-20">
             <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
@@ -50,8 +79,8 @@ export default function PetDetails() {
                         <div className="flex flex-col border rounded-lg p-4 space-y-4">
                             <h1 className="text-base md:text-lg lg:text-xl font-semibold">Post Author Info:</h1>
                             <hr />
-                            <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl inline-flex gap-2 items-center"><IoPersonCircleOutline /> {pet?.postedBy.name}</p>
-                            <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl inline-flex gap-2 items-center"><MdOutlineAttachEmail /> {pet?.postedBy.email}</p>
+                            <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl inline-flex gap-2 items-center"><IoPersonCircleOutline /> {pet?.postedBy?.name}</p>
+                            <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl inline-flex gap-2 items-center"><MdOutlineAttachEmail /> {pet?.postedBy?.email}</p>
                         </div>
 
                     </div>
@@ -88,17 +117,18 @@ export default function PetDetails() {
                             </DialogTrigger>
                             <DialogContent>
                                 <DialogHeader>
-                                    <DialogTitle>Adopt Buddy</DialogTitle>
-                                    <DialogDescription>Fill out the form below to adopt Buddy.</DialogDescription>
+                                    <DialogTitle className="text-2xl font-bold text-center">Adopt {pet?.name}</DialogTitle>
+                                    <DialogDescription className="font-semibold text-md text-center">Fill out the form below to adopt {pet?.name}.</DialogDescription>
                                 </DialogHeader>
-                                <form className="grid gap-4 md:gap-6">
+                                <hr />
+                                <form onSubmit={handleSubmit(handleAdoption)} className="grid gap-4 md:gap-6 border rounded-lg p-4">
                                     <div className="grid gap-2">
                                         <Label htmlFor="name" className="text-base md:text-lg lg:text-xl">
                                             Name
                                         </Label>
                                         <Input
                                             id="name"
-                                            defaultValue="John Doe"
+                                            defaultValue={user?.displayName}
                                             disabled
                                             className="bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-base md:text-lg lg:text-xl"
                                         />
@@ -109,7 +139,7 @@ export default function PetDetails() {
                                         </Label>
                                         <Input
                                             id="email"
-                                            defaultValue="john@example.com"
+                                            defaultValue={user?.email}
                                             disabled
                                             className="bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-base md:text-lg lg:text-xl"
                                         />
@@ -119,6 +149,7 @@ export default function PetDetails() {
                                             Phone
                                         </Label>
                                         <Input
+                                            {...register('phone')}
                                             id="phone"
                                             placeholder="Enter your phone number"
                                             className="border-gray-200 dark:border-gray-700 text-base md:text-lg lg:text-xl"
@@ -129,28 +160,22 @@ export default function PetDetails() {
                                             Address
                                         </Label>
                                         <Textarea
+                                            {...register('address')}
                                             id="address"
                                             placeholder="Enter your address"
                                             className="border-gray-200 dark:border-gray-700 text-base md:text-lg lg:text-xl"
                                         />
                                     </div>
-                                </form>
-                                <DialogFooter>
-                                    <Button
-                                        type="submit"
-                                        className="bg-primary text-white hover:bg-primary-500 focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
-                                    >
-                                        Submit
-                                    </Button>
-                                    <div>
+                                    <DialogFooter>
                                         <Button
-                                            variant="outline"
-                                            className="border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                                            type="submit"
+                                            className="bg-primary text-white hover:bg-primary-500 focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
                                         >
-                                            Cancel
+                                            Submit Request
                                         </Button>
-                                    </div>
-                                </DialogFooter>
+                                    </DialogFooter>
+                                </form>
+
                             </DialogContent>
                         </Dialog>
                     </div>
