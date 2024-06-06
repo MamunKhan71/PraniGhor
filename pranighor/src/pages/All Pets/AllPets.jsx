@@ -48,7 +48,7 @@ const AllPets = () => {
     }
     const handleCategoryFilter = (data) => {
         // TODO
-        axiosPublic.get(`filter-pet?age=${ageFilter}`)
+        // axiosPublic.get(`filter-pet?age=${ageFilter}`)
     }
     return (
         <div className="w-full space-y-4">
@@ -129,7 +129,7 @@ const AllPets = () => {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <Link to={'/details'}><Button className="w-full">View Details</Button></Link>
+                                                        <Link to={`/details/${pet._id}`}><Button className="w-full">View Details</Button></Link>
                                                     </CardHeader>
                                                 </Card>
                                             </>

@@ -2,46 +2,77 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, Dialog
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
+import { MdOutlineAttachEmail } from "react-icons/md";
 import { Textarea } from "@/components/ui/textarea"
-
+import { useParams } from "react-router-dom"
+import { IoPersonCircleOutline } from "react-icons/io5";
+import useAxiosPublic from "@/hooks/useAxiosPublic"
+import { useQuery } from "@tanstack/react-query"
+import { LuCalendarDays } from "react-icons/lu";
+import moment from "moment"
+import { MdShareLocation } from "react-icons/md";
+import { HiOutlineStatusOnline } from "react-icons/hi";
+import { FaHeart } from "react-icons/fa"
 export default function PetDetails() {
+
+    const petId = useParams()
+    const axiosPublic = useAxiosPublic()
+    const { isPending, error, data: pet } = useQuery({
+        queryKey: [`petDetails/${petId.id}`],
+        queryFn: async () =>
+            await axiosPublic.get(`pet-details/${petId.id}`).then((res) => { return res.data })
+    })
     return (
         <div className="w-full max-w-6xl mx-auto px-4 py-12 md:px-6 md:py-16 lg:px-8 lg:py-20">
             <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
                 <div className="relative rounded-2xl overflow-hidden">
-                    <img src="header1.jpg" alt="Pet Image" className="w-full h-auto object-cover" />
+                    <img src={pet?.image} alt={pet?.name} className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent" />
                     <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 lg:bottom-8 lg:left-8 text-white">
-                        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">Buddy the Golden Retriever</h1>
-                        <p className="text-sm md:text-base lg:text-lg font-medium">ID: #12345</p>
+                        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">{pet?.name}</h1>
+                        <p className="text-sm md:text-base lg:text-lg font-medium">{pet?.shortDescription}</p>
                     </div>
                 </div>
                 <div className="space-y-8 md:space-y-10 lg:space-y-12">
                     <div className="space-y-4 md:space-y-5 lg:space-y-6">
-                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold">About Buddy</h2>
+                        <div className="flex justify-between items-center">
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold">About {pet?.name}</h2>
+                            <h1 className="text-2xl font-bold inline-flex gap-2 items-center text-orange-400"><FaHeart /> {pet?.interactionCount}</h1>
+                        </div>
                         <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl">
-                            Buddy is a 3-year-old Golden Retriever who loves to play fetch and go on long walks. He's great with kids
-                            and other pets, and is house-trained and up-to-date on all his vaccinations.
+                            {pet?.longDescription}
                         </p>
+                        <div className="flex flex-col gap-2">
+                            <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl inline-flex gap-2 items-center"><LuCalendarDays /> {moment(pet?.postedBy.postedTime).format('MMMM Do YYYY')}</p>
+                            <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl inline-flex gap-2 items-center"><MdShareLocation /> {pet?.location}</p>
+                            <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl inline-flex gap-2 items-center"><HiOutlineStatusOnline /> {pet?.status}</p>
+                        </div>
+                        <div className="flex flex-col border rounded-lg p-4 space-y-4">
+                            <h1 className="text-base md:text-lg lg:text-xl font-semibold">Post Author Info:</h1>
+                            <hr />
+                            <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl inline-flex gap-2 items-center"><IoPersonCircleOutline /> {pet?.postedBy.name}</p>
+                            <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl inline-flex gap-2 items-center"><MdOutlineAttachEmail /> {pet?.postedBy.email}</p>
+                        </div>
+
                     </div>
                     <div className="space-y-4 md:space-y-5 lg:space-y-6">
                         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold">Details</h2>
                         <div className="grid grid-cols-2 gap-4 md:gap-6 lg:gap-8">
                             <div>
                                 <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl">Age:</p>
-                                <p className="text-base md:text-lg lg:text-xl">3 years</p>
+                                <p className="text-base md:text-lg lg:text-xl">{pet?.age}</p>
                             </div>
                             <div>
-                                <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl">Breed:</p>
-                                <p className="text-base md:text-lg lg:text-xl">Golden Retriever</p>
+                                <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl">Neutered:</p>
+                                <p className="text-base md:text-lg lg:text-xl">{pet?.neutered ? "Yes" : "No"}</p>
                             </div>
                             <div>
-                                <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl">Gender:</p>
-                                <p className="text-base md:text-lg lg:text-xl">Male</p>
+                                <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl">Vaccinated:</p>
+                                <p className="text-base md:text-lg lg:text-xl">{pet?.vaccinated ? "Yes" : "No"}</p>
                             </div>
                             <div>
-                                <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl">Size:</p>
-                                <p className="text-base md:text-lg lg:text-xl">Large</p>
+                                <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl">Urgent:</p>
+                                <p className="text-base md:text-lg lg:text-xl">{pet?.adoptionUrgency ? "Yes" : "No"}</p>
                             </div>
                         </div>
                     </div>

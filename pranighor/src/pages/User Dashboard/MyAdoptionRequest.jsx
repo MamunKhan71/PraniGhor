@@ -2,9 +2,19 @@ import { createColumnHelper, flexRender, getCoreRowModel, getPaginationRowModel,
 import { USERS } from "./data";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import UseAuth from "@/hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
 
 
 const MyAdoptionRequests = () => {
+    const { user } = UseAuth()
+    const axiosPublic = useAxiosPublic()
+    const { isPending, error, data: myPets } = useQuery({
+        queryKey: ['adoptionRequest'],
+        queryFn: async () =>
+            await axiosPublic.get(`adoption-requests?authorEmail=${user?.email}`).then((res) => { return res.data })
+    })
     const columnHelper = createColumnHelper()
     const columns = [
         columnHelper.accessor("", {
@@ -30,7 +40,7 @@ const MyAdoptionRequests = () => {
         }),
         columnHelper.accessor("age", {
             cell: (info) => <div className="inline-flex items-center justify-center gap-4">
-                <Link to={'update-pet'} className="btn bg-green-400 py-1 px-2 rounded-md">Update</Link><Link  className="btn bg-red-400 text-white py-1 px-2 rounded-md">Delete</Link><Link  className="btn bg-blue-400 text-white py-1 px-2 rounded-md">Adopted</Link>
+                <Link to={'update-pet'} className="btn bg-green-400 py-1 px-2 rounded-md">Update</Link><Link className="btn bg-red-400 text-white py-1 px-2 rounded-md">Delete</Link><Link className="btn bg-blue-400 text-white py-1 px-2 rounded-md">Adopted</Link>
             </div>,
             header: "Actions",
         }),

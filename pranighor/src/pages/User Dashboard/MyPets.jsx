@@ -15,7 +15,6 @@ const MyPets = () => {
         queryFn: async () =>
             await axiosPublic.get(`my-pets?email=${user?.email}`).then((res) => { return res.data })
     })
-    console.log(myPets);
     const columnHelper = createColumnHelper()
     const columns = [
         columnHelper.accessor("", {
@@ -93,7 +92,7 @@ const MyPets = () => {
                                 <tr className={`${i % 2 === 0 ? "bg-gray-50" : ""}`} key={row.id}>
                                     {
                                         row.getVisibleCells().map((cell) => (
-                                            <td className="text-center" key={cell.id}>
+                                            <td className="text-center py-2" key={cell.id}>
                                                 {
                                                     flexRender(
                                                         cell.column.columnDef.cell,
