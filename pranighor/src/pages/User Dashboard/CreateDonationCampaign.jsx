@@ -3,57 +3,151 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
+import useAxiosPublic from "@/hooks/useAxiosPublic"
+import { useForm } from "react-hook-form"
+import { FaUser } from "react-icons/fa"
+import UseAuth from "@/hooks/useAuth"
+import TimeDisplay from "@/components/ui/time-display"
+import Select from 'react-select';
+import { useState } from "react"
+import { DatePicker } from "@/components/ui/date-picker"
+import axios from "axios"
+const options = [
+  { value: 'adoption', label: 'Adoption & Rescue' },
+  { value: 'wellbeing', label: 'campaign Wellbeing' },
+  { value: 'ownership', label: 'Responsible Ownership' },
+  { value: 'products', label: 'campaign Products' },
+  { value: 'services', label: 'campaign Services' },
+  { value: 'lifestyle', label: 'campaign Lifestyle' },
+  { value: 'entertainment', label: 'campaign Entertainment' },
+];
 
 export default function CreateDonationCampaign() {
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [date, setDate] = useState()
+  const { user } = UseAuth()
+  const axiosPublic = useAxiosPublic()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+  const handleAddCampaign = data => {
+    const campaignName = data.campaignName
+    const maxDonation = parseFloat(data.maxDonation)
+    const campDeadline = date
+    const shortDescription = data.shortDescription
+    const longDescription = data.longDescription
+    const newCampaign = {
+      campaignName,
+      campaignImage: null,
+      campDeadline,
+      maxDonation,
+      shortDescription,
+      longDescription,
+      authorInfo: {
+        name: user?.displayName,
+        email: user?.email
+      },
+      creationTime: new Date().toISOString()
+    }
+
+    axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_api}`, { image: data.image[0] }, {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    })
+      .then((res) => {
+        newCampaign.campaignImage = (res.data?.data?.display_url)
+
+      })
+      .then(() => {
+        axiosPublic.post('/create-campaign', newCampaign)
+          .then(res => console.log(res.data))
+      })
+
+
+  }
   return (
-    <Card>
-      <CardHeader className="text-center">
-        <CardTitle>Create Donation Campaign</CardTitle>
-        <CardDescription>Help pets in need by creating a donation campaign.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form className="grid gap-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="pet-image">Pet Picture</Label>
-              <Input id="pet-image" type="file" accept="image/*" />
+    <div className="flex gap-6 w-full">
+      <Card>
+        <CardHeader className="text-center">
+          <CardTitle>Create Donation Campaign</CardTitle>
+          <CardDescription>Help pets in need by creating a donation campaign.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit(handleAddCampaign)} className="grid gap-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label >Campaign Name</Label>
+                <Input {...register('campaignName')} type="text" accept="image/*" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="max-donation">Maximum Donation</Label>
+                <Input
+                  {...register('maxDonation')}
+                  id="max-donation"
+                  type="number"
+                  placeholder="Enter maximum donation amount"
+                />
+              </div>
+              <div className="space-y-2 w-full">
+                <Label htmlFor="campaign-image">Campaign Picture</Label>
+                <Input {...register('image')} id="campaign-image" type="file" accept="image/*" />
+              </div>
+              <div className="space-y-2 w-full">
+                <Label htmlFor="campaign-image">Campaign Deadline</Label>
+                <DatePicker setDate={setDate} date={date} />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="short-description">Short Description</Label>
+                <Input
+                  {...register('shortDescription')}
+                  id="short-description"
+                  type="text"
+                  placeholder="Enter a brief description"
+                />
+              </div>
+              <div className="space-y-2 w-full">
+                <Label htmlFor="campaign-image">Campaign Category</Label>
+                <Select
+                  styles={{
+                    control: (baseStyles, state) => ({
+                      ...baseStyles,
+                      borderColor: state.isFocused ? 'border-gray-200' : 'border-gray-300',
+                    }),
+                  }}
+                  defaultValue={selectedOption}
+                  onChange={setSelectedOption}
+                  options={options}
+                />
+              </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="max-donation">Maximum Donation</Label>
-              <Input
-                id="max-donation"
-                type="number"
-                placeholder="Enter maximum donation amount"
+              <Label htmlFor="long-description">Long Description</Label>
+              <Textarea
+                {...register('longDescription')}
+                id="long-description"
+                placeholder="Enter a detailed description"
               />
             </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="donation-end-date">Donation End Date</Label>
-              <Input
-                id="donation-end-date"
-                type="date"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="short-description">Short Description</Label>
-              <Input
-                id="short-description"
-                type="text"
-                placeholder="Enter a brief description"
-              />
-            </div>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="long-description">Long Description</Label>
-            <Textarea
-              id="long-description"
-              placeholder="Enter a detailed description"
-            />
-          </div>
-          <Button type="submit">Create Campaign</Button>
-        </form>
-      </CardContent>
-    </Card>
+            <Button type="submit">Create Campaign</Button>
+          </form>
+        </CardContent>
+      </Card>
+      <div className="basis-1/3 ">
+        <div className="border border-gray-100 rounded-lg p-4 space-y-4">
+          <h1 className="text-2xl font-bold inline-flex items-center gap-2"><FaUser />User Info</h1>
+          <hr />
+          <p>Name: {user?.displayName}</p>
+          <p>Email: {user?.email}</p>
+          <p>Phone: +880 1643091606</p>
+          <p>Current Time:  <TimeDisplay /></p>
+        </div>
+        <p className="text-red-200 font-light mt-2">* These info will be submitted</p>
+      </div>
+    </div>
   )
 }

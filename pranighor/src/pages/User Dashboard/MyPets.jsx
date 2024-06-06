@@ -134,7 +134,7 @@ const MyPets = () => {
 
     return (
         <div className="w-full">
-            <h1 className="text-center font-semibold text-2xl">Adoption Requests</h1>
+            <h1 className="text-center font-semibold text-2xl">My Pets</h1>
             <hr />
 
             <div className="rounded-md border my-12">
