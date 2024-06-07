@@ -43,7 +43,7 @@ export function FeaturedSection() {
                             orientation="vertical"
                             className="w-full max-w-md"
                         >
-                            <CarouselContent className="h-[470px]">
+                            <CarouselContent className="h-[490px]">
                                 {
                                     featuredPet?.map((pet, index) => <>
                                         <CarouselItem key={index} className="md:basis-1/2">
@@ -69,8 +69,10 @@ export function FeaturedSection() {
                                                                 <CardDescription className="text-sm text-gray-600">Location: {pet.location}</CardDescription>
                                                             </div>
                                                         </div>
+                                                        <div>
+                                                            <Link to={`/details/${pet._id}`}><Button className="w-full">View Details</Button></Link>
+                                                        </div>
                                                     </div>
-                                                    <Link to={`/details/${pet._id}`}><Button className="w-full">View Details</Button></Link>
                                                 </CardHeader>
                                             </Card>
                                         </CarouselItem>

@@ -41,7 +41,7 @@ const Home = () => {
                 <CompanySlider />
             </div>
             <div className="space-y-16">
-                <h1 className="text-3xl font-bold text-center">Best selling products</h1>
+                <h1 className="text-3xl font-bold text-center">Best pets</h1>
                 <BestPets />
                 <div className="w-full flex items-center justify-center">
                     <div className="flex items-center gap-2 justify-center">

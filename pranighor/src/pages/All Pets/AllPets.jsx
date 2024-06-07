@@ -78,7 +78,7 @@ const AllPets = () => {
         setSearch(dataArray)
         setFilteredSearch(pets)
     }, [pets])
-    const handleSearch = data => {
+    const handleSearch = async(data) => {
         const filteredData = pets.filter(pet => pet.name === data)
         setFilteredSearch(filteredData);
     }
@@ -155,8 +155,10 @@ const AllPets = () => {
                                                                 <CardDescription className="text-sm text-gray-600">Location: {pet.location}</CardDescription>
                                                             </div>
                                                         </div>
+                                                        <div>
+                                                            <Link to={`/details/${pet._id}`}><Button className="w-full">View Details</Button></Link>
+                                                        </div>
                                                     </div>
-                                                    <Link to={`/details/${pet._id}`}><Button className="w-full">View Details</Button></Link>
                                                 </CardHeader>
                                             </Card>
                                         </>

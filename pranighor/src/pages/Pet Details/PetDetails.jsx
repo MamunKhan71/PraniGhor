@@ -115,13 +115,21 @@ export default function PetDetails() {
                                     Adopt Buddy
                                 </Button>
                             </DialogTrigger>
-                            <DialogContent>
+                            <DialogContent className={'font-primary'}>
                                 <DialogHeader>
-                                    <DialogTitle className="text-2xl font-bold text-center">Adopt {pet?.name}</DialogTitle>
+                                    <DialogTitle className="text-2xl font-bold text-center ">Adopt {pet?.name}</DialogTitle>
                                     <DialogDescription className="font-semibold text-md text-center">Fill out the form below to adopt {pet?.name}.</DialogDescription>
                                 </DialogHeader>
                                 <hr />
                                 <form onSubmit={handleSubmit(handleAdoption)} className="grid gap-4 md:gap-6 border rounded-lg p-4">
+                                    <div className="flex gap-4 items-center border rounded-lg p-4 shadow-md">
+                                        <img src={pet?.image} alt={pet?.name} className="w-24 h-24 rounded-xl object-cover" />
+                                        <div className="space-y-1">
+                                            <h1 className="text-xl font-bold">{pet?.name}</h1>
+                                            <h1 className="text-sm font-medium text-gray-400">#{pet?._id}</h1>
+                                            <p className="font-medium text-gray-400">{pet?.shortDescription}</p>
+                                        </div>
+                                    </div>
                                     <div className="grid gap-2">
                                         <Label htmlFor="name" className="text-base md:text-lg lg:text-xl">
                                             Name

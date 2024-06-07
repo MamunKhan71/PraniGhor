@@ -72,18 +72,18 @@ export default function Navbar() {
           About
         </Link>
         <Link
+          to={'/all-pets'}
+          className="group inline-flex h-9 w-max items-center justify-center rounded-full  px-4 py-2 text-lg font-medium transition-colors  hover:text-primaryCol focus:bg-primaryCol focus:text-black focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
+          prefetch={false}
+        >
+          Pet Listings
+        </Link>
+        <Link
           to={`/donation`}
           className="group inline-flex h-9 w-max items-center justify-center rounded-full  px-4 py-2 text-lg font-medium transition-colors  hover:text-primaryCol focus:bg-primaryCol focus:text-black focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
           prefetch={false}
         >
           Donation Campaign
-        </Link>
-        <Link
-          href="#"
-          className="group inline-flex h-9 w-max items-center justify-center rounded-full  px-4 py-2 text-lg font-medium transition-colors  hover:text-primaryCol focus:bg-primaryCol focus:text-black focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
-          prefetch={false}
-        >
-          Contact
         </Link>
         {
           user ? <Link prefetch={false} className="group inline-flex h-9 w-max items-center justify-center rounded-full  px-4 py-2 text-lg font-medium transition-colors  hover:text-primaryCol focus:bg-primaryCol focus:text-black focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50">

@@ -25,7 +25,8 @@ export default function RegisterForm({ switchToLogin }) {
         const newUser = {
             userName,
             userEmail,
-            userPassword
+            userPassword,
+            role: "admin"
         }
         signUpUser(userEmail, userPassword)
             .then(async () => {
@@ -40,11 +41,17 @@ export default function RegisterForm({ switchToLogin }) {
                 const name = userName
                 const photo = newUser.userImage
                 userUpdate(name, photo)
-                    .then(() => toast({
-                        title: "Successful!",
-                        description: "Account Created Successfully!",
-                    }))
-
+                    .then(() => {
+                        axiosPublic.post('/users', newUser)
+                            .then(() => toast({
+                                title: "Successful!",
+                                description: "Account Created Successfully!",
+                            }))
+                            .catch(() => toast({
+                                title: "Error!",
+                                description: "Account Creation Unsuccessful!!",
+                            }))
+                    })
             })
     }
     const handleGoogleSignUp = () => {
