@@ -72,6 +72,7 @@ const MyDonations = () => {
             id: "actions",
             header: "Actions",
             cell: ({ row }) => {
+                const { _id } = row.original
                 return (
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -83,7 +84,7 @@ const MyDonations = () => {
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuItem>
-                                <Link to={'update-pet'} className="btn bg-green-400 py-1 px-2 rounded-md w-full text-center">Edit</Link>
+                            <Link to={`/dashboard/edit-donation/${_id}`} className="btn bg-green-400 py-1 px-2 rounded-md w-full text-center">Edit</Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
                                 <Link className="btn bg-red-400 text-white py-1 px-2 rounded-md w-full text-center">Pause</Link>
