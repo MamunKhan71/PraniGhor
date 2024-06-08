@@ -17,16 +17,27 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useState } from "react"
-
+import { Badge } from "@/components/ui/badge"
 const MyAdoptionRequests = () => {
     const { user } = UseAuth()
     const axiosPublic = useAxiosPublic()
-    const { isLoading, isError, error, data: myRequests } = useQuery({
+    const [myAdoptRequest, setMyAdoptRequest] = useState([])
+    const { isLoading, isError, error, data: myRequests, refetch } = useQuery({
         queryKey: ['adoptionRequest'],
         queryFn: async () =>
             await axiosPublic.get(`my-requests?authorEmail=${user?.email}`).then((res) => res.data)
     })
 
+    const handleAccept = async (petId, _id) => {
+        axiosPublic.get(`pet-requests?petId=${petId}&id=${_id}`)
+            .then(res => res.data)
+            .then(refetch())
+    }
+    const handleDelete = (_id) => {
+        axiosPublic.delete(`delete-request?id=${_id}`)
+            .then(res => res.data)
+            .then(refetch())
+    }
     const columnHelper = createColumnHelper()
     const columns = [
         {
@@ -68,10 +79,23 @@ const MyAdoptionRequests = () => {
                 </div>
             ),
         }),
+        columnHelper.accessor("status", {
+            header: "Status",
+            cell: ({ row }) => {
+                const { _id, postInfo } = row.original
+                const { status } = postInfo;
+                return (
+                    <Badge className={`${status === "adopted" ? "bg-green-500" : "bg-primaryCol"}`}>{status === "adopted" ? "Adopted" : "Requested"}</Badge>
+                )
+            },
+        }),
         {
             id: "actions",
             header: "Actions",
             cell: ({ row }) => {
+                const { _id, postInfo } = row.original
+                const { petId } = postInfo
+                console.log(petId);
                 return (
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -83,10 +107,10 @@ const MyAdoptionRequests = () => {
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuItem>
-                                <Link to={'update-pet'} className="btn bg-green-400 py-1 px-2 rounded-md w-full text-center">Accept</Link>
+                                <Button onClick={() => handleAccept(petId, _id)} className="btn bg-green-400 py-1 px-2 rounded-md w-full text-center">Accept</Button>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
-                                <Link className="btn bg-red-400 text-white py-1 px-2 rounded-md w-full text-center">Reject</Link>
+                                <Button onClick={() => handleDelete(_id)} className="btn bg-red-400 text-white py-1 px-2 rounded-md w-full text-center">Reject</Button>
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                         </DropdownMenuContent>
@@ -130,7 +154,7 @@ const MyAdoptionRequests = () => {
         <div className="w-full">
             <h1 className="text-center font-semibold text-2xl">Adoption Requests</h1>
             <hr />
-           
+
             <div className="rounded-md border my-12">
                 <Table>
                     <TableHeader>
