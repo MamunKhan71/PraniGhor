@@ -56,17 +56,43 @@ export default function RegisterForm({ switchToLogin }) {
     }
     const handleGoogleSignUp = () => {
         handleGoogleAuth()
-            .then(() => toast({
-                title: "Successful!",
-                description: "Account Created Successfully!",
-            }))
+            .then((result) => {
+                const newUser = {
+                    userName: result.user.displayName,
+                    userEmail: result.user.email,
+                    userImage: result.user.photoURL,
+                    role: "user"
+                }
+                axiosPublic.post('/users', newUser)
+                    .then(() => toast({
+                        title: "Successful!",
+                        description: "Account Created Successfully!",
+                    }))
+                    .catch(() => toast({
+                        title: "Error!",
+                        description: "Account Creation Unsuccessful!!",
+                    }))
+            })
     }
     const handleTwitterSignUp = () => {
         handleTwitterAuth()
-            .then(() => toast({
-                title: "Successful!",
-                description: "Account Created Successfully!",
-            }))
+            .then((result) => {
+                const newUser = {
+                    userName: result.user.displayName,
+                    userEmail: result.user.email,
+                    userImage: result.user.photoURL,
+                    role: "user"
+                }
+                axiosPublic.post('/users', newUser)
+                    .then(() => toast({
+                        title: "Successful!",
+                        description: "Account Created Successfully!",
+                    }))
+                    .catch(() => toast({
+                        title: "Error!",
+                        description: "Account Creation Unsuccessful!!",
+                    }))
+            })
     }
     return (
         <div className="mx-auto">
