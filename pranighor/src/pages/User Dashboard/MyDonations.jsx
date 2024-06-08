@@ -34,6 +34,16 @@ const MyDonations = () => {
         const percentage = parseFloat((raisedMoney * 100) / maxDonation);
         return Math.round(percentage);
     };
+    const handlePause = (id, status) => {
+        let newStatus;
+        if (status === "paused") {
+            newStatus = "running"
+        } else {
+            newStatus = "paused"
+        }
+        axiosPublic.patch(`pause-campaign?id=${id}&newStatus=${newStatus}`)
+            .then(res => console.log("Success"))
+    }
     const columnHelper = createColumnHelper()
     const columns = [
         columnHelper.accessor("", {
@@ -72,7 +82,7 @@ const MyDonations = () => {
             id: "actions",
             header: "Actions",
             cell: ({ row }) => {
-                const { _id } = row.original
+                const { _id, status } = row.original
                 return (
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -84,10 +94,10 @@ const MyDonations = () => {
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuItem>
-                            <Link to={`/dashboard/edit-donation/${_id}`} className="btn bg-green-400 py-1 px-2 rounded-md w-full text-center">Edit</Link>
+                                <Link to={`/dashboard/edit-donation/${_id}`} className="btn bg-green-400 py-1 px-2 rounded-md w-full text-center">Edit</Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
-                                <Link className="btn bg-red-400 text-white py-1 px-2 rounded-md w-full text-center">Pause</Link>
+                                <Button onClick={() => handlePause(_id, status)} className="btn bg-red-400 text-white py-1 px-2 rounded-md w-full text-center">{status === "paused" ? "Run" : "Pause"}</Button>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
                                 <Link className="btn bg-black text-white py-1 px-2 rounded-md w-full text-center">View Donators</Link>
