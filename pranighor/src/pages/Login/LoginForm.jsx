@@ -6,8 +6,14 @@ import { Link } from "react-router-dom"
 import { FaGoogle, FaTwitter } from "react-icons/fa"
 import { useForm } from "react-hook-form"
 import UseAuth from "@/hooks/useAuth"
+import { ErrorMessage } from "@hookform/error-message"
+import { useState } from "react"
+import { useToast } from "@/components/ui/use-toast"
+
 export default function LoginForm({ switchToRegister }) {
+    const [viewPassword, setViewPassword] = useState(false)
     const { signInUser, handleGoogleAuth, handleTwitterAuth } = UseAuth()
+    const { toast } = useToast()
     const {
         register,
         handleSubmit,
@@ -17,15 +23,36 @@ export default function LoginForm({ switchToRegister }) {
         const email = data.email
         const password = data.password
         signInUser(email, password)
-            .then(res => console.log(res))
+            .then(() => toast({
+                title: "Successful!",
+                description: "Login Successful!",
+            }))
+            .catch(() => toast({
+                title: "Error!",
+                description: "Something went wrong!",
+            }))
     }
     const handleGoogleLogin = () => {
         handleGoogleAuth()
-            .then(res => console.log(res))
+            .then(() => toast({
+                title: "Successful!",
+                description: "Login Successful!",
+            }))
+            .catch(() => toast({
+                title: "Error!",
+                description: "Something went wrong!",
+            }))
     }
     const handleTwitterLogin = () => {
         handleTwitterAuth()
-            .then(res => console.log(res))
+            .then(() => toast({
+                title: "Successful!",
+                description: "Login Successful!",
+            }))
+            .catch(() => toast({
+                title: "Error!",
+                description: "Something went wrong!",
+            }))
     }
     return (
         <div className="mx-auto">
@@ -39,7 +66,16 @@ export default function LoginForm({ switchToRegister }) {
                         <form className="space-y-4" onSubmit={handleSubmit(handleFormSubmit)}>
                             <div className="space-y-2">
                                 <Label htmlFor="email">Email</Label>
-                                <Input {...register('email')} id="email" type="email" placeholder="m@example.com" required />
+                                <Input {...register('email', {
+                                    required: "* Email required",
+                                })} id="email" type="email" placeholder="m@example.com" />
+                                <ErrorMessage
+                                    errors={errors}
+                                    name="email"
+                                    render={({ message }) => (
+                                        <span className="text-red-500 text-sm font-primary">{message}</span>
+                                    )}
+                                />
                             </div>
                             <div className="relative space-y-2">
                                 <div className="flex items-center">
@@ -48,12 +84,22 @@ export default function LoginForm({ switchToRegister }) {
                                         Forgot your password?
                                     </Link>
                                 </div>
-                                <Input {...register('password')} id="password" type="password" placeholder="your password" required />
-                                <Button variant="ghost" size="icon" className="absolute bottom-1 right-1 h-7 w-7">
+                                <Input {...register('password', {
+                                    required: "* Password required"
+                                })} id="password" type={viewPassword ? "text" : "password"} placeholder="your password" />
+                                <Button onClick={(e) => { e.preventDefault(); setViewPassword(!viewPassword); }} variant="ghost" size="icon" className="absolute bottom-1 right-1 h-7 w-7">
                                     <EyeIcon className="h-4 w-4" />
                                     <span className="sr-only">Toggle password visibility</span>
                                 </Button>
+
                             </div>
+                            <ErrorMessage
+                                errors={errors}
+                                name="password"
+                                render={({ message }) => (
+                                    <span className="text-red-500 text-sm font-primary">{message}</span>
+                                )}
+                            />
                             <Button type="submit" className="w-full">
                                 Login
                             </Button>
