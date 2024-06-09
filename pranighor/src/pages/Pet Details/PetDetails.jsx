@@ -112,7 +112,7 @@ export default function PetDetails() {
                                     size="lg"
                                     className=" dark:bg-black dark:text-white"
                                 >
-                                    Adopt Buddy
+                                    Adopt {pet?.name}
                                 </Button>
                             </DialogTrigger>
                             <DialogContent className={'font-primary'}>

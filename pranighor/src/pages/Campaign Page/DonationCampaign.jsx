@@ -12,14 +12,54 @@ import { TiMediaFastForwardOutline, TiMediaRewindOutline } from "react-icons/ti"
 import { TbColumns2, TbColumns3 } from "react-icons/tb";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useEffect, useRef, useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import { SkeletonCard } from "@/components/ui/skeleton-card";
 const DonationCampaign = () => {
     const axiosPublic = useAxiosPublic()
-    const { data: campaigns, isPending, isLoading, error } = useQuery({
-        queryKey: ['allCampaign'],
-        queryFn: async () => await axiosPublic.get('campaigns').then((res) => {
-            return res.data
-        })
-    })
+    // const { data: campaigns, isPending, isLoading, error } = useQuery({
+    //     queryKey: ['allCampaign'],
+    //     queryFn: async () => await axiosPublic.get('campaigns').then((res) => {
+    //         return res.data
+    //     })
+    // })
+    const [campaigns, setCampaigns] = useState([])
+    const [hasMore, setHasMore] = useState([])
+    const [page, setPage] = useState(0)
+    const elementRef = useRef(null)
+    const onIntersection = (entries) => {
+        const firstEntry = entries[0]
+        if (firstEntry.isIntersecting && hasMore) {
+            fetchMoreItems()
+        }
+    }
+    const fetchMoreItems = async () => {
+        const response = await axiosPublic.get(`campaigns?limit=3&skip=${page * 3}`)
+        const data = await response.data
+        if (data.length === 0) {
+            setHasMore(false)
+        }
+        else {
+            setCampaigns(prevCampaign => {
+                const mergedData = [...prevCampaign, ...data]
+                return mergedData
+            })
+        }
+        setPage(prevPage => prevPage + 1)
+    }
+    useEffect(() => {
+        const observer = new IntersectionObserver(onIntersection)
+        if (observer && elementRef.current) {
+            observer.observe(elementRef.current)
+        }
+        return () => {
+            if (observer) {
+                observer.disconnect()
+            }
+        }
+    }, [campaigns])
+
+
     return (
         <div className="space-y-16">
             <div className="h-96 w-full relative rounded-xl">
@@ -76,14 +116,45 @@ const DonationCampaign = () => {
                                                     <CardDescription>Donated Amount: ${campaign?.raisedMoney}</CardDescription> {/* Donated Amount */}
                                                 </div>
                                             </div>
+                                            <div>
+                                                <Link to={`/campaign-details/${campaign?._id}`}>
+                                                    <Button className="w-full dark:bg-black dark:text-white">View Details</Button>
+                                                </Link>
+                                            </div>
                                         </div>
-                                        <Link to={`/campaign-details/${campaign?._id}`}>
-                                            <Button className="w-full dark:bg-black dark:text-white">View Details</Button>
-                                        </Link>
+
                                     </CardHeader>
                                 </Card>
                             </>
                         ))
+                    }
+                    {
+                        hasMore &&
+                        <>
+                            <div ref={elementRef}>
+                                <div>
+                                    <div className="flex flex-col space-y-3">
+                                        <Skeleton className="h-full w-full rounded-xl" />
+                                        <div className="space-y-2">
+                                            <Skeleton className="h-52 w-full" />
+                                            <Skeleton className="h-6 w-full" />
+                                            <Skeleton className="h-4 w-full" />
+                                            <Skeleton className="h-12 w-full" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ref={elementRef}>
+                                <div>
+                                    <SkeletonCard className="rounded-full" />
+                                </div>
+                            </div>
+                            <div ref={elementRef}>
+                                <div>
+                                    <SkeletonCard className="rounded-full" />
+                                </div>
+                            </div>
+                        </>
                     }
 
                 </div>

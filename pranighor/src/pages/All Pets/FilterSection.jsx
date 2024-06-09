@@ -4,19 +4,20 @@ import axios from "axios";
 import { useState } from "react";
 import { FaFilter } from "react-icons/fa";
 
-const FilterSection = ({ setFilteredSearch }) => {
-    const [catFilter, setCatFilter] = useState("")
+const FilterSection = ({ setFilteredSearch, handleAge }) => {
+    const [petFilter, setPetFilter] = useState("")
     const [ageFilter, setAgeFilter] = useState("")
     const axiosPublic = useAxiosPublic()
     const { isPending, error, data: categories } = useQuery({
         queryKey: ['petCategory'],
         queryFn: async () => {
-            const res = await axios.get('pet-category.json')
+            const res = await axiosPublic.get('pet-category')
             return res.data;
         }
     })
-    const handleAge = data => {
-        axiosPublic.get(`filter-pet?age=${data}`)
+    const handleSelect = category => {
+        axiosPublic.get(`filter-pet?category=${category}`)
+            .then(res => setFilteredSearch(res.data))
     }
     return (
         <div>
@@ -37,12 +38,13 @@ const FilterSection = ({ setFilteredSearch }) => {
                                             By Animal Types
                                         </label>
                                         <select
+                                            onChange={(e) => handleSelect(e.target.value)}
                                             id="FROM"
                                             className="h-12 border border-gray-300 text-gray-900 text-xs font-medium rounded-lg block w-full py-2.5 px-4 appearance-none relative focus:outline-none dark:bg-black dark:text-white"
                                         >
                                             <option selected="" disabled>Select</option>
                                             {
-                                                categories?.map(category => <option value={category.name}>{category.name}</option>)
+                                                categories?.map(category => <option key={category._id} value={category.name}>{category.name}</option>)
                                             }
                                         </select>
 

@@ -7,7 +7,7 @@ import { FaMoneyBill, FaPaw, FaUser } from "react-icons/fa"
 import UseAuth from "@/hooks/useAuth"
 
 export default function Dashboard() {
-    const isAdmin = true
+    const isAdmin = false
     const { user } = UseAuth()
     return (
         <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">

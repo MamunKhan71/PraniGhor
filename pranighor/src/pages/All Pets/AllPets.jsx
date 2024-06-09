@@ -1,15 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-    Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from "@/components/ui/pagination"
-import {
     Select,
     SelectContent,
     SelectItem,
@@ -39,7 +30,6 @@ const AllPets = () => {
     const [page, setPage] = useState(0)
     const isPending = false
     const elementRef = useRef(null)
-
     const onIntersection = (entries) => {
         const firstEntry = entries[0]
         if (firstEntry.isIntersecting && hasMore) {
@@ -54,7 +44,12 @@ const AllPets = () => {
             setHasMore(false)
         }
         else {
-            setPets(prevPets => [...prevPets, ...data])
+            const sortData = data.sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate))
+            console.log('sort Data: ', sortData);
+            setPets(prevPets => {
+                const mergedData = [...prevPets, ...sortData];
+                return mergedData.sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate));
+            });
             setPage(prevPage => prevPage + 1)
         }
     }
@@ -82,6 +77,10 @@ const AllPets = () => {
     const handleSearch = async (data) => {
         const filteredData = pets.filter(pet => pet.name === data)
         setFilteredSearch(filteredData);
+    }
+    const handleAge = data => {
+        axiosPublic.get(`filter-age?sort=${data}`)
+            .then(res => setFilteredSearch(res.data))
     }
     const handleCategoryFilter = (data) => {
         // TODO
@@ -111,7 +110,7 @@ const AllPets = () => {
                     </div>
                 </div>
             </div>
-            <div className="flex w-full justify-end">
+            {/* <div className="flex w-full justify-end">
                 <Select>
                     <SelectTrigger className="w-[180px]">
                         <SelectValue placeholder="Sort by" />
@@ -121,10 +120,10 @@ const AllPets = () => {
                         <SelectItem value="dark">Popularity</SelectItem>
                     </SelectContent>
                 </Select>
-            </div>
+            </div> */}
             <div className="flex gap-8 font-primary">
                 <div className="basis-1/5 w-full">
-                    <FilterSection setFilteredSearch={setFilteredSearch} />
+                    <FilterSection setFilteredSearch={setFilteredSearch} handleAge={handleAge} />
                 </div>
                 <div className="flex-1">
                     <div className="grid grid-cols-3 gap-4">
