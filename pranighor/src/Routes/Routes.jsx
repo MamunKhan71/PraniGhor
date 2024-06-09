@@ -1,5 +1,8 @@
 import MainLayouts from "@/Layouts/MainLayouts";
 import AboutUs from "@/pages/About Us/AboutUs";
+import ManageDonations from "@/pages/Admin Dashboard/ManageDonations";
+import ManagePets from "@/pages/Admin Dashboard/ManagePets";
+import ManageUsers from "@/pages/Admin Dashboard/ManageUsers";
 import AllPets from "@/pages/All Pets/AllPets";
 import DonationCampaign from "@/pages/Campaign Page/DonationCampaign";
 import Dashboard from "@/pages/Dashboard/Dashboard";
@@ -86,6 +89,19 @@ const router = createBrowserRouter([
                     {
                         path: 'adoption-requests',
                         element: <MyAdoptionRequests />
+                    },
+                    //admin
+                    {
+                        path: 'users',
+                        element: <ManageUsers />
+                    },
+                    {
+                        path: 'all-pets',
+                        element: <ManagePets />
+                    },
+                    {
+                        path: 'all-campaigns',
+                        element: <ManageDonations />
                     }
                 ]
             }
