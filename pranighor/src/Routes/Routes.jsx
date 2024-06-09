@@ -59,6 +59,10 @@ const router = createBrowserRouter([
                 children: [
                     // user
                     {
+                        index: true,
+                        element: <AddPet />
+                    },
+                    {
                         path: 'add-pet',
                         element: <AddPet />
                     },
