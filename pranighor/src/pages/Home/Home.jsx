@@ -9,6 +9,7 @@ import { GoMoveToEnd } from "react-icons/go";
 import { ShopByPets } from "./ShopByPets";
 import { Link } from "react-router-dom";
 import CallToAction from "./CallToAction";
+import About from "./About";
 const Home = () => {
     return (
         <div className="space-y-40">
@@ -47,8 +48,10 @@ const Home = () => {
                     <div className="flex items-center gap-2 justify-center">
                         <Link to={'/all-pets'}><Button className="inline-flex gap-2 items-center dark:bg-black dark:text-white">View More <GoMoveToEnd /></Button></Link>
                     </div>
-
                 </div>
+            </div>
+            <div className="space-y-16">
+                <About />
             </div>
 
             <div className="space-y-16">
