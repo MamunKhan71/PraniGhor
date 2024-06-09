@@ -21,7 +21,6 @@ import { Badge } from "@/components/ui/badge"
 const MyAdoptionRequests = () => {
     const { user } = UseAuth()
     const axiosPublic = useAxiosPublic()
-    const [myAdoptRequest, setMyAdoptRequest] = useState([])
     const { isLoading, isError, error, data: myRequests, refetch } = useQuery({
         queryKey: ['adoptionRequest'],
         queryFn: async () =>

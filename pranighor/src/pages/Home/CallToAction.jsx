@@ -26,7 +26,7 @@ export default function CallToAction() {
                             <Label htmlFor="message">Your Message</Label>
                             <Textarea id="message" placeholder="Enter your message" />
                         </div>
-                        <Button className="inline-flex gap-2 items-center"><MailIcon /> Send Message</Button>
+                        <Button className="inline-flex gap-2 items-center dark:bg-black dark:text-white"><MailIcon /> Send Message</Button>
                     </div>
                 </CardContent>
             </Card>

@@ -2,7 +2,7 @@ import { SiDatadog } from "react-icons/si";
 import { MdWifiCalling1 } from "react-icons/md";
 const Footer = () => {
     return (
-        <footer className="w-full mt-40 bg-[url('Footer.png')]">
+        <footer className="w-full mt-40 bg-[url('Vector.png')] bg-no-repeat bg-center">
             <div className="mx-auto container">
                 {/*Grid*/}
                 <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-8 py-10 max-sm:max-w-sm max-sm:mx-auto gap-y-8">
@@ -11,7 +11,7 @@ const Footer = () => {
                             <SiDatadog className="text-primaryCol" />
                             <h1 className="font-semibold ">Prani<span className="text-primaryCol">Ghor</span></h1>
                         </div>
-                        <p className="py-8 text-sm text-gray-500 lg:max-w-xs text-center lg:text-left">
+                        <p className="py-8 text-sm text-gray-500 dark:text-white lg:max-w-xs text-center lg:text-left">
                             Trusted in more than 100 countries &amp; 5 million customers. Have any
                             query ?
                         </p>
@@ -22,12 +22,12 @@ const Footer = () => {
                         </a>
                     </div>
                     <div className="lg:mx-auto text-left ">
-                        <h4 className="text-lg text-gray-900 font-medium mb-7">Company</h4>
+                        <h4 className="text-lg text-gray-900 dark:text-white font-medium mb-7">Company</h4>
                         <ul className="text-sm  transition-all duration-500">
                             <li className="mb-6">
                                 <a
                                     href="javascript:;"
-                                    className="text-gray-600 hover:text-gray-900"
+                                    className="text-gray-600 hover:text-gray-900 dark:text-white"
                                 >
                                     About Us
                                 </a>
@@ -35,7 +35,7 @@ const Footer = () => {
                             <li className="mb-6">
                                 <a
                                     href="javascript:;"
-                                    className=" text-gray-600 hover:text-gray-900"
+                                    className=" text-gray-600 hover:text-gray-900 dark:text-white"
                                 >
                                     Blog
                                 </a>
@@ -43,7 +43,7 @@ const Footer = () => {
                             <li className="mb-6">
                                 <a
                                     href="javascript:;"
-                                    className=" text-gray-600 hover:text-gray-900"
+                                    className=" text-gray-600 hover:text-gray-900 dark:text-white"
                                 >
                                     Gift cards
                                 </a>
@@ -51,7 +51,7 @@ const Footer = () => {
                             <li>
                                 <a
                                     href="javascript:;"
-                                    className=" text-gray-600 hover:text-gray-900"
+                                    className=" text-gray-600 hover:text-gray-900 dark:text-white"
                                 >
                                     Careers
                                 </a>
@@ -59,12 +59,12 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div className="lg:mx-auto text-left ">
-                        <h4 className="text-lg text-gray-900 font-medium mb-7">Useful Links</h4>
+                        <h4 className="text-lg text-gray-900 dark:text-white font-medium mb-7">Useful Links</h4>
                         <ul className="text-sm  transition-all duration-500">
                             <li className="mb-6">
                                 <a
                                     href="javascript:;"
-                                    className="text-gray-600 hover:text-gray-900"
+                                    className="text-gray-600 hover:text-gray-900 dark:text-white"
                                 >
                                     New products
                                 </a>
@@ -72,7 +72,7 @@ const Footer = () => {
                             <li className="mb-6">
                                 <a
                                     href="javascript:;"
-                                    className=" text-gray-600 hover:text-gray-900"
+                                    className=" text-gray-600 hover:text-gray-900 dark:text-white"
                                 >
                                     Best sellers
                                 </a>
@@ -80,7 +80,7 @@ const Footer = () => {
                             <li className="mb-6">
                                 <a
                                     href="javascript:;"
-                                    className=" text-gray-600 hover:text-gray-900"
+                                    className=" text-gray-600 hover:text-gray-900 dark:text-white"
                                 >
                                     Responsive Blocks
                                 </a>
@@ -88,7 +88,7 @@ const Footer = () => {
                             <li>
                                 <a
                                     href="javascript:;"
-                                    className=" text-gray-600 hover:text-gray-900"
+                                    className=" text-gray-600 hover:text-gray-900 dark:text-white"
                                 >
                                     Discount
                                 </a>
@@ -96,7 +96,7 @@ const Footer = () => {
                             <li>
                                 <a
                                     href="javascript:;"
-                                    className=" text-gray-600 hover:text-gray-900"
+                                    className=" text-gray-600 hover:text-gray-900 dark:text-white"
                                 >
                                     F.A.Q
                                 </a>
@@ -105,12 +105,12 @@ const Footer = () => {
                     </div>
                     {/*End Col*/}
                     <div className="lg:mx-auto text-left">
-                        <h4 className="text-lg text-gray-900 font-medium mb-7">Customer Service</h4>
+                        <h4 className="text-lg text-gray-900 dark:text-white font-medium mb-7">Customer Service</h4>
                         <ul className="text-sm  transition-all duration-500">
                             <li className="mb-6">
                                 <a
                                     href="javascript:;"
-                                    className="text-gray-600 hover:text-gray-900"
+                                    className="text-gray-600 hover:text-gray-900 dark:text-white"
                                 >
                                     Contact Us
                                 </a>
@@ -118,7 +118,7 @@ const Footer = () => {
                             <li className="mb-6">
                                 <a
                                     href="javascript:;"
-                                    className=" text-gray-600 hover:text-gray-900"
+                                    className=" text-gray-600 hover:text-gray-900 dark:text-white"
                                 >
                                     Shipping
                                 </a>
@@ -126,7 +126,7 @@ const Footer = () => {
                             <li className="mb-6">
                                 <a
                                     href="javascript:;"
-                                    className=" text-gray-600 hover:text-gray-900"
+                                    className=" text-gray-600 hover:text-gray-900 dark:text-white"
                                 >
                                     Returns
                                 </a>
@@ -134,7 +134,7 @@ const Footer = () => {
                             <li>
                                 <a
                                     href="javascript:;"
-                                    className=" text-gray-600 hover:text-gray-900"
+                                    className=" text-gray-600 hover:text-gray-900 dark:text-white"
                                 >
                                     Order tracking
                                 </a>
@@ -143,12 +143,12 @@ const Footer = () => {
                     </div>
                     {/*End Col*/}
                     <div className="lg:mx-auto text-left">
-                        <h4 className="text-lg text-gray-900 font-medium mb-7">Store</h4>
+                        <h4 className="text-lg text-gray-900 dark:text-white font-medium mb-7">Store</h4>
                         <ul className="text-sm  transition-all duration-500">
                             <li className="mb-6">
                                 <a
                                     href="javascript:;"
-                                    className="text-gray-600 hover:text-gray-900"
+                                    className="text-gray-600 hover:text-gray-900 dark:text-white"
                                 >
                                     8592 Fairground St.
                                     Tallahassee, FL 32303
@@ -160,7 +160,7 @@ const Footer = () => {
                             <li className="mb-6">
                                 <a
                                     href="javascript:;"
-                                    className=" text-gray-600 hover:text-gray-900"
+                                    className=" text-gray-600 hover:text-gray-900 dark:text-white"
                                 >
                                     +775 378-6348
                                 </a>
@@ -168,7 +168,7 @@ const Footer = () => {
                             <li className="mb-6">
                                 <a
                                     href="javascript:;"
-                                    className=" text-gray-600 hover:text-gray-900"
+                                    className=" text-gray-600 hover:text-gray-900 dark:text-white"
                                 >
                                     rgarton@outlook.com
                                 </a>
@@ -180,14 +180,14 @@ const Footer = () => {
                 {/*Grid*/}
                 <div className="py-7 border-t border-gray-200">
                     <div className="flex items-center justify-center flex-col lg:justify-between lg:flex-row">
-                        <span className="text-sm text-gray-500 ">
+                        <span className="text-sm text-gray-500 dark:text-white ">
                             <a href="https://pagedone.io/">PraniGhor</a> 2024, All rights
                             reserved.
                         </span>
                         <div className="flex mt-4 space-x-4 sm:justify-center lg:mt-0 ">
                             <a
                                 href="javascript:;"
-                                className="w-9 h-9 rounded-full bg-gray-700 flex justify-center items-center hover:bg-indigo-600"
+                                className="w-9 h-9 rounded-full bg-gray-700 dark:bg-black flex justify-center items-center hover:bg-indigo-600"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -207,7 +207,7 @@ const Footer = () => {
                             </a>
                             <a
                                 href="javascript:;"
-                                className="w-9 h-9 rounded-full bg-gray-700 flex justify-center items-center hover:bg-indigo-600"
+                                className="w-9 h-9 rounded-full bg-gray-700 dark:bg-black flex justify-center items-center hover:bg-indigo-600"
                             >
                                 <svg
                                     className="w-[1.25rem] h-[1.125rem] text-white"
@@ -223,7 +223,7 @@ const Footer = () => {
                             </a>
                             <a
                                 href="javascript:;"
-                                className="w-9 h-9 rounded-full bg-gray-700 flex justify-center items-center hover:bg-indigo-600"
+                                className="w-9 h-9 rounded-full bg-gray-700 dark:bg-black flex justify-center items-center hover:bg-indigo-600"
                             >
                                 <svg
                                     className="w-[1rem] h-[1rem] text-white"
@@ -239,7 +239,7 @@ const Footer = () => {
                             </a>
                             <a
                                 href="javascript:;"
-                                className="w-9 h-9 rounded-full bg-gray-700 flex justify-center items-center hover:bg-indigo-600"
+                                className="w-9 h-9 rounded-full bg-gray-700 dark:bg-black flex justify-center items-center hover:bg-indigo-600"
                             >
                                 <svg
                                     className="w-[1.25rem] h-[0.875rem] text-white"

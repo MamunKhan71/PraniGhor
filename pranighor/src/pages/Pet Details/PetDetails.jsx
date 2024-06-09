@@ -110,14 +110,14 @@ export default function PetDetails() {
                             <DialogTrigger asChild>
                                 <Button
                                     size="lg"
-                                    className="bg-primary text-white hover:bg-primary-500 focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                                    className=" dark:bg-black dark:text-white"
                                 >
                                     Adopt Buddy
                                 </Button>
                             </DialogTrigger>
                             <DialogContent className={'font-primary'}>
                                 <DialogHeader>
-                                    <DialogTitle className="text-2xl font-bold text-center ">Adopt {pet?.name}</DialogTitle>
+                                    <DialogTitle className="text-2xl font-bold text-center  ">Adopt {pet?.name}</DialogTitle>
                                     <DialogDescription className="font-semibold text-md text-center">Fill out the form below to adopt {pet?.name}.</DialogDescription>
                                 </DialogHeader>
                                 <hr />
@@ -177,7 +177,7 @@ export default function PetDetails() {
                                     <DialogFooter>
                                         <Button
                                             type="submit"
-                                            className="bg-primary text-white hover:bg-primary-500 focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                                            className="dark:bg-black dark:text-white"
                                         >
                                             Submit Request
                                         </Button>

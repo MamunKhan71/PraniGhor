@@ -25,6 +25,8 @@ const AddPet = () => {
     const [urgent, setUrgent] = useState(false)
     const [vaccinated, setVaccinated] = useState(false)
     const [neutered, setNeutered] = useState(false)
+    const [selectedFile, setSelectedFile] = useState(null)
+
     const { isPending, error, data: category } = useQuery({
         queryKey: ['petData'],
         queryFn: () =>
@@ -75,6 +77,21 @@ const AddPet = () => {
             neutered: neuteredCheck,
             featuredStatus: false
         };
+        if (selectedFile !== null) {
+            axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_api}`, { image: data.image[0] }, {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            })
+                .then((res) => {
+                    newCampaign.campaignImage = (res.data?.data?.display_url)
+
+                })
+                .then(() => {
+                    axiosPublic.patch(`edit-campaign?id=${id.id}`, newCampaign)
+                        .then(res => console.log(res.data))
+                })
+        }
         axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_api}`, { image: data.petPicture[0] }, {
             headers: {
                 'content-type': 'multipart/form-data'

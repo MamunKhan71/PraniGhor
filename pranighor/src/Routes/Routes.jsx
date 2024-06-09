@@ -64,7 +64,7 @@ const router = createBrowserRouter([
                         element: <MyPets />
                     },
                     {
-                        path: 'my-pets/update-pet',
+                        path: 'update-pet/:id',
                         element: <UpdatePet />
                     },
                     {

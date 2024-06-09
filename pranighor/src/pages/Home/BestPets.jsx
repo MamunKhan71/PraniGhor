@@ -39,7 +39,7 @@ export function BestPets() {
                                         </div>
                                     </div>
                                 </div>
-                                <Link to={`/details/${pet._id}`}><Button className="w-full">View Details</Button></Link>
+                                <Link to={`/details/${pet._id}`}><Button className="w-full dark:bg-black dark:text-white">View Details</Button></Link>
                             </CardHeader>
                         </Card>
                     </>

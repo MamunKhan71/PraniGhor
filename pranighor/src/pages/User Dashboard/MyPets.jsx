@@ -23,7 +23,7 @@ import { useState } from "react"
 const MyPets = () => {
     const { user } = UseAuth()
     const axiosPublic = useAxiosPublic()
-    const { isPending, error, data: myPets, isError, isLoading } = useQuery({
+    const { isPending, error, data: myPets, isError, isLoading, refetch } = useQuery({
         queryKey: ['myPets'],
         queryFn: async () =>
             await axiosPublic.get(`my-pets?email=${user?.email}`).then((res) => { return res.data })
@@ -75,6 +75,7 @@ const MyPets = () => {
             id: "actions",
             header: "Actions",
             cell: ({ row }) => {
+                const { _id } = row.original
                 return (
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -86,13 +87,13 @@ const MyPets = () => {
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuItem>
-                                <Link to={'update-pet'} className="btn bg-orange-400 py-1 px-2 rounded-md w-full text-center">Update</Link>
+                                <Link to={`/dashboard/update-pet/${_id}`} className="btn bg-orange-400 py-1 px-2 rounded-md w-full text-center">Update</Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
-                                <Link className="btn bg-red-400 text-white py-1 px-2 rounded-md w-full text-center">Delete</Link>
+                                <Button onClick={() => handleDelete(_id)} className="btn bg-red-400 text-white py-1 px-2 rounded-md w-full text-center">Delete</Button>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
-                                <Link className="btn bg-green-400 text-white py-1 px-2 rounded-md w-full text-center">Adopted</Link>
+                                <Button onClick={() => handleStatus(_id)} className="btn bg-green-400 text-white py-1 px-2 rounded-md w-full text-center">Adopted</Button>
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                         </DropdownMenuContent>
@@ -109,7 +110,14 @@ const MyPets = () => {
     const [columnFilters, setColumnFilters] = useState([])
     const [columnVisibility, setColumnVisibility] = useState([])
     const [rowSelection, setRowSelection] = useState([])
-
+    const handleDelete = id => {
+        axiosPublic.delete(`delete-pet?id=${id}`)
+            .then(() => refetch())
+    }
+    const handleStatus = id => {
+        axiosPublic.patch(`pet-status?id=${id}`)
+            .then(() => refetch())
+    }
     const table = useReactTable({
         data,
         columns,

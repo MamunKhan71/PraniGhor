@@ -6,7 +6,7 @@ const MainLayouts = () => {
     const location = useLocation()
     return (
         <div className="font-primary">
-            <div className="container mx-auto">
+            <div className="container mx-auto py-8">
                 {!location.pathname.startsWith("/dashboard") && <Navbar />}
                 <div>
                     <Outlet />

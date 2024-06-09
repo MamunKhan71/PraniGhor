@@ -24,6 +24,7 @@ import useAxiosPublic from "@/hooks/useAxiosPublic";
 import ReactSearchBox from "react-search-box";
 import { useEffect, useRef, useState } from "react";
 import { GrPowerReset } from "react-icons/gr";
+import { Skeleton } from "@/components/ui/skeleton";
 const AllPets = () => {
     const axiosPublic = useAxiosPublic()
     const [search, setSearch] = useState([])
@@ -78,7 +79,7 @@ const AllPets = () => {
         setSearch(dataArray)
         setFilteredSearch(pets)
     }, [pets])
-    const handleSearch = async(data) => {
+    const handleSearch = async (data) => {
         const filteredData = pets.filter(pet => pet.name === data)
         setFilteredSearch(filteredData);
     }
@@ -88,7 +89,7 @@ const AllPets = () => {
     }
     return (
         <div className="w-full space-y-4">
-            <div className="bg-primary h-48 rounded-lg flex flex-col items-center justify-center">
+            <div className="bg-primary dark:bg-black h-48 rounded-lg flex flex-col items-center justify-center">
                 <h1 className="text-5xl text-white font-bold text-center">Available Pets</h1>
                 <p className=" text-gray-400 text-center">Browse the list of available pets</p>
             </div>
@@ -156,7 +157,7 @@ const AllPets = () => {
                                                             </div>
                                                         </div>
                                                         <div>
-                                                            <Link to={`/details/${pet._id}`}><Button className="w-full">View Details</Button></Link>
+                                                            <Link to={`/details/${pet._id}`}><Button className="w-full dark:bg-black dark:text-white">View Details</Button></Link>
                                                         </div>
                                                     </div>
                                                 </CardHeader>
@@ -172,7 +173,15 @@ const AllPets = () => {
                             <>
                                 <div ref={elementRef}>
                                     <div>
-                                        <SkeletonCard className="rounded-full" />
+                                        <div className="flex flex-col space-y-3">
+                                            <Skeleton className="h-full w-full rounded-xl" />
+                                            <div className="space-y-2">
+                                                <Skeleton className="h-52 w-full" />
+                                                <Skeleton className="h-6 w-full" />
+                                                <Skeleton className="h-4 w-full" />
+                                                <Skeleton className="h-12 w-full" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div ref={elementRef}>
@@ -187,8 +196,6 @@ const AllPets = () => {
                                 </div>
                             </>
                         }
-
-
                     </div>
                 </div>
             </div>

@@ -78,7 +78,7 @@ const DonationCampaign = () => {
                                             </div>
                                         </div>
                                         <Link to={`/campaign-details/${campaign?._id}`}>
-                                            <Button className="w-full">View Details</Button>
+                                            <Button className="w-full dark:bg-black dark:text-white">View Details</Button>
                                         </Link>
                                     </CardHeader>
                                 </Card>

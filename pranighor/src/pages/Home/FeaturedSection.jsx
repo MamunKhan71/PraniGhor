@@ -29,7 +29,7 @@ export function FeaturedSection() {
                             <h1 className="text-3xl font-bold"> Pranighor Unveils the Ultimate Pet Adoption Platform</h1>
                             <p className="text-gray-500 text-justify max-w-xl">Meet a rescued tabby cat with a heart of gold. This affectionate feline enjoys sunbathing, cuddles, and playtime with feather toys. With striking green eyes and silky fur, Whiskers is ready to steal your heart and become your new best friend!</p>
                             <div>
-                                <Link to={'/all-pets'}><Button>
+                                <Link to={'/all-pets'}><Button className="dark:bg-black dark:text-white">
                                     <MdShoppingCartCheckout className="mr-2 h-4 w-4" /> Adopt Now
                                 </Button></Link>
                             </div>
@@ -70,7 +70,7 @@ export function FeaturedSection() {
                                                             </div>
                                                         </div>
                                                         <div>
-                                                            <Link to={`/details/${pet._id}`}><Button className="w-full">View Details</Button></Link>
+                                                            <Link to={`/details/${pet._id}`}><Button className="w-full dark:bg-black dark:text-white">View Details</Button></Link>
                                                         </div>
                                                     </div>
                                                 </CardHeader>

@@ -20,25 +20,25 @@ const FilterSection = ({ setFilteredSearch }) => {
     }
     return (
         <div>
-            <section className="relative w-full">
+            <section className="relative w-full ">
                 <div className="w-full">
                     <div>
                         <div>
-                            <div className="box rounded-lg border border-gray-200 bg-white p-6 w-full">
-                                <h6 className="font-medium text-base leading-7 text-black mb-5">
+                            <div className="box rounded-lg border border-gray-200 dark:bg-black p-6 w-full">
+                                <h6 className="font-medium text-base leading-7  mb-5">
                                     <FaFilter className="inline-flex items-center gap-2 text-md" /> Filter
                                 </h6>
                                 <div className="flex items-center mb-5 gap-1">
                                     <div className="relative w-full">
                                         <label
                                             htmlFor="countries"
-                                            className="block mb-2 text-sm font-medium text-gray-600 w-full"
+                                            className="block mb-2 text-sm font-medium  w-full"
                                         >
                                             By Animal Types
                                         </label>
                                         <select
                                             id="FROM"
-                                            className="h-12 border border-gray-300 text-gray-900 text-xs font-medium rounded-lg block w-full py-2.5 px-4 appearance-none relative focus:outline-none bg-white"
+                                            className="h-12 border border-gray-300 text-gray-900 text-xs font-medium rounded-lg block w-full py-2.5 px-4 appearance-none relative focus:outline-none dark:bg-black dark:text-white"
                                         >
                                             <option selected="" disabled>Select</option>
                                             {
@@ -57,7 +57,7 @@ const FilterSection = ({ setFilteredSearch }) => {
                                 <div className="relative w-full mb-8">
                                     <select onChange={(e) => handleAge(e.target.value)}
                                         id="FROM"
-                                        className="h-12 border border-gray-300 text-gray-900 text-xs font-medium rounded-lg block w-full py-2.5 px-4 appearance-none relative focus:outline-none bg-white"
+                                        className="h-12 border border-gray-300 text-gray-900 text-xs font-medium rounded-lg block w-full py-2.5 px-4 appearance-none relative focus:outline-none dark:bg-black dark:text-white"
                                     >
                                         <option selected="" disabled>Select one</option>
                                         <option value={1}>Ascending</option>

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { BsStripe } from "react-icons/bs";
 export default function PaymentCard() {
     return (
+        
         <Card className="w-full p-4">
             <CardContent className="space-y-4">
                 <div className="space-y-2">

@@ -19,14 +19,14 @@ const Home = () => {
                     <h1 className="text-6xl font-black leading-[60px]">A pet store with everything you need</h1>
                     <h3 className="text-lg">Sociis blandit et pellentesque aliquet at quisque tortor lacinia nullam. Mattis aenean scelerisque dui libero</h3>
                     <div>
-                        <Link to={'/all-pets'}><Button>
-                            <MdShoppingCartCheckout className="mr-2 h-4 w-4" /> Adopt Now
+                        <Link to={'/all-pets'}><Button className="dark:bg-black dark:text-white">
+                            <MdShoppingCartCheckout className="mr-2 h-4 w-4 " /> Adopt Now
                         </Button></Link>
                     </div>
                 </div>
             </div>
             <div className="space-y-16 relative">
-                <h1 className="text-3xl font-bold text-center">Browse by category</h1>
+                <h1 className="text-3xl font-bold text-center ">Browse by category</h1>
                 <ShopByPets></ShopByPets>
             </div>
             <div className="space-y-16">
@@ -45,7 +45,7 @@ const Home = () => {
                 <BestPets />
                 <div className="w-full flex items-center justify-center">
                     <div className="flex items-center gap-2 justify-center">
-                        <Link to={'/all-pets'}><Button className="inline-flex gap-2 items-center">View More <GoMoveToEnd /></Button></Link>
+                        <Link to={'/all-pets'}><Button className="inline-flex gap-2 items-center dark:bg-black dark:text-white">View More <GoMoveToEnd /></Button></Link>
                     </div>
 
                 </div>

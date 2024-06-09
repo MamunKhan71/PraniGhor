@@ -47,7 +47,7 @@ export default function DonationDetails() {
                             <CardTitle>Donation Details</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <div className="flex gap-4 items-center justify-between bg-gray-50 p-4 rounded-lg">
+                            <div className="flex gap-4 items-center justify-between dark:bg-black dark:text-white p-4 rounded-lg">
                                 <div className="h-12 w-12">
                                     <img className="w-full h-full rounded-lg object-cover" src="header1.jpg" alt="" />
                                 </div>
@@ -58,7 +58,7 @@ export default function DonationDetails() {
                             </div>
                         </CardContent>
                         <CardContent>
-                            <div className="flex gap-4 items-center justify-between bg-gray-50 p-4 rounded-lg">
+                            <div className="flex gap-4 items-center justify-between dark:bg-black dark:text-white p-4 rounded-lg">
                                 <div className="h-12 w-12">
                                     <img className="w-full h-full rounded-lg object-cover" src="header1.jpg" alt="" />
                                 </div>
@@ -69,7 +69,7 @@ export default function DonationDetails() {
                             </div>
                         </CardContent>
                         <CardContent>
-                            <div className="flex gap-4 items-center justify-between bg-gray-50 p-4 rounded-lg">
+                            <div className="flex gap-4 items-center justify-between dark:bg-black dark:text-white p-4 rounded-lg">
                                 <div className="h-12 w-12">
                                     <img className="w-full h-full rounded-lg object-cover" src="header1.jpg" alt="" />
                                 </div>
@@ -82,7 +82,7 @@ export default function DonationDetails() {
                     </Card>
                     <Dialog>
                         <DialogTrigger asChild>
-                            <Button className="w-full">Donate Now</Button>
+                            <Button className="w-full dark:bg-black dark:text-white">Donate Now</Button>
                         </DialogTrigger>
                         <DialogContent >
                             <DialogHeader>
@@ -131,7 +131,7 @@ export default function DonationDetails() {
                                         </div>
                                     </CardContent>
                                     <CardFooter>
-                                        <Link to={`/campaign-details/${data?._id}`}><Button>Donate Now</Button></Link>
+                                        <Link to={`/campaign-details/${data?._id}`}><Button className="dark:bg-black dark:text-white">Donate Now</Button></Link>
                                     </CardFooter>
                                 </Card>
                             </>

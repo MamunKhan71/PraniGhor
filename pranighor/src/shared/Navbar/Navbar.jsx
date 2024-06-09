@@ -16,6 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "../../components/ui/dropdown-menu"
 import UseAuth from "@/hooks/useAuth";
+import { ModeToggle } from "@/components/ui/toggle";
 
 export default function Navbar() {
   const { user, userSignOut } = UseAuth()
@@ -23,7 +24,7 @@ export default function Navbar() {
     userSignOut()
   }
   return (
-    <header className="flex w-full shrink-0 items-center bg-gray-100 px-6 py-4 rounded-full my-8">
+    <header className="flex w-full shrink-0 items-center bg-gray-100 dark:bg-black px-6 py-4 rounded-full mb-8">
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="lg:hidden">
@@ -85,8 +86,9 @@ export default function Navbar() {
         >
           Donation Campaign
         </Link>
+        <ModeToggle />
         {
-          user ? <Link prefetch={false} className="group inline-flex h-9 w-max items-center justify-center rounded-full  px-4 py-2 text-lg font-medium transition-colors  hover:text-primaryCol focus:bg-primaryCol focus:text-black focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50">
+          user ? <Link prefetch={false} className="group inline-flex h-9 w-max items-center justify-center rounded-full px-4 py-2 text-lg font-medium transition-colors  hover:text-primaryCol focus:bg-primaryCol focus:text-black focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50">
             <DropdownMenu>
               <DropdownMenuTrigger><Avatar>
                 <AvatarImage src={`${user?.photoURL || "https://github.com/shadcn.png"}`} />
