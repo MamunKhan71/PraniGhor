@@ -7,9 +7,12 @@ import { useForm } from "react-hook-form"
 import UseAuth from "@/hooks/useAuth"
 import useAxiosPublic from "@/hooks/useAxiosPublic"
 import { useToast } from "@/components/ui/use-toast"
+import { ErrorMessage } from "@hookform/error-message"
+import { useState } from "react"
 
 export default function RegisterForm({ switchToLogin }) {
     const { user, signUpUser, handleGoogleAuth, handleTwitterAuth, userUpdate } = UseAuth()
+    const [viewPassword, setViewPassword] = useState(false)
     const { toast } = useToast()
     const axiosPublic = useAxiosPublic()
     const {
@@ -106,26 +109,66 @@ export default function RegisterForm({ switchToLogin }) {
                         <form className="space-y-4" onSubmit={handleSubmit(handleFormSubmit)}>
                             <div className="space-y-2">
                                 <Label htmlFor="name">Name</Label>
-                                <Input {...register('name')} id="name" type="text" placeholder="John Doe" required />
+                                <Input {...register('name', {
+                                    required: "* Name required"
+                                })} id="name" type="text" placeholder="John Doe" />
+                                <ErrorMessage
+                                    errors={errors}
+                                    name="name"
+                                    render={({ message }) => (
+                                        <span className="text-red-500 text-sm font-primary">{message}</span>
+                                    )}
+                                />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="email">Email</Label>
-                                <Input {...register('email')} id="email" type="email" placeholder="m@example.com" required />
+                                <Input {...register('email', {
+                                    required: "* Email required"
+                                })} id="email" type="email" placeholder="m@example.com" />
+                                <ErrorMessage
+                                    errors={errors}
+                                    name="email"
+                                    render={({ message }) => {
+                                        return <span className="text-red-500 text-sm font-primary">{message}</span>
+                                    }}
+                                />
                             </div>
                             <div className="grid w-full items-center gap-1.5">
                                 <Label htmlFor="picture">Profile Picture</Label>
-                                <Input {...register('image')} id="picture" type="file" />
+                                <Input {...register('image', {
+                                    required: "* Please upload your profile picture"
+                                })} id="picture" type="file" />
+                                <ErrorMessage
+                                    errors={errors}
+                                    name="image"
+                                    render={({ message }) => {
+                                        return <span className="text-red-500 text-sm font-primary">{message}</span>
+                                    }}
+                                />
                             </div>
                             <div className="relative space-y-2">
                                 <div className="flex items-center">
                                     <Label htmlFor="password">Password</Label>
                                 </div>
-                                <Input {...register('password')} id="password" type="password" required />
-                                <Button variant="ghost" size="icon" className="absolute bottom-1 right-1 h-7 w-7">
+                                <Input {...register('password', {
+                                    required: "This field is required",
+                                    pattern: {
+                                        value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/,
+                                        message: "* Password must contain at least 6 characters, including 1 uppercase letter, 1 lowercase letter, and 1 number"
+                                    }
+                                })} id="password" type={viewPassword ? "text": "password"} />
+                                <Button onClick={(e) => { e.preventDefault(); setViewPassword(!viewPassword); }} variant="ghost" size="icon" className="absolute bottom-1 right-1 h-7 w-7">
                                     <EyeIcon className="h-4 w-4" />
                                     <span className="sr-only">Toggle password visibility</span>
                                 </Button>
                             </div>
+                            <ErrorMessage
+                                errors={errors}
+                                name="password"
+                                render={({ message }) => (
+                                    <span className="text-red-500 text-sm font-primary">{message}</span>
+                                )}
+                            />
                             <Button type="submit" className="w-full">
                                 Register
                             </Button>

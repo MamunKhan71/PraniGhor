@@ -46,7 +46,7 @@ const UpdatePet = () => {
 
     useEffect(() => {
         if (petData.status) {
-            setAdoptionStatus(petData.status);
+            setAdoptionStatus(petData.adopted);
         }
         if (petData.adoptionUrgency !== undefined) {
             setUrgent(petData.adoptionUrgency);
@@ -91,7 +91,7 @@ const UpdatePet = () => {
         const urgentCheck = Boolean(data.urgencyStatus);
         const vaccinationCheck = Boolean(data.vaccinationStatus);
         const neuteredCheck = Boolean(data.neurationStatus);
-        const adoptedStatus = adoptionStatus;
+        const adoptedStatus = Boolean(adoptionStatus)
         const postedBy = {
             name: user?.displayName,
             email: user?.email,
@@ -108,7 +108,7 @@ const UpdatePet = () => {
             location: petLocation,
             shortDescription: petShortDescription,
             longDescription: petLongDescription,
-            status: adoptedStatus,
+            adopted: Boolean(adoptedStatus),
             postedBy: postedBy,
             postedDate: new Date().toISOString(),
             interactionCount: 0,
@@ -142,7 +142,6 @@ const UpdatePet = () => {
         }
         else {
             console.log("outside");
-
             axiosPublic.patch(`edit-pet?id=${id}`, newPetData)
                 .then(res => console.log(res.data))
         }
@@ -217,11 +216,11 @@ const UpdatePet = () => {
                                     <div className="flex gap-6 items-center w-full">
                                         <div className="flex flex-1 items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
                                             <input
-                                                onChange={() => setAdoptionStatus("Adopted")}
+                                                onChange={() => setAdoptionStatus(true)}
                                                 id="bordered-radio-1"
                                                 type="radio"
-                                                checked={adoptionStatus === "Adopted"}
-                                                value="Adopted"
+                                                checked={adoptionStatus === true}
+                                                value={true}
                                                 name="bordered-radio"
                                             />
                                             <label
@@ -234,10 +233,10 @@ const UpdatePet = () => {
                                         <div className="flex flex-1 items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
                                             <input
                                                 id="bordered-radio-2"
-                                                onChange={() => setAdoptionStatus("Not Adopted")}
-                                                value="Not Adopted"
+                                                onChange={() => setAdoptionStatus(false)}
+                                                value={false}
                                                 type="radio"
-                                                checked={adoptionStatus === "Not Adopted"}
+                                                checked={adoptionStatus === false}
                                                 name="bordered-radio"
                                             />
                                             <label

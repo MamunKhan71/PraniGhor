@@ -28,7 +28,9 @@ export default function Dashboard() {
                             !isAdmin ? <nav className="grid items-start px-4 text-sm font-medium">
                                 <NavLink
                                     to={'add-pet'}
-                                    className={`flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50 ${({ isActive }) => isActive ? "bg-gray-100" : "bg-gray-100"}`}
+                                    className={({ isActive }) =>
+                                        `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                    }
                                     prefetch={false}
                                 >
                                     <PlusIcon className="h-4 w-4" />
@@ -36,7 +38,9 @@ export default function Dashboard() {
                                 </NavLink>
                                 <NavLink
                                     to={'my-pets'}
-                                    className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+                                    className={({ isActive }) =>
+                                        `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                    }
                                     prefetch={false}
                                 >
                                     <PackageIcon className="h-4 w-4" />
@@ -44,7 +48,9 @@ export default function Dashboard() {
                                 </NavLink>
                                 <NavLink
                                     to={'adoption-requests'}
-                                    className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+                                    className={({ isActive }) =>
+                                        `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                    }
                                     prefetch={false}
                                 >
                                     <UsersIcon className="h-4 w-4" />
@@ -52,7 +58,9 @@ export default function Dashboard() {
                                 </NavLink>
                                 <NavLink
                                     to={'donation-campaign'}
-                                    className="flex items-center gap-3 rounded-lg bg-gray-100 px-3 py-2 text-gray-900  transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50"
+                                    className={({ isActive }) =>
+                                        `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                    }
                                     prefetch={false}
                                 >
                                     <DollarSignIcon className="h-4 w-4" />
@@ -60,7 +68,9 @@ export default function Dashboard() {
                                 </NavLink>
                                 <NavLink
                                     to={'my-donations'}
-                                    className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+                                    className={({ isActive }) =>
+                                        `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                    }
                                     prefetch={false}
                                 >
                                     <WalletIcon className="h-4 w-4" />
@@ -68,7 +78,9 @@ export default function Dashboard() {
                                 </NavLink>
                                 <NavLink
                                     to={'my-campaigns'}
-                                    className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+                                    className={({ isActive }) =>
+                                        `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                    }
                                     prefetch={false}
                                 >
                                     <ClipboardIcon className="h-4 w-4" />
@@ -78,7 +90,9 @@ export default function Dashboard() {
                                 <nav className="grid items-start px-4 text-sm font-medium">
                                     <NavLink
                                         to={'users'}
-                                        className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+                                        className={({ isActive }) =>
+                                            `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                        }
                                         prefetch={false}
                                     >
                                         <FaUser />
@@ -86,7 +100,9 @@ export default function Dashboard() {
                                     </NavLink>
                                     <NavLink
                                         to={'all-pets'}
-                                        className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+                                        className={({ isActive }) =>
+                                            `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                        }
                                         prefetch={false}
                                     >
                                         <FaPaw />
@@ -94,7 +110,9 @@ export default function Dashboard() {
                                     </NavLink>
                                     <NavLink
                                         to={'all-campaigns'}
-                                        className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+                                        className={({ isActive }) =>
+                                            `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                        }
                                         prefetch={false}
                                     >
                                         <FaMoneyBill />
@@ -128,10 +146,10 @@ export default function Dashboard() {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="rounded-full border border-gray-200 w-8 h-8 dark:border-gray-800"
+                                className="rounded-full border border-gray-200 h-12 w-12 object-cover dark:border-gray-800"
                             >
 
-                                <img src={`${user?.photoURL || "https://github.com/shadcn.png"}`} width="32" height="32" className="rounded-full" alt="Avatar" />
+                                <img src={`${user?.photoURL || "https://github.com/shadcn.png"}`} width="32" height="32" className="rounded-full h-full w-full object-cover" alt="Avatar" />
                                 <span className="sr-only">Toggle user menu</span>
                             </Button>
                         </DropdownMenuTrigger>

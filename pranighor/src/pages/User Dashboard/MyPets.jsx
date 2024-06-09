@@ -19,6 +19,7 @@ import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMe
 import { Input } from "@/components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useState } from "react"
+import { Badge } from "@/components/ui/badge"
 
 const MyPets = () => {
     const { user } = UseAuth()
@@ -43,13 +44,9 @@ const MyPets = () => {
             header: "Pet Name",
             cell: (info) => <span>{info.getValue()}</span>,
         }),
-        columnHelper.accessor("requestorInfo.requestorName", {
-            header: "Requestor Name",
-            cell: (info) => <span>{info.getValue()}</span>,
-        }),
         columnHelper.accessor("category", {
             header: ({ column }) => (
-                <Button
+                <Button className="text-left p-0"
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
@@ -63,13 +60,12 @@ const MyPets = () => {
             header: "Pet Image",
             cell: (info) => <div className="w-full flex items-center justify-center"><img src={info.getValue()} className="h-12 w-12 rounded-full object-cover"></img></div>,
         }),
-        columnHelper.accessor("status", {
+        columnHelper.accessor("adopted", {
             header: "Adoption Status",
-            cell: (info) => (
-                <div className="w-48 overflow-x-auto whitespace-nowrap custom-scrollbar">
-                    {info.getValue()}
-                </div>
-            ),
+            cell: ({ row }) => {
+                const { adopted } = row.original
+                return <Badge>{adopted ? "Adopted":  "Not Adopted"}</Badge>
+            },
         }),
         {
             id: "actions",
