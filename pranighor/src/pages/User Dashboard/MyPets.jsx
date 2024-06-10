@@ -8,6 +8,18 @@ import {
     useReactTable,
 } from "@tanstack/react-table"
 
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
 import { useQuery } from "@tanstack/react-query"
 import { Link } from "react-router-dom"
@@ -61,39 +73,69 @@ const MyPets = () => {
             cell: (info) => <div className="w-full flex items-center justify-center"><img src={info.getValue()} className="h-12 w-12 rounded-full object-cover"></img></div>,
         }),
         columnHelper.accessor("adopted", {
-            header: "Adoption Status",
+            header: ({ column }) => (
+                <Button className="text-left p-0"
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Adoption Status
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            ),
             cell: ({ row }) => {
                 const { adopted } = row.original
-                return <Badge>{adopted ? "Adopted":  "Not Adopted"}</Badge>
+                return <Badge>{adopted ? "Adopted" : "Not Adopted"}</Badge>
             },
         }),
         {
             id: "actions",
             header: "Actions",
             cell: ({ row }) => {
-                const { _id } = row.original
+                const { _id, name, adopted } = row.original
+                const [isAlertOpen, setIsAlertOpen] = useState(false);
                 return (
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" className="h-8 w-8 p-0">
-                                <span className="sr-only">Open menu</span>
-                                <MoreHorizontal className="h-4 w-4" />
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem>
-                                <Link to={`/dashboard/update-pet/${_id}`} className="btn bg-orange-400 py-1 px-2 rounded-md w-full text-center">Update</Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <Button onClick={() => handleDelete(_id)} className="btn bg-red-400 text-white py-1 px-2 rounded-md w-full text-center">Delete</Button>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <Button onClick={() => handleStatus(_id)} className="btn bg-green-400 text-white py-1 px-2 rounded-md w-full text-center">Adopted</Button>
-                            </DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                    <>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button variant="ghost" className="h-8 w-8 p-0">
+                                    <span className="sr-only">Open menu</span>
+                                    <MoreHorizontal className="h-4 w-4" />
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                                <DropdownMenuItem asChild>
+                                    <Link
+                                        to={`/dashboard/update-pet/${_id}`}
+                                    >
+                                        <Button className="w-full text-center h-8">Update</Button>
+                                    </Link>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onSelect={() => setIsAlertOpen(true)}>
+                                    <Button className="w-full text-center h-8 bg-red-400">Delete</Button>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem  disabled={adopted ? true : false}  onSelect={() => handleStatus(_id)}>
+                                    <Button className="w-full text-center h-8 bg-green-400">Adopted</Button>
+                                </DropdownMenuItem>
+                                <DropdownMenuSeparator />
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                        <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
+                            <AlertDialogContent>
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>Delete {name}?</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        This action cannot be undone. This will permanently delete {name} {" "}
+                                        and remove the data from our servers.
+                                    </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                    <AlertDialogCancel onClick={() => setIsAlertOpen(false)}>Cancel</AlertDialogCancel>
+                                    <AlertDialogAction onClick={() => handleDelete(_id)} className="bg-red-400">Delete</AlertDialogAction>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
+                    </>
                 )
             },
             enableHiding: false,

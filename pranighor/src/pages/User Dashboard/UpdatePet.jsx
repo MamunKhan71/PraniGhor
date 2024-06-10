@@ -45,7 +45,7 @@ const UpdatePet = () => {
     }, [id, axiosPublic]);
 
     useEffect(() => {
-        if (petData.status) {
+        if (petData.adopted !== undefined) {
             setAdoptionStatus(petData.adopted);
         }
         if (petData.adoptionUrgency !== undefined) {
@@ -117,6 +117,7 @@ const UpdatePet = () => {
             neutered: neuteredCheck,
             featuredStatus: false,
         };
+        console.log(newPetData);
 
         if (selectedFile !== null) {
             console.log("inside");
@@ -132,10 +133,10 @@ const UpdatePet = () => {
                 )
                 .then((res) => {
                     newPetData.image = res.data?.data?.display_url;
-                    axiosPublic.patch("edit-pet", newPetData).then(() => {
+                    axiosPublic.patch(`edit-pet?id=${id}`, newPetData).then(() => {
                         toast({
                             title: "Successful!",
-                            description: "Pet Added Successfully!",
+                            description: "Pet Updated Successfully!",
                         });
                     });
                 });
@@ -143,14 +144,17 @@ const UpdatePet = () => {
         else {
             console.log("outside");
             axiosPublic.patch(`edit-pet?id=${id}`, newPetData)
-                .then(res => console.log(res.data))
+                .then(() => toast({
+                    title: "Successful!",
+                    description: "Pet Updated Successfully!",
+                }))
         }
 
     };
 
     return (
         <div>
-            <h1 className="text-2xl font-bold text-center">Add Pet</h1>
+            <h1 className="text-2xl font-bold text-center">Update {petData?.name}</h1>
             <hr />
             {petLoading ? (
                 <></>
@@ -273,7 +277,8 @@ const UpdatePet = () => {
                                             <input
                                                 {...register("neurationStatus")}
                                                 type="checkbox"
-                                                defaultChecked={neutered}
+                                                checked={neutered}
+                                                onChange={(e) => setNeutered(e.target.checked)}
                                                 value={true}
                                             />
                                             <label
@@ -289,7 +294,8 @@ const UpdatePet = () => {
                                             <input
                                                 {...register("vaccinationStatus")}
                                                 type="checkbox"
-                                                defaultChecked={vaccinated}
+                                                checked={vaccinated}
+                                                onChange={(e) => setVaccinated(e.target.checked)}
                                                 value={true}
                                             />
                                             <label
@@ -305,7 +311,8 @@ const UpdatePet = () => {
                                             <input
                                                 {...register("urgencyStatus")}
                                                 type="checkbox"
-                                                defaultChecked={urgent}
+                                                checked={urgent}
+                                                onChange={(e) => setUrgent(e.target.checked)}
                                                 value={true}
                                             />
                                             <label
