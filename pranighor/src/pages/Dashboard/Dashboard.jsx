@@ -30,7 +30,7 @@ export default function Dashboard() {
                         {
                             !isAdminLoading && <>
                                 {
-                                    !isAdmin ? <nav className="grid items-start px-4 text-sm font-medium">
+                                    !isAdmin ? <nav className="grid items-start px-4 text-sm font-medium space-y-3">
                                         <NavLink
                                             to={'add-pet'}
                                             className={({ isActive }) =>
@@ -92,7 +92,73 @@ export default function Dashboard() {
                                             My Campaigns
                                         </NavLink>
                                     </nav> :
-                                        <nav className="grid items-start px-4 text-sm font-medium">
+                                        <nav className="grid items-start px-4 text-sm font-medium space-y-3">
+                                            <hr />
+                                            <h1>General Routes</h1>
+                                            <hr />
+                                            <NavLink
+                                                to={'add-pet'}
+                                                className={({ isActive }) =>
+                                                    `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                                }
+                                                prefetch={false}
+                                            >
+                                                <PlusIcon className="h-4 w-4" />
+                                                Add a Pet
+                                            </NavLink>
+                                            <NavLink
+                                                to={'my-pets'}
+                                                className={({ isActive }) =>
+                                                    `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                                }
+                                                prefetch={false}
+                                            >
+                                                <PackageIcon className="h-4 w-4" />
+                                                My Added Pets
+                                            </NavLink>
+                                            <NavLink
+                                                to={'adoption-requests'}
+                                                className={({ isActive }) =>
+                                                    `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                                }
+                                                prefetch={false}
+                                            >
+                                                <UsersIcon className="h-4 w-4" />
+                                                Adoption Requests
+                                            </NavLink>
+                                            <NavLink
+                                                to={'donation-campaign'}
+                                                className={({ isActive }) =>
+                                                    `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                                }
+                                                prefetch={false}
+                                            >
+                                                <DollarSignIcon className="h-4 w-4" />
+                                                Create Donation Campaign
+                                            </NavLink>
+                                            <NavLink
+                                                to={'my-donations'}
+                                                className={({ isActive }) =>
+                                                    `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                                }
+                                                prefetch={false}
+                                            >
+                                                <WalletIcon className="h-4 w-4" />
+                                                My Donations
+                                            </NavLink>
+                                            <NavLink
+                                                to={'my-campaigns'}
+                                                className={({ isActive }) =>
+                                                    `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                                }
+                                                prefetch={false}
+                                            >
+                                                <ClipboardIcon className="h-4 w-4" />
+                                                My Campaigns
+                                            </NavLink>
+                                            <hr />
+                                            <h1>Admin Routes</h1>
+                                            <hr />
                                             <NavLink
                                                 to={'users'}
                                                 className={({ isActive }) =>
