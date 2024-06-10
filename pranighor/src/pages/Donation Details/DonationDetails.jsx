@@ -10,12 +10,13 @@ import { useQuery } from "@tanstack/react-query"
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from "@stripe/react-stripe-js"
 import CheckoutForm from "./CheckoutForm"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_gateway_pk)
 export default function DonationDetails() {
     const campaignId = useParams()
     const axiosPublic = useAxiosPublic()
     const [donationAmount, setDonationAmount] = useState(0)
+    const [donation, setDonation] = useState([])
     const { data, isPending } = useQuery({
         queryKey: [`${campaignId.id}`],
         queryFn: async () => await axiosPublic.get(`campaigns/${campaignId.id}`).then(res => { return res.data })
@@ -23,6 +24,10 @@ export default function DonationDetails() {
     const handleSubmit = e => {
         setDonationAmount(parseInt(e.target.value));
     }
+    useEffect(() => {
+        axiosPublic.get(`donations/${campaignId.id}`)
+            .then(res => setDonation(res.data))
+    }, [axiosPublic, campaignId])
     return (
         <div className="container mx-auto py-12 px-4 md:px-6">
             <div className="grid md:grid-cols-2 gap-8">
@@ -56,39 +61,18 @@ export default function DonationDetails() {
                         <CardHeader>
                             <CardTitle>Donation Details</CardTitle>
                         </CardHeader>
-                        <CardContent>
-                            <div className="flex gap-4 items-center justify-between dark:bg-black dark:text-white p-4 rounded-lg">
-                                <div className="h-12 w-12">
-                                    <img className="w-full h-full rounded-lg object-cover" src="header1.jpg" alt="" />
-                                </div>
-                                <div className="text-xl flex justify-between items-center font-semibold w-full">
-                                    <h3>Md. Mamun</h3>
-                                    <h3>$3000</h3>
-                                </div>
-                            </div>
-                        </CardContent>
-                        <CardContent>
-                            <div className="flex gap-4 items-center justify-between dark:bg-black dark:text-white p-4 rounded-lg">
-                                <div className="h-12 w-12">
-                                    <img className="w-full h-full rounded-lg object-cover" src="header1.jpg" alt="" />
-                                </div>
-                                <div className="text-xl flex justify-between items-center font-semibold w-full">
-                                    <h3>Md. Mamun</h3>
-                                    <h3>$500</h3>
-                                </div>
-                            </div>
-                        </CardContent>
-                        <CardContent>
-                            <div className="flex gap-4 items-center justify-between dark:bg-black dark:text-white p-4 rounded-lg">
-                                <div className="h-12 w-12">
-                                    <img className="w-full h-full rounded-lg object-cover" src="header1.jpg" alt="" />
-                                </div>
-                                <div className="text-xl flex justify-between items-center font-semibold w-full">
-                                    <h3>Md. Rakib</h3>
-                                    <h3>$2000</h3>
-                                </div>
-                            </div>
-                        </CardContent>
+                        {
+                            donation?.map(camp => (
+                                <>
+                                    <CardContent>
+                                        <div className="text-xl flex justify-between items-center font-semibold w-full bg-gray-100 p-4 rounded-lg">
+                                            <h3>{camp.donorName}</h3>
+                                            <h3>${camp.donationAmount}</h3>
+                                        </div>
+                                    </CardContent>
+                                </>
+                            ))
+                        }
                         <CardContent>
                             <div className="flex items-center gap-2 p-4">
                                 <label htmlFor="amount" className="text-2xl font-bold">$</label>
@@ -110,7 +94,7 @@ export default function DonationDetails() {
                                     </DialogDescription>
                                     <DialogTitle>
                                         <Elements stripe={stripePromise}>
-                                            <CheckoutForm donationAmount={donationAmount} campaignId={data?._id} />
+                                            <CheckoutForm donationAmount={donationAmount} campaignId={campaignId.id} />
                                         </Elements>
                                     </DialogTitle>
                                 </div>
