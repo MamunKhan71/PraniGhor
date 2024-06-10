@@ -77,7 +77,7 @@ export default function CreateDonationCampaign() {
 
   }
   return (
-    <div className="flex gap-6 w-full">
+    <div className="flex flex-col lg:flex-row gap-6 w-full">
       <Card>
         <CardHeader className="text-center">
           <CardTitle>Create Donation Campaign</CardTitle>
@@ -85,7 +85,7 @@ export default function CreateDonationCampaign() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(handleAddCampaign)} className="grid gap-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div className="space-y-2 w-full">
                 <Label htmlFor="campaign-image">Campaign Picture</Label>
                 <Input
@@ -120,7 +120,7 @@ export default function CreateDonationCampaign() {
                 <DatePicker setDate={setDate} date={date} />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="short-description">Short Description</Label>
                 <Input

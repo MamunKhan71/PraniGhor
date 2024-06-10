@@ -119,10 +119,10 @@ const AddPet = () => {
     };
 
     return (
-        <div>
+        <div className="w-full">
             <h1 className="text-2xl font-bold text-center">Add Pet</h1>
             <hr />
-            <div className="flex py-4 gap-6">
+            <div className="flex flex-col lg:flex-row py-4 gap-6">
                 <form onSubmit={handleSubmit(handleAddPet)} className="flex-1 flex flex-col border border-gray-100 rounded-lg p-4 space-y-4">
                     <h1 className="text-2xl font-bold inline-flex items-center gap-2"><MdOutlinePets />Pet Info</h1>
                     <div className="space-y-4">
