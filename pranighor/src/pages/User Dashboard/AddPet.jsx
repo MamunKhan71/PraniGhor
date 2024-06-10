@@ -10,15 +10,15 @@ import moment from 'moment';
 import TimeDisplay from "@/components/ui/time-display";
 import { useForm, Controller } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "@/hooks/useAxiosPublic";
 import UseAuth from "@/hooks/useAuth";
 import axios from "axios";
 import { toast } from "@/components/ui/use-toast";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ErrorMessage } from "@hookform/error-message";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const AddPet = () => {
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const { user } = UseAuth();
     const [categories, setCategories] = useState([]);
     const [selectedOption, setSelectedOption] = useState(null);
@@ -32,7 +32,7 @@ const AddPet = () => {
     const { isPending, error, data: category } = useQuery({
         queryKey: ['petData'],
         queryFn: () =>
-            axiosPublic.get('pet-category').then((res) => { return res.data })
+            axiosSecure.get(`pet-category?email=${user?.email}`).then((res) => { return res.data })
     });
 
     useEffect(() => {
@@ -91,7 +91,7 @@ const AddPet = () => {
             })
                 .then((res) => {
                     petData.image = (res.data?.data?.display_url)
-                    axiosPublic.post('add-pet', petData)
+                    axiosSecure.post(`add-pet?email=${user?.email}`, petData)
                         .then(() => {
                             toast({
                                 title: "Successful!",

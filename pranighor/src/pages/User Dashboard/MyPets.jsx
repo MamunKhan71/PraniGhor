@@ -32,14 +32,15 @@ import { Input } from "@/components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useState } from "react"
 import { Badge } from "@/components/ui/badge"
+import useAxiosSecure from "@/hooks/useAxiosSecure"
 
 const MyPets = () => {
     const { user } = UseAuth()
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
     const { isPending, error, data: myPets, isError, isLoading, refetch } = useQuery({
         queryKey: ['myPets'],
         queryFn: async () =>
-            await axiosPublic.get(`my-pets?email=${user?.email}`).then((res) => { return res.data })
+            await axiosSecure.get(`my-pets?email=${user?.email}`).then((res) => { return res.data })
     })
 
 

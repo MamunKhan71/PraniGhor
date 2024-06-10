@@ -21,6 +21,7 @@ import UpdatePet from "@/pages/User Dashboard/UpdatePet";
 import { createBrowserRouter } from "react-router-dom";
 import PrivateRoutes from "./PrivateRoutes";
 import LoginProtection from "./LoginProtection";
+import AdminRoute from "./AdminRoute";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -53,11 +54,11 @@ const router = createBrowserRouter([
 
             {
                 path: '/campaign-details/:id',
-                element: <DonationDetails />
+                element: <PrivateRoutes><DonationDetails /></PrivateRoutes>
             },
             {
                 path: '/dashboard',
-                element: <Dashboard />,
+                element: <PrivateRoutes><Dashboard /></PrivateRoutes>,
                 children: [
                     // user
                     {
@@ -99,15 +100,15 @@ const router = createBrowserRouter([
                     //admin
                     {
                         path: 'users',
-                        element: <ManageUsers />
+                        element: <AdminRoute><ManageUsers /></AdminRoute>
                     },
                     {
                         path: 'all-pets',
-                        element: <ManagePets />
+                        element: <AdminRoute><ManagePets /></AdminRoute>
                     },
                     {
                         path: 'all-campaigns',
-                        element: <ManageDonations />
+                        element: <AdminRoute><ManageDonations /></AdminRoute>
                     }
                 ]
             }

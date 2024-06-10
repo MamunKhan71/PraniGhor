@@ -2,13 +2,16 @@ import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem } from "@/components/ui/dropdown-menu"
-import { NavLink, Outlet } from "react-router-dom"
+import { NavLink, Outlet, useNavigate } from "react-router-dom"
 import { FaMoneyBill, FaPaw, FaUser } from "react-icons/fa"
 import UseAuth from "@/hooks/useAuth"
+import { useEffect, useState } from "react"
+import useAdmin from "@/hooks/useAdmin"
 
 export default function Dashboard() {
-    const isAdmin = false
-    const { user } = UseAuth()
+    const { user, userSignOut } = UseAuth()
+    const [isAdmin, isAdminLoading] = useAdmin()
+    const navigate = useNavigate()
     return (
         <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
             <div className="hidden border-r bg-gray-100/40 lg:block dark:bg-gray-800/40">
@@ -25,100 +28,105 @@ export default function Dashboard() {
                     </div>
                     <div className="flex-1 overflow-auto py-2">
                         {
-                            !isAdmin ? <nav className="grid items-start px-4 text-sm font-medium">
-                                <NavLink
-                                    to={'add-pet'}
-                                    className={({ isActive }) =>
-                                        `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
-                                    }
-                                    prefetch={false}
-                                >
-                                    <PlusIcon className="h-4 w-4" />
-                                    Add a Pet
-                                </NavLink>
-                                <NavLink
-                                    to={'my-pets'}
-                                    className={({ isActive }) =>
-                                        `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
-                                    }
-                                    prefetch={false}
-                                >
-                                    <PackageIcon className="h-4 w-4" />
-                                    My Added Pets
-                                </NavLink>
-                                <NavLink
-                                    to={'adoption-requests'}
-                                    className={({ isActive }) =>
-                                        `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
-                                    }
-                                    prefetch={false}
-                                >
-                                    <UsersIcon className="h-4 w-4" />
-                                    Adoption Requests
-                                </NavLink>
-                                <NavLink
-                                    to={'donation-campaign'}
-                                    className={({ isActive }) =>
-                                        `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
-                                    }
-                                    prefetch={false}
-                                >
-                                    <DollarSignIcon className="h-4 w-4" />
-                                    Create Donation Campaign
-                                </NavLink>
-                                <NavLink
-                                    to={'my-donations'}
-                                    className={({ isActive }) =>
-                                        `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
-                                    }
-                                    prefetch={false}
-                                >
-                                    <WalletIcon className="h-4 w-4" />
-                                    My Donations
-                                </NavLink>
-                                <NavLink
-                                    to={'my-campaigns'}
-                                    className={({ isActive }) =>
-                                        `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
-                                    }
-                                    prefetch={false}
-                                >
-                                    <ClipboardIcon className="h-4 w-4" />
-                                    My Campaigns
-                                </NavLink>
-                            </nav> :
-                                <nav className="grid items-start px-4 text-sm font-medium">
-                                    <NavLink
-                                        to={'users'}
-                                        className={({ isActive }) =>
-                                            `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
-                                        }
-                                        prefetch={false}
-                                    >
-                                        <FaUser />
-                                        Manage Users
-                                    </NavLink>
-                                    <NavLink
-                                        to={'all-pets'}
-                                        className={({ isActive }) =>
-                                            `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
-                                        }
-                                        prefetch={false}
-                                    >
-                                        <FaPaw />
-                                        Manage Pets
-                                    </NavLink>
-                                    <NavLink
-                                        to={'all-campaigns'}
-                                        className={({ isActive }) =>
-                                            `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
-                                        }
-                                        prefetch={false}
-                                    >
-                                        <FaMoneyBill />
-                                        Manage Donations
-                                    </NavLink>
-                                </nav>
+                            !isAdminLoading && <>
+                                {
+                                    !isAdmin ? <nav className="grid items-start px-4 text-sm font-medium">
+                                        <NavLink
+                                            to={'add-pet'}
+                                            className={({ isActive }) =>
+                                                `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                            }
+                                            prefetch={false}
+                                        >
+                                            <PlusIcon className="h-4 w-4" />
+                                            Add a Pet
+                                        </NavLink>
+                                        <NavLink
+                                            to={'my-pets'}
+                                            className={({ isActive }) =>
+                                                `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                            }
+                                            prefetch={false}
+                                        >
+                                            <PackageIcon className="h-4 w-4" />
+                                            My Added Pets
+                                        </NavLink>
+                                        <NavLink
+                                            to={'adoption-requests'}
+                                            className={({ isActive }) =>
+                                                `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                            }
+                                            prefetch={false}
+                                        >
+                                            <UsersIcon className="h-4 w-4" />
+                                            Adoption Requests
+                                        </NavLink>
+                                        <NavLink
+                                            to={'donation-campaign'}
+                                            className={({ isActive }) =>
+                                                `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                            }
+                                            prefetch={false}
+                                        >
+                                            <DollarSignIcon className="h-4 w-4" />
+                                            Create Donation Campaign
+                                        </NavLink>
+                                        <NavLink
+                                            to={'my-donations'}
+                                            className={({ isActive }) =>
+                                                `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                            }
+                                            prefetch={false}
+                                        >
+                                            <WalletIcon className="h-4 w-4" />
+                                            My Donations
+                                        </NavLink>
+                                        <NavLink
+                                            to={'my-campaigns'}
+                                            className={({ isActive }) =>
+                                                `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                            }
+                                            prefetch={false}
+                                        >
+                                            <ClipboardIcon className="h-4 w-4" />
+                                            My Campaigns
+                                        </NavLink>
+                                    </nav> :
+                                        <nav className="grid items-start px-4 text-sm font-medium">
+                                            <NavLink
+                                                to={'users'}
+                                                className={({ isActive }) =>
+                                                    `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                                }
+                                                prefetch={false}
+                                            >
+                                                <FaUser />
+                                                Manage Users
+                                            </NavLink>
+                                            <NavLink
+                                                to={'all-pets'}
+                                                className={({ isActive }) =>
+                                                    `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                                }
+                                                prefetch={false}
+                                            >
+                                                <FaPaw />
+                                                Manage Pets
+                                            </NavLink>
+                                            <NavLink
+                                                to={'all-campaigns'}
+                                                className={({ isActive }) =>
+                                                    `${isActive ? "active bg-gray-100 " : ""}flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`
+                                                }
+                                                prefetch={false}
+                                            >
+                                                <FaMoneyBill />
+                                                Manage Donations
+                                            </NavLink>
+                                        </nav>
+                                }
+
+                            </>
                         }
                     </div>
                 </div>
@@ -159,7 +167,10 @@ export default function Dashboard() {
                             <DropdownMenuItem>Settings</DropdownMenuItem>
                             <DropdownMenuItem>Support</DropdownMenuItem>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem>Logout</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => {
+                                userSignOut()
+                                    .then(() => navigate('/'))
+                            }}>Logout</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </header>

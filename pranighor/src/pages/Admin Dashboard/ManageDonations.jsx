@@ -17,14 +17,15 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useState } from "react"
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const ManageDonations = () => {
 
     const { user } = UseAuth()
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
     const { data: myDonations, isPending, isLoading, error, refetch } = useQuery({
         queryKey: ['myDonations'],
-        queryFn: async () => await axiosPublic.get(`my-donation`).then((res) => {
+        queryFn: async () => await axiosSecure.get(`all-donation?email=${user?.email}`).then((res) => {
             return res.data
         })
     })

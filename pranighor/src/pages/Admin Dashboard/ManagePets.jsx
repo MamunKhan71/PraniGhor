@@ -19,14 +19,15 @@ import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMe
 import { Input } from "@/components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useState } from "react"
+import useAxiosSecure from "@/hooks/useAxiosSecure"
 
 const ManagePets = () => {
     const { user } = UseAuth()
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
     const { isPending, error, data: myPets, isError, isLoading, refetch } = useQuery({
         queryKey: ['myPets'],
         queryFn: async () =>
-            await axiosPublic.get(`my-pets`).then((res) => { return res.data })
+            await axiosSecure.get(`all-pets?email=${user?.email}`).then((res) => { return res.data })
     })
 
 

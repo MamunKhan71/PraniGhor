@@ -17,22 +17,23 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useState } from "react"
+import useAxiosSecure from "@/hooks/useAxiosSecure"
 
 const ManageUsers = () => {
     const { user } = UseAuth()
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
     const { data: myCampaigns, isPending, isLoading, error, refetch } = useQuery({
         queryKey: ['users'],
-        queryFn: async () => await axiosPublic.get(`users`).then((res) => {
+        queryFn: async () => await axiosSecure.get(`users?email=${user?.email}`).then((res) => {
             return res.data
         })
     })
     const handleMakeAdmin = id => {
-        axiosPublic.patch('make-admin', { id })
+        axiosSecure.patch(`make-admin?email=${user?.email}`, { id })
             .then(() => refetch())
     }
     const handleRemoveAdmin = id => {
-        axiosPublic.patch('remove-admin', { id })
+        axiosSecure.patch(`remove-admin?email=${user?.email}`, { id })
             .then(() => refetch())
     }
     const columnHelper = createColumnHelper()

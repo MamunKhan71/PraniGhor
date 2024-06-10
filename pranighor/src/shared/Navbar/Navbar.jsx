@@ -1,6 +1,6 @@
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { SiDatadog } from "react-icons/si";
 import { Avatar } from "../../components/ui/avatar";
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
@@ -20,8 +20,10 @@ import { ModeToggle } from "@/components/ui/toggle";
 
 export default function Navbar() {
   const { user, userSignOut } = UseAuth()
+  const navigate = useNavigate()
   const handleUserSignOut = () => {
     userSignOut()
+      .then(() => navigate('/'))
   }
   return (
     <header className="flex w-full shrink-0 items-center bg-gray-100 dark:bg-black px-6 py-4 rounded-full mb-8">

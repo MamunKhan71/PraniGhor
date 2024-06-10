@@ -37,7 +37,7 @@ const AllPets = () => {
         }
     }
     const fetchMoreItems = async () => {
-        const response = await axiosPublic.get(`pets?limit=3&skip=${page * 3}`)
+        const response = await axiosPublic.get(`pets?limit=3&skip=${page * 3}`, {withCredentials: true})
         const data = await response.data
         console.log(data);
         if (data.length === 0) {
