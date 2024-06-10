@@ -23,7 +23,7 @@ export function FeaturedSection() {
     return (
         <div className="w-full flex items-center flex-col justify-center">
             <div className="w-full">
-                <div className="flex justify-between items-center w-full">
+                <div className="flex flex-col-reverse lg:flex-row justify-between items-center w-full space-y-12 lg:space-y-0">
                     <div className="flex-1 flex items-center justify-center">
                         <div className="space-y-4">
                             <h1 className="text-3xl font-bold"> Pranighor Unveils the Ultimate Pet Adoption Platform</h1>
@@ -35,13 +35,13 @@ export function FeaturedSection() {
                             </div>
                         </div>
                     </div>
-                    <div className="flex-1 flex items-center justify-end">
+                    <div className="lg:flex-1 flex items-center justify-end pb-20 lg:pb-0">
                         <Carousel
                             opts={{
                                 align: "start",
                             }}
                             orientation="vertical"
-                            className="w-full max-w-md"
+                            className="w-full lg:max-w-md"
                         >
                             <CarouselContent className="h-[490px]">
                                 {

@@ -94,7 +94,7 @@ export default function DonationDetails() {
                                     </DialogDescription>
                                     <DialogTitle>
                                         <Elements stripe={stripePromise}>
-                                            <CheckoutForm donationAmount={donationAmount} campaignId={campaignId.id} />
+                                            <CheckoutForm donationAmount={donationAmount} campaignId={campaignId.id} maximumDonation={data?.actualData?.maxDonation} />
                                         </Elements>
                                     </DialogTitle>
                                 </div>

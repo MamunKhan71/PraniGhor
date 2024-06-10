@@ -11,7 +11,7 @@ import { FaDove } from "react-icons/fa";
 import { FaFrog } from "react-icons/fa";
 export function ShopByPets() {
     return (
-        <div className="grid grid-cols-5 gap-6">
+        <div className="grid grid-cols-3 lg:grid-cols-5 gap-6">
             <Card className="hover:bg-primaryCol transition-all transform hover:text-black hover:cursor-pointer">
                 <CardHeader>
                     <div className="space-y-4 flex flex-col items-center justify-center">

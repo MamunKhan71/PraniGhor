@@ -31,7 +31,7 @@ export default function RegisterForm({ switchToLogin }) {
             userName,
             userEmail,
             userPassword,
-            role: "admin"
+            role: "user"
         }
         signUpUser(userEmail, userPassword)
             .then(async () => {

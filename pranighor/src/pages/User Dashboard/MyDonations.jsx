@@ -24,8 +24,8 @@ const MyDonations = () => {
     const { user } = UseAuth()
     const axiosSecure = useAxiosSecure()
     const { data: myDonations, isPending, isLoading, error, refetch } = useQuery({
-        queryKey: ['myDonations'],
-        queryFn: async () => await axiosSecure.get(`my-donation?email=${user?.email}`).then((res) => {
+        queryKey: ['my-Donations'],
+        queryFn: async () => await axiosSecure.get(`my-donations?email=${user?.email}`).then((res) => {
             return res.data
         })
     })
@@ -52,18 +52,18 @@ const MyDonations = () => {
             cell: (info) => <span>{info.row.index + 1}</span>,
             header: "Serial Number"
         }),
-        columnHelper.accessor("campaignName", {
+        columnHelper.accessor("campaignId", {
             cell: (info) => <span>{info.getValue()}</span>,
-            header: "Pet Name",
+            header: "Campaign Id",
         }),
-        columnHelper.accessor("maxDonation", {
+        columnHelper.accessor("donationAmount", {
             cell: (info) => <span>{info.getValue()}</span>,
-            header: "Maximum Donation",
+            header: "Donation Amount",
         }),
         columnHelper.accessor("progress", {
             cell: ({ row }) => {
-                const { raisedMoney, maxDonation } = row.original;
-                const percentage = calculatePercentage(raisedMoney, maxDonation);
+                const { donationAmount, maximumDonation } = row.original;
+                const percentage = calculatePercentage(donationAmount, maximumDonation);
                 return (
                     <ProgressBar
                         bgColor={'#18181b'}
@@ -75,41 +75,11 @@ const MyDonations = () => {
             },
             header: "Progress",
         }),
-        columnHelper.accessor("age", {
+        columnHelper.accessor("transactionId", {
             cell: (info) => <span>{info.getValue()}</span>,
-            header: "Adoption Status",
+            header: "Transaction Id",
         }),
-        {
-            id: "actions",
-            header: "Actions",
-            cell: ({ row }) => {
-                const { _id, status } = row.original
-                return (
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" className="h-8 w-8 p-0">
-                                <span className="sr-only">Open menu</span>
-                                <MoreHorizontal className="h-4 w-4" />
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem>
-                                <Link to={`/dashboard/edit-donation/${_id}`} className="btn bg-green-400 py-1 px-2 rounded-md w-full text-center">Edit</Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <Button onClick={() => handlePause(_id, status)} className="btn bg-red-400 text-white py-1 px-2 rounded-md w-full text-center">{status === "paused" ? "Run" : "Pause"}</Button>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <Link className="btn bg-black text-white py-1 px-2 rounded-md w-full text-center">View Donators</Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                        </DropdownMenuContent>
-                    </DropdownMenu>
-                )
-            },
-            enableHiding: false,
-        },
+        
 
     ]
 

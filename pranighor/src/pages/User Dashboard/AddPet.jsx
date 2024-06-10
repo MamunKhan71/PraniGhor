@@ -16,8 +16,12 @@ import { toast } from "@/components/ui/use-toast";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ErrorMessage } from "@hookform/error-message";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
-
+import Editor from 'react-simple-wysiwyg';
 const AddPet = () => {
+    const [html, setHtml] = useState('my <b>HTML</b>');
+    function onChange(e) {
+        setHtml(e.target.value);
+    }
     const axiosSecure = useAxiosSecure();
     const { user } = UseAuth();
     const [categories, setCategories] = useState([]);
@@ -54,7 +58,7 @@ const AddPet = () => {
         const petCategoryId = selectedOption?.value;
         const petLocation = data.petLocation;
         const petShortDescription = data.petShortDescription;
-        const petLongDescription = data.petLongDescription;
+        const petLongDescription = html;
         const urgentCheck = Boolean(data.urgencyStatus);
         const vaccinationCheck = Boolean(data.vaccinationStatus);
         const neuteredCheck = Boolean(data.neurationStatus);
@@ -230,9 +234,20 @@ const AddPet = () => {
                             )}
                         />
                     </div>
-                    <div className="space-y-4">
+                    {/* <div className="space-y-4">
                         <Label htmlFor="petName">Long Description</Label>
                         <Textarea {...register("petLongDescription", { required: "Long Description is required" })} />
+                        <ErrorMessage
+                            errors={errors}
+                            name="petLongDescription"
+                            render={({ message }) => (
+                                <span className="text-red-500 text-sm">{message}</span>
+                            )}
+                        />
+                    </div> */}
+                    <div className="space-y-4">
+                        <Label htmlFor="petName">Long Description</Label>
+                        <Editor value={html} onChange={onChange} />
                         <ErrorMessage
                             errors={errors}
                             name="petLongDescription"

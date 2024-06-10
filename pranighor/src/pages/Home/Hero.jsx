@@ -15,7 +15,7 @@ const Hero = () => {
                 disableOnInteraction: false,
             }}
             modules={[Autoplay, Pagination, Navigation]}
-            className="mySwiper h-[650px] rounded-xl"
+            className="mySwiper h-full lg:h-[650px] rounded-xl"
         >
             <SwiperSlide><img src="header1.jpg" alt="" /></SwiperSlide>
             <SwiperSlide><img src="header2.jpg" alt="" /></SwiperSlide>

@@ -12,12 +12,12 @@ import CallToAction from "./CallToAction";
 import About from "./About";
 const Home = () => {
     return (
-        <div className="space-y-40">
-            <div className="relative">
+        <div className="space-y-20 lg:space-y-40">
+            <div className="lg:relative">
                 <Hero />
-                <div className="absolute top-1/2 -translate-y-1/2 z-20 p-20 max-w-3xl text-white space-y-4">
+                <div className="lg:absolute lg:top-1/2 lg:-translate-y-1/2 z-20 lg:p-20 lg:max-w-3xl text-white space-y-4">
                     <p className="text-primaryCol font-semibold">Pet shop</p>
-                    <h1 className="text-6xl font-black leading-[60px]">A pet store with everything you need</h1>
+                    <h1 className="text-3xl lg:text-6xl font-black lg:leading-[60px]">A pet store with everything you need</h1>
                     <h3 className="text-lg">Sociis blandit et pellentesque aliquet at quisque tortor lacinia nullam. Mattis aenean scelerisque dui libero</h3>
                     <div>
                         <Link to={'/all-pets'}><Button className="dark:bg-black dark:text-white">
@@ -61,7 +61,7 @@ const Home = () => {
                         Give a loving home to a pet in need. Adopt today and make a friend for life!
                     </p>
                 </div>
-                <div className="flex gap-6 items-center">
+                <div className="flex flex-col lg:flex-row gap-6 items-center">
                     <div className="flex-1 w-full">
                         <img className="rounded-lg object-cover" src="header1.jpg" alt="" />
                     </div>

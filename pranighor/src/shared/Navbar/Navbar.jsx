@@ -46,12 +46,37 @@ export default function Navbar() {
             <Link to={'/about-us'} className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
               About
             </Link>
-            <Link href="#" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
-              Services
+            <Link to={'/all-pets'} className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
+              Pet Listings
             </Link>
-            <Link href="#" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
-              Contact
+            <Link to={`/donation`} className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
+              Donation Campaign
             </Link>
+            {
+              user ? <Link prefetch={false} className="group inline-flex h-9 w-max items-center justify-center rounded-full px-4 py-2 text-lg font-medium transition-colors  hover:text-primaryCol focus:bg-primaryCol focus:text-black focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50">
+                <DropdownMenu>
+                  <DropdownMenuTrigger><Avatar>
+                    <AvatarImage className="object-cover h-12 w-12" src={`${user?.photoURL || "https://github.com/shadcn.png"}`} />
+                    <AvatarFallback>{user?.displayName}</AvatarFallback>
+                  </Avatar></DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem><Link to={'/dashboard'} className="flex items-center justify-center gap-2 hover:cursor-pointer"><TbLayoutDashboard /> Dashboard</Link></DropdownMenuItem>
+                    <DropdownMenuItem><button onClick={handleUserSignOut} className="flex items-center justify-center gap-2">
+                      <CgLogOut /> Logout
+                    </button></DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+              </Link> : <Link
+                to={'/login'}
+                className="group inline-flex h-9 w-max items-center justify-center rounded-full  px-4 py-2 text-lg font-medium transition-colors  hover:text-primaryCol focus:bg-primaryCol focus:text-black focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
+                prefetch={false}
+              >
+                <div className="flex gap-2 items-center justify-center">Login<HiLogin /></div>
+              </Link>
+            }
           </div>
         </SheetContent>
       </Sheet>

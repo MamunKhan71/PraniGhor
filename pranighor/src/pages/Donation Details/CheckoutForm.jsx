@@ -4,7 +4,7 @@ import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 
-const CheckoutForm = ({ donationAmount, campaignId }) => {
+const CheckoutForm = ({ donationAmount, campaignId, maximumDonation }) => {
     const stripe = useStripe()
     const elements = useElements()
     const { user } = UseAuth()
@@ -50,6 +50,7 @@ const CheckoutForm = ({ donationAmount, campaignId }) => {
                     donorName: user?.displayName,
                     donorEmail: user?.email,
                     donationAmount: parseInt(paymentIntent.amount / 100),
+                    maximumDonation,
                     transactionId: paymentIntent.id,
                 }
                 axiosSecure.post(`donations?email=${user?.email}`, newTransaction)

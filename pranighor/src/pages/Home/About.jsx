@@ -10,13 +10,13 @@ export default function About() {
                         <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl md:text-5xl dark:text-gray-50">
                             About PraniGhor
                         </h2>
-                        <p className="text-lg text-gray-600 md:text-xl dark:text-gray-400 max-w-4xl mx-auto">
+                        <p className="text-lg text-gray-600 md:text-xl dark:text-gray-400 lg:max-w-4xl mx-auto">
                             At PraniGhor, we are dedicated to rescuing and caring for abandoned and neglected pets. Our mission is to
                             provide a safe and loving environment for these animals, and to find them forever homes with compassionate
                             families. Join us in our mission to make a difference in the lives of these deserving creatures.
                         </p>
                     </div>
-                    <div className="flex gap-6">
+                    <div className="flex flex-col lg:flex-row gap-6">
                         <div className="flex-1">
                             <img
                                 src="header1.jpg"

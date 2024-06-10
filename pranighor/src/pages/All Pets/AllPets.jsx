@@ -39,7 +39,6 @@ const AllPets = () => {
     const fetchMoreItems = async () => {
         const response = await axiosPublic.get(`pets?limit=3&skip=${page * 3}`, {withCredentials: true})
         const data = await response.data
-        console.log(data);
         if (data.length === 0) {
             setHasMore(false)
         }
@@ -93,9 +92,9 @@ const AllPets = () => {
                 <p className=" text-gray-400 text-center">Browse the list of available pets</p>
             </div>
             <div className="mx-auto space-y-4 h-24">
-                <div className="flex relative items-center justify-end gap-4 w-full mt-16">
-                    <div className="w-1/2 mx-auto relative">
-                        <div className="absolute z-30 w-full">
+                <div className="flex relative items-center justify-end gap-4 w-full lg:mt-16">
+                    <div className="w-1/2 mx-auto lg:relative">
+                        <div className="lg:absolute z-30 w-full">
                             <ReactSearchBox
                                 placeholder="Search"
                                 data={search}
@@ -105,7 +104,7 @@ const AllPets = () => {
                             />
                         </div>
                     </div>
-                    <div className="absolute right-52 z-40 top-1/2">
+                    <div className="lg:absolute right-52 z-40 top-1/2">
                         <Button onClick={() => setFilteredSearch(pets)} className="inline-flex gap-2 items-center"><GrPowerReset />Reset</Button>
                     </div>
                 </div>
@@ -121,12 +120,12 @@ const AllPets = () => {
                     </SelectContent>
                 </Select>
             </div> */}
-            <div className="flex gap-8 font-primary">
+            <div className="flex flex-col lg:flex-row gap-8 font-primary">
                 <div className="basis-1/5 w-full">
                     <FilterSection setFilteredSearch={setFilteredSearch} handleAge={handleAge} />
                 </div>
                 <div className="flex-1">
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
                         {
                             <>
