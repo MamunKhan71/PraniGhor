@@ -7,13 +7,22 @@ import PaymentCard from "@/components/ui/payment-card"
 import { Link, useParams } from "react-router-dom"
 import useAxiosPublic from "@/hooks/useAxiosPublic"
 import { useQuery } from "@tanstack/react-query"
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from "@stripe/react-stripe-js"
+import CheckoutForm from "./CheckoutForm"
+import { useState } from "react"
+const stripePromise = loadStripe(import.meta.env.VITE_Payment_gateway_pk)
 export default function DonationDetails() {
     const campaignId = useParams()
     const axiosPublic = useAxiosPublic()
+    const [donationAmount, setDonationAmount] = useState(0)
     const { data, isPending } = useQuery({
         queryKey: [`${campaignId.id}`],
         queryFn: async () => await axiosPublic.get(`campaigns/${campaignId.id}`).then(res => { return res.data })
     })
+    const handleSubmit = e => {
+        setDonationAmount(parseInt(e.target.value));
+    }
     return (
         <div className="container mx-auto py-12 px-4 md:px-6">
             <div className="grid md:grid-cols-2 gap-8">
@@ -41,6 +50,7 @@ export default function DonationDetails() {
                         </div>
                     </div>
                 </div>
+
                 <div className="space-y-6">
                     <Card>
                         <CardHeader>
@@ -79,6 +89,12 @@ export default function DonationDetails() {
                                 </div>
                             </div>
                         </CardContent>
+                        <CardContent>
+                            <div className="flex items-center gap-2 p-4">
+                                <label htmlFor="amount" className="text-2xl font-bold">$</label>
+                                <input onChange={e => handleSubmit(e)} type="number" className="w-full text-2xl font-bold bg-gray-50 p-2 rounded-lg border" placeholder="Your Donation Amount" />
+                            </div>
+                        </CardContent>
                     </Card>
                     <Dialog>
                         <DialogTrigger asChild>
@@ -93,16 +109,15 @@ export default function DonationDetails() {
                                         Enter your donation amount and payment details to complete your contribution.
                                     </DialogDescription>
                                     <DialogTitle>
-                                        <div className="flex items-center gap-2">
-                                            <label htmlFor="amount" className="text-2xl font-bold">$</label>
-                                            <input type="number" className="w-full text-2xl font-bold bg-gray-50 p-2 rounded-lg border" placeholder="Your Donation Amount" />
-                                        </div>
+                                        <Elements stripe={stripePromise}>
+                                            <CheckoutForm donationAmount={donationAmount} campaignId={data?._id} />
+                                        </Elements>
                                     </DialogTitle>
                                 </div>
                             </DialogHeader>
-                            <div>
+                            {/* <div>
                                 <PaymentCard />
-                            </div>
+                            </div> */}
                         </DialogContent>
                     </Dialog>
                 </div>

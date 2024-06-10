@@ -42,7 +42,7 @@ const ManageDonations = () => {
         } else {
             newStatus = "paused"
         }
-        axiosPublic.patch(`pause-campaign?id=${id}&newStatus=${newStatus}`)
+        axiosSecure.patch(`pause-campaign?id=${id}&newStatus=${newStatus}&email=${user?.email}`)
             .then(() => refetch())
     }
     const columnHelper = createColumnHelper()

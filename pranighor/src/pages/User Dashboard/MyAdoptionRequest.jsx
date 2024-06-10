@@ -18,22 +18,23 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useState } from "react"
 import { Badge } from "@/components/ui/badge"
+import useAxiosSecure from "@/hooks/useAxiosSecure"
 const MyAdoptionRequests = () => {
     const { user } = UseAuth()
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
     const { isLoading, isError, error, data: myRequests, refetch } = useQuery({
         queryKey: ['adoptionRequest'],
         queryFn: async () =>
-            await axiosPublic.get(`my-requests?authorEmail=${user?.email}`).then((res) => res.data)
+            await axiosSecure.get(`my-requests?email=${user?.email}&authorEmail=${user?.email}`).then((res) => res.data)
     })
 
     const handleAccept = async (petId, _id) => {
-        axiosPublic.get(`pet-requests?petId=${petId}&id=${_id}`)
+        axiosSecure.get(`pet-requests?email=${user?.email}&petId=${petId}&id=${_id}`)
             .then(res => res.data)
             .then(refetch())
     }
     const handleDelete = (_id) => {
-        axiosPublic.delete(`delete-request?id=${_id}`)
+        axiosSecure.delete(`delete-request?email=${user?.email}&id=${_id}`)
             .then(res => res.data)
             .then(refetch())
     }

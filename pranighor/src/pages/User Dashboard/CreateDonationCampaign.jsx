@@ -14,6 +14,7 @@ import { DatePicker } from "@/components/ui/date-picker"
 import axios from "axios"
 import { ErrorMessage } from "@hookform/error-message"
 import { toast } from "@/components/ui/use-toast"
+import useAxiosSecure from "@/hooks/useAxiosSecure"
 const options = [
   { value: 'adoption', label: 'Adoption & Rescue' },
   { value: 'wellbeing', label: 'campaign Wellbeing' },
@@ -28,7 +29,7 @@ export default function CreateDonationCampaign() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [date, setDate] = useState()
   const { user } = UseAuth()
-  const axiosPublic = useAxiosPublic()
+  const axiosSecure = useAxiosSecure()
   const {
     register,
     handleSubmit,
@@ -66,7 +67,7 @@ export default function CreateDonationCampaign() {
 
       })
       .then(() => {
-        axiosPublic.post('/create-campaign', newCampaign)
+        axiosSecure.post(`/create-campaign?email=${user?.email}`, newCampaign)
           .then(() => toast({
             title: "Successful!",
             description: "Campaign created Successfully!",

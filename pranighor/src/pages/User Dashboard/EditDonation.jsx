@@ -14,6 +14,7 @@ import { DatePicker } from "@/components/ui/date-picker"
 import axios from "axios"
 import { useParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
+import useAxiosSecure from "@/hooks/useAxiosSecure"
 const options = [
     { value: 'adoption', label: 'Adoption & Rescue' },
     { value: 'wellbeing', label: 'campaign Wellbeing' },
@@ -26,9 +27,11 @@ const options = [
 
 export default function EditDonation() {
     const id = useParams()
+    const axiosSecure = useAxiosSecure()
+    const { user } = UseAuth()
     const { data, isLoading } = useQuery({
         queryKey: ['editCampaign'],
-        queryFn: async () => await axiosPublic.get(`edit-campaign/${id.id}`).then(res => { return res.data })
+        queryFn: async () => await axiosSecure.get(`edit-campaign/${id.id}?email=${user?.email}`).then(res => { return res.data })
     })
     const [selectedOption, setSelectedOption] = useState(null);
     const [date, setDate] = useState(data?.campDeadline)
@@ -41,8 +44,6 @@ export default function EditDonation() {
         const initialOption = options.find(option => option.value === data?.campaignCategory.value);
         setSelectedOption(initialOption);
     }, [data, isLoading])
-    const { user } = UseAuth()
-    const axiosPublic = useAxiosPublic()
     const {
         register,
         handleSubmit,
@@ -74,12 +75,12 @@ export default function EditDonation() {
 
                 })
                 .then(() => {
-                    axiosPublic.patch(`edit-campaign?id=${id.id}`, newCampaign)
+                    axiosSecure.patch(`edit-campaign?email=${user?.email}&id=${id.id}`, newCampaign)
                         .then(res => console.log(res.data))
                 })
         }
         else {
-            axiosPublic.patch(`edit-campaign?id=${id.id}`, newCampaign)
+            axiosSecure.patch(`edit-campaign?email=${user?.email}&id=${id.id}`, newCampaign)
                 .then(res => console.log(res.data))
         }
 

@@ -150,11 +150,11 @@ const MyPets = () => {
     const [columnVisibility, setColumnVisibility] = useState([])
     const [rowSelection, setRowSelection] = useState([])
     const handleDelete = id => {
-        axiosPublic.delete(`delete-pet?id=${id}`)
+        axiosSecure.delete(`delete-pet?email=${user?.email}&id=${id}`)
             .then(() => refetch())
     }
     const handleStatus = id => {
-        axiosPublic.patch(`pet-status?id=${id}`)
+        axiosSecure.patch(`pet-status?email=${user?.email}&id=${id}`)
             .then(() => refetch())
     }
     const table = useReactTable({

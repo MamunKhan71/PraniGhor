@@ -15,10 +15,13 @@ import { HiOutlineStatusOnline } from "react-icons/hi";
 import { FaHeart } from "react-icons/fa"
 import { useForm } from "react-hook-form";
 import UseAuth from "@/hooks/useAuth";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
+import { toast } from "@/components/ui/use-toast";
 export default function PetDetails() {
     const { user } = UseAuth()
     const petId = useParams()
     const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
     const { register, handleSubmit } = useForm();
 
     const { isPending, error, data: pet } = useQuery({
@@ -48,8 +51,15 @@ export default function PetDetails() {
                 authorEmail: pet?.postedBy.email
             }
         }
-        axiosPublic.post(`adoption-requests`, requestorInfo)
-            .then(res => console.log(res.data))
+        axiosSecure.post(`adoption-requests?email=${user?.email}`, requestorInfo)
+            .then(() => toast({
+                title: "Successful!",
+                description: "Adoption Request Successful!",
+            }))
+            .catch(() => toast({
+                title: "Error!",
+                description: "Something Went Wrong!",
+            }))
     }
     return (
         <div className="w-full max-w-6xl mx-auto px-4 py-12 md:px-6 md:py-16 lg:px-8 lg:py-20">
@@ -74,7 +84,7 @@ export default function PetDetails() {
                         <div className="flex flex-col gap-2">
                             <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl inline-flex gap-2 items-center"><LuCalendarDays /> {moment(pet?.postedBy?.postedTime).format('MMMM Do YYYY')}</p>
                             <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl inline-flex gap-2 items-center"><MdShareLocation /> {pet?.location}</p>
-                            <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl inline-flex gap-2 items-center"><HiOutlineStatusOnline /> {pet?.adopted ? "Adopted": "Not Adopted"}</p>
+                            <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl inline-flex gap-2 items-center"><HiOutlineStatusOnline /> {pet?.adopted ? "Adopted" : "Not Adopted"}</p>
                         </div>
                         <div className="flex flex-col border rounded-lg p-4 space-y-4">
                             <h1 className="text-base md:text-lg lg:text-xl font-semibold">Post Author Info:</h1>

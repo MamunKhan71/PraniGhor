@@ -112,11 +112,11 @@ const ManagePets = () => {
     const [columnVisibility, setColumnVisibility] = useState([])
     const [rowSelection, setRowSelection] = useState([])
     const handleDelete = id => {
-        axiosPublic.delete(`delete-pet?id=${id}`)
+        axiosSecure.delete(`delete-pet?id=${id}&email=${user?.email}`)
             .then(() => refetch())
     }
     const handleStatus = id => {
-        axiosPublic.patch(`pet-status?id=${id}`)
+        axiosSecure.patch(`pet-status?id=${id}&email=${user?.email}`)
             .then(() => refetch())
     }
     const table = useReactTable({

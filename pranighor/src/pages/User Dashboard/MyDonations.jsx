@@ -17,14 +17,15 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useState } from "react"
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const MyDonations = () => {
 
     const { user } = UseAuth()
-    const axiosPublic = useAxiosPublic()
-    const { data: myDonations, isPending, isLoading, error } = useQuery({
+    const axiosSecure = useAxiosSecure()
+    const { data: myDonations, isPending, isLoading, error, refetch } = useQuery({
         queryKey: ['myDonations'],
-        queryFn: async () => await axiosPublic.get(`my-donation?email=${user?.email}`).then((res) => {
+        queryFn: async () => await axiosSecure.get(`my-donation?email=${user?.email}`).then((res) => {
             return res.data
         })
     })
@@ -41,8 +42,8 @@ const MyDonations = () => {
         } else {
             newStatus = "paused"
         }
-        axiosPublic.patch(`pause-campaign?id=${id}&newStatus=${newStatus}`)
-            .then(res => console.log("Success"))
+        axiosSecure.patch(`pause-campaign?id=${id}&newStatus=${newStatus}&email=${user?.email}`)
+            .then(() => refetch())
     }
     const columnHelper = createColumnHelper()
     const columns = [
