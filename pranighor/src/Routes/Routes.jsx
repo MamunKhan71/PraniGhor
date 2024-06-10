@@ -19,6 +19,8 @@ import MyDonations from "@/pages/User Dashboard/MyDonations";
 import MyPets from "@/pages/User Dashboard/MyPets";
 import UpdatePet from "@/pages/User Dashboard/UpdatePet";
 import { createBrowserRouter } from "react-router-dom";
+import PrivateRoutes from "./PrivateRoutes";
+import LoginProtection from "./LoginProtection";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -30,7 +32,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/login',
-                element: <Login />
+                element: <LoginProtection><Login /></LoginProtection>
             },
             {
                 path: '/all-pets',
@@ -42,7 +44,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/details/:id',
-                element: <PetDetails />
+                element: <PrivateRoutes><PetDetails /></PrivateRoutes>
             },
             {
                 path: '/donation',

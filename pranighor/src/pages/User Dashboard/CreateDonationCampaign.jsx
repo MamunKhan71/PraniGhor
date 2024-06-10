@@ -12,6 +12,8 @@ import Select from 'react-select';
 import { useState } from "react"
 import { DatePicker } from "@/components/ui/date-picker"
 import axios from "axios"
+import { ErrorMessage } from "@hookform/error-message"
+import { toast } from "@/components/ui/use-toast"
 const options = [
   { value: 'adoption', label: 'Adoption & Rescue' },
   { value: 'wellbeing', label: 'campaign Wellbeing' },
@@ -44,7 +46,7 @@ export default function CreateDonationCampaign() {
       campDeadline,
       raisedMoney: 0,
       maxDonation,
-      campaignCategory : selectedOption,
+      campaignCategory: selectedOption,
       shortDescription,
       longDescription,
       authorInfo: {
@@ -65,7 +67,10 @@ export default function CreateDonationCampaign() {
       })
       .then(() => {
         axiosPublic.post('/create-campaign', newCampaign)
-          .then(res => console.log(res.data))
+          .then(() => toast({
+            title: "Successful!",
+            description: "Campaign created Successfully!",
+          }))
       })
 
 
@@ -80,25 +85,37 @@ export default function CreateDonationCampaign() {
         <CardContent>
           <form onSubmit={handleSubmit(handleAddCampaign)} className="grid gap-4">
             <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label >Campaign Name</Label>
-                <Input {...register('campaignName')} type="text" accept="image/*" />
+              <div className="space-y-2 w-full">
+                <Label htmlFor="campaign-image">Campaign Picture</Label>
+                <Input
+                  {...register('image', { required: 'Campaign picture is required' })}
+                  id="campaign-image"
+                  type="file"
+                  accept="image/*"
+                />
+                <ErrorMessage errors={errors} name="image" as="p" className="text-red-600 text-sm" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="max-donation">Maximum Donation</Label>
+                <Label>Campaign Name</Label>
                 <Input
-                  {...register('maxDonation')}
+                  {...register('campaignName', { required: '* This field is required' })}
+                  type="text"
+                />
+                <ErrorMessage errors={errors} name="campaignName" as="p" className="text-red-600 text-sm" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="max-donation">Maximum Donation $</Label>
+                <Input
+                  {...register('maxDonation', { required: '* This field is required' })}
                   id="max-donation"
                   type="number"
                   placeholder="Enter maximum donation amount"
                 />
+                <ErrorMessage errors={errors} name="maxDonation" as="p" className="text-red-600 text-sm" />
               </div>
+
               <div className="space-y-2 w-full">
-                <Label htmlFor="campaign-image">Campaign Picture</Label>
-                <Input {...register('image')} id="campaign-image" type="file" accept="image/*" />
-              </div>
-              <div className="space-y-2 w-full">
-                <Label htmlFor="campaign-image">Campaign Deadline</Label>
+                <Label>Campaign Deadline</Label>
                 <DatePicker setDate={setDate} date={date} />
               </div>
             </div>
@@ -106,11 +123,12 @@ export default function CreateDonationCampaign() {
               <div className="space-y-2">
                 <Label htmlFor="short-description">Short Description</Label>
                 <Input
-                  {...register('shortDescription')}
+                  {...register('shortDescription', { required: '* Short description is required' })}
                   id="short-description"
                   type="text"
                   placeholder="Enter a brief description"
                 />
+                <ErrorMessage errors={errors} name="shortDescription" as="p" className="text-red-600 text-sm" />
               </div>
               <div className="space-y-2 w-full">
                 <Label htmlFor="campaign-image">Campaign Category</Label>
@@ -130,10 +148,11 @@ export default function CreateDonationCampaign() {
             <div className="space-y-2">
               <Label htmlFor="long-description">Long Description</Label>
               <Textarea
-                {...register('longDescription')}
+                {...register('longDescription', { required: '* Long description is required' })}
                 id="long-description"
                 placeholder="Enter a detailed description"
               />
+              <ErrorMessage errors={errors} name="longDescription" as="p" className="text-red-600 text-sm" />
             </div>
             <Button type="submit">Create Campaign</Button>
           </form>

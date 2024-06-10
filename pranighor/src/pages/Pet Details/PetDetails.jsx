@@ -72,9 +72,9 @@ export default function PetDetails() {
                             {pet?.longDescription}
                         </p>
                         <div className="flex flex-col gap-2">
-                            <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl inline-flex gap-2 items-center"><LuCalendarDays /> {moment(pet?.postedBy.postedTime).format('MMMM Do YYYY')}</p>
+                            <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl inline-flex gap-2 items-center"><LuCalendarDays /> {moment(pet?.postedBy?.postedTime).format('MMMM Do YYYY')}</p>
                             <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl inline-flex gap-2 items-center"><MdShareLocation /> {pet?.location}</p>
-                            <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl inline-flex gap-2 items-center"><HiOutlineStatusOnline /> {pet?.status}</p>
+                            <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl inline-flex gap-2 items-center"><HiOutlineStatusOnline /> {pet?.adopted ? "Adopted": "Not Adopted"}</p>
                         </div>
                         <div className="flex flex-col border rounded-lg p-4 space-y-4">
                             <h1 className="text-base md:text-lg lg:text-xl font-semibold">Post Author Info:</h1>

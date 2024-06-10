@@ -114,7 +114,7 @@ const MyPets = () => {
                                 <DropdownMenuItem onSelect={() => setIsAlertOpen(true)}>
                                     <Button className="w-full text-center h-8 bg-red-400">Delete</Button>
                                 </DropdownMenuItem>
-                                <DropdownMenuItem  disabled={adopted ? true : false}  onSelect={() => handleStatus(_id)}>
+                                <DropdownMenuItem disabled={adopted ? true : false} onSelect={() => handleStatus(_id)}>
                                     <Button className="w-full text-center h-8 bg-green-400">Adopted</Button>
                                 </DropdownMenuItem>
                                 <DropdownMenuSeparator />
@@ -218,27 +218,35 @@ const MyPets = () => {
                 </Table>
             </div>
             <div className="flex items-center justify-end space-x-2 py-4">
-                <div className="flex-1 text-sm text-muted-foreground">
-                    {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} row(s) selected.
-                </div>
-                <div className="space-x-2">
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => table.previousPage()}
-                        disabled={!table.getCanPreviousPage()}
-                    >
-                        Previous
-                    </Button>
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => table.nextPage()}
-                        disabled={!table.getCanNextPage()}
-                    >
-                        Next
-                    </Button>
-                </div>
+
+                {
+                    table.getFilteredRowModel().rows.length > 10 ?
+                        <>
+                            <div className="flex-1 text-sm text-muted-foreground">
+                                {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} row(s) selected.
+                            </div>
+                            <div className="space-x-2">
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    onClick={() => table.previousPage()}
+                                    disabled={!table.getCanPreviousPage()}
+                                >
+                                    Previous
+                                </Button>
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    onClick={() => table.nextPage()}
+                                    disabled={!table.getCanNextPage()}
+                                >
+                                    Next
+                                </Button>
+                            </div>
+                        </> :
+                        ""
+                }
+
             </div>
         </div>
     )

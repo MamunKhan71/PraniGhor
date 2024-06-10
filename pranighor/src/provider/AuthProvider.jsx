@@ -36,11 +36,12 @@ const AuthProvider = ({ children }) => {
     const userUpdate = (name, photo) => {
         setLoading(true)
         return updateProfile(auth.currentUser, {
-            displayName: name, 
+            displayName: name,
             photoURL: photo
         })
     }
     const userSignOut = () => {
+        localStorage.removeItem('isAuth')
         return signOut(auth)
     }
     const authValues = { loading, user, signUpUser, signInUser, handleGoogleAuth, handleTwitterAuth, userUpdate, userSignOut }

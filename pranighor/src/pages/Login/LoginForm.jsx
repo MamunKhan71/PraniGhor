@@ -2,7 +2,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Link } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { FaGoogle, FaTwitter } from "react-icons/fa"
 import { useForm } from "react-hook-form"
 import UseAuth from "@/hooks/useAuth"
@@ -11,6 +11,9 @@ import { useState } from "react"
 import { useToast } from "@/components/ui/use-toast"
 
 export default function LoginForm({ switchToRegister }) {
+    const location = useLocation()
+    const navigate = useNavigate()
+
     const [viewPassword, setViewPassword] = useState(false)
     const { signInUser, handleGoogleAuth, handleTwitterAuth } = UseAuth()
     const { toast } = useToast()
@@ -23,10 +26,19 @@ export default function LoginForm({ switchToRegister }) {
         const email = data.email
         const password = data.password
         signInUser(email, password)
+            .then(() => localStorage.setItem('isAuth', 'authenticated'))
             .then(() => toast({
                 title: "Successful!",
                 description: "Login Successful!",
             }))
+            .then(() => {
+                if (location?.state) {
+                    navigate(location.state.from)
+                }
+                else {
+                    navigate('/')
+                }
+            })
             .catch(() => toast({
                 title: "Error!",
                 description: "Something went wrong!",
@@ -34,10 +46,19 @@ export default function LoginForm({ switchToRegister }) {
     }
     const handleGoogleLogin = () => {
         handleGoogleAuth()
+            .then(() => localStorage.setItem('isAuth', 'authenticated'))
             .then(() => toast({
                 title: "Successful!",
                 description: "Login Successful!",
             }))
+            .then(() => {
+                if (location?.state) {
+                    navigate(location.state.from)
+                }
+                else {
+                    navigate('/')
+                }
+            })
             .catch(() => toast({
                 title: "Error!",
                 description: "Something went wrong!",
@@ -45,10 +66,19 @@ export default function LoginForm({ switchToRegister }) {
     }
     const handleTwitterLogin = () => {
         handleTwitterAuth()
+            .then(() => localStorage.setItem('isAuth', 'authenticated'))
             .then(() => toast({
                 title: "Successful!",
                 description: "Login Successful!",
             }))
+            .then(() => {
+                if (location?.state) {
+                    navigate(location.state.from)
+                }
+                else {
+                    navigate('/')
+                }
+            })
             .catch(() => toast({
                 title: "Error!",
                 description: "Something went wrong!",

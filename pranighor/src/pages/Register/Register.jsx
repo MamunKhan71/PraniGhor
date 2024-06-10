@@ -9,11 +9,13 @@ import useAxiosPublic from "@/hooks/useAxiosPublic"
 import { useToast } from "@/components/ui/use-toast"
 import { ErrorMessage } from "@hookform/error-message"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export default function RegisterForm({ switchToLogin }) {
-    const { user, signUpUser, handleGoogleAuth, handleTwitterAuth, userUpdate } = UseAuth()
+    const { user, signUpUser, handleGoogleAuth, handleTwitterAuth, userUpdate, userSignOut } = UseAuth()
     const [viewPassword, setViewPassword] = useState(false)
     const { toast } = useToast()
+    const navigate = useNavigate()
     const axiosPublic = useAxiosPublic()
     const {
         register,
@@ -48,8 +50,12 @@ export default function RegisterForm({ switchToLogin }) {
                         axiosPublic.post('/users', newUser)
                             .then(() => toast({
                                 title: "Successful!",
-                                description: "Account Created Successfully!",
+                                description: "Account Created Successfully! Please Login",
                             }))
+                            .then(() => {
+                                userSignOut()
+                                    .then(() => navigate('/'))
+                            })
                             .catch(() => toast({
                                 title: "Error!",
                                 description: "Account Creation Unsuccessful!!",
@@ -69,8 +75,12 @@ export default function RegisterForm({ switchToLogin }) {
                 axiosPublic.post('/users', newUser)
                     .then(() => toast({
                         title: "Successful!",
-                        description: "Account Created Successfully!",
+                        description: "Account Created Successfully! Please Login",
                     }))
+                    .then(() => {
+                        userSignOut()
+                            .then(() => navigate('/'))
+                    })
                     .catch(() => toast({
                         title: "Error!",
                         description: "Account Creation Unsuccessful!!",
@@ -89,8 +99,12 @@ export default function RegisterForm({ switchToLogin }) {
                 axiosPublic.post('/users', newUser)
                     .then(() => toast({
                         title: "Successful!",
-                        description: "Account Created Successfully!",
+                        description: "Account Created Successfully! Please Login",
                     }))
+                    .then(() => {
+                        userSignOut()
+                            .then(() => navigate('/'))
+                    })
                     .catch(() => toast({
                         title: "Error!",
                         description: "Account Creation Unsuccessful!!",
@@ -156,7 +170,7 @@ export default function RegisterForm({ switchToLogin }) {
                                         value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/,
                                         message: "* Password must contain at least 6 characters, including 1 uppercase letter, 1 lowercase letter, and 1 number"
                                     }
-                                })} id="password" type={viewPassword ? "text": "password"} />
+                                })} id="password" type={viewPassword ? "text" : "password"} />
                                 <Button onClick={(e) => { e.preventDefault(); setViewPassword(!viewPassword); }} variant="ghost" size="icon" className="absolute bottom-1 right-1 h-7 w-7">
                                     <EyeIcon className="h-4 w-4" />
                                     <span className="sr-only">Toggle password visibility</span>
