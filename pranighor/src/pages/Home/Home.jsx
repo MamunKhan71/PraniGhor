@@ -10,9 +10,13 @@ import { ShopByPets } from "./ShopByPets";
 import { Link } from "react-router-dom";
 import CallToAction from "./CallToAction";
 import About from "./About";
+import { Helmet } from "react-helmet";
 const Home = () => {
     return (
         <div className="space-y-20 lg:space-y-40">
+            <Helmet>
+                <title>Pranighor | Home</title>
+            </Helmet>
             <div className="lg:relative">
                 <Hero />
                 <div className="lg:absolute lg:top-1/2 lg:-translate-y-1/2 z-20 lg:p-20 lg:max-w-3xl text-white space-y-4">

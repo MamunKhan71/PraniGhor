@@ -19,6 +19,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import useAxiosSecure from "@/hooks/useAxiosSecure"
+import { Helmet } from "react-helmet"
 const MyAdoptionRequests = () => {
     const { user } = UseAuth()
     const axiosSecure = useAxiosSecure()
@@ -152,6 +153,9 @@ const MyAdoptionRequests = () => {
 
     return (
         <div className="w-full">
+            <Helmet>
+                <title>Pranighor | Adoption Requests</title>
+            </Helmet>
             <h1 className="text-center font-semibold text-2xl">Adoption Requests</h1>
             <hr />
 

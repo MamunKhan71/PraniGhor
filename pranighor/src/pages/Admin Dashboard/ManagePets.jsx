@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useState } from "react"
 import useAxiosSecure from "@/hooks/useAxiosSecure"
+import { Helmet } from "react-helmet"
 
 const ManagePets = () => {
     const { user } = UseAuth()
@@ -143,6 +144,9 @@ const ManagePets = () => {
 
     return (
         <div className="w-full">
+            <Helmet>
+                <title>Pranighor | Admin - Manage Pets</title>
+            </Helmet>
             <h1 className="text-center font-semibold text-2xl">My Pets</h1>
             <hr />
 

@@ -15,6 +15,7 @@ import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useEffect, useRef, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SkeletonCard } from "@/components/ui/skeleton-card";
+import { Helmet } from "react-helmet";
 const DonationCampaign = () => {
     const axiosPublic = useAxiosPublic()
     // const { data: campaigns, isPending, isLoading, error } = useQuery({
@@ -62,6 +63,9 @@ const DonationCampaign = () => {
 
     return (
         <div className="space-y-16">
+            <Helmet>
+                <title>Pranighor | Campaigns</title>
+            </Helmet>
             <div className="h-96 w-full relative rounded-xl">
                 <img className="h-full w-full object-cover rounded-xl" src="header1.jpg" alt="" />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent rounded-xl" />

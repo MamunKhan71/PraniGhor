@@ -7,6 +7,7 @@ import { FaMoneyBill, FaPaw, FaUser } from "react-icons/fa"
 import UseAuth from "@/hooks/useAuth"
 import { useEffect, useState } from "react"
 import useAdmin from "@/hooks/useAdmin"
+import { Helmet } from "react-helmet"
 
 export default function Dashboard() {
     const { user, userSignOut } = UseAuth()

@@ -15,6 +15,7 @@ import axios from "axios"
 import { ErrorMessage } from "@hookform/error-message"
 import { toast } from "@/components/ui/use-toast"
 import useAxiosSecure from "@/hooks/useAxiosSecure"
+import { Helmet } from "react-helmet"
 const options = [
   { value: 'adoption', label: 'Adoption & Rescue' },
   { value: 'wellbeing', label: 'campaign Wellbeing' },
@@ -78,6 +79,9 @@ export default function CreateDonationCampaign() {
   }
   return (
     <div className="flex flex-col lg:flex-row gap-6 w-full">
+      <Helmet>
+        <title>Pranighor | Create Campaign</title>
+      </Helmet>
       <Card>
         <CardHeader className="text-center">
           <CardTitle>Create Donation Campaign</CardTitle>

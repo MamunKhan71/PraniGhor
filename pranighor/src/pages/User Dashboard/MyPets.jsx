@@ -33,6 +33,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import useAxiosSecure from "@/hooks/useAxiosSecure"
+import { Helmet } from "react-helmet"
 
 const MyPets = () => {
     const { user } = UseAuth()
@@ -181,6 +182,9 @@ const MyPets = () => {
 
     return (
         <div className="w-full">
+            <Helmet>
+                <title>Pranighor | My pets</title>
+            </Helmet>
             <h1 className="text-center font-semibold text-2xl">My Pets</h1>
             <hr />
 

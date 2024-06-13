@@ -10,6 +10,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { ErrorMessage } from "@hookform/error-message"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Helmet } from "react-helmet"
 
 export default function RegisterForm({ switchToLogin }) {
     const { user, signUpUser, handleGoogleAuth, handleTwitterAuth, userUpdate, userSignOut } = UseAuth()
@@ -113,6 +114,9 @@ export default function RegisterForm({ switchToLogin }) {
     }
     return (
         <div className="mx-auto">
+            <Helmet>
+                <title>Pranighor | Register</title>
+            </Helmet>
             <Card>
                 <CardHeader className="space-y-1 text-center">
                     <CardTitle className="text-2xl font-bold">Register</CardTitle>

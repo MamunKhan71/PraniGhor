@@ -11,6 +11,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from "@stripe/react-stripe-js"
 import CheckoutForm from "./CheckoutForm"
 import { useEffect, useState } from "react"
+import { Helmet } from "react-helmet"
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_gateway_pk)
 export default function DonationDetails() {
     const campaignId = useParams()
@@ -30,6 +31,9 @@ export default function DonationDetails() {
     }, [axiosPublic, campaignId])
     return (
         <div className="container mx-auto py-12 px-4 md:px-6">
+            <Helmet>
+                <title>Pranighor | Details</title>
+            </Helmet>
             <div className="grid md:grid-cols-2 gap-8">
                 <div>
                     <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6 space-y-4">

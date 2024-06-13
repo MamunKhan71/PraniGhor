@@ -14,6 +14,7 @@ import UseAuth from "@/hooks/useAuth";
 import axios from "axios";
 import { toast } from "@/components/ui/use-toast";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const UpdatePet = () => {
     const axiosPublic = useAxiosPublic();
@@ -117,7 +118,6 @@ const UpdatePet = () => {
             neutered: neuteredCheck,
             featuredStatus: false,
         };
-        console.log(newPetData);
 
         if (selectedFile !== null) {
             console.log("inside");
@@ -154,6 +154,9 @@ const UpdatePet = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Pranighor | Update {petData?.name}</title>
+            </Helmet>
             <h1 className="text-2xl font-bold text-center">Update {petData?.name}</h1>
             <hr />
             {petLoading ? (

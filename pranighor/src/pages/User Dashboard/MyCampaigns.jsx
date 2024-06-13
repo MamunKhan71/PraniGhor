@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useState } from "react"
+import { Helmet } from "react-helmet"
 
 const MyCampaigns = () => {
     const { user } = UseAuth()
@@ -111,6 +112,9 @@ const MyCampaigns = () => {
 
     return (
         <div className="w-full">
+            <Helmet>
+                <title>Pranighor | My Campaigns</title>
+            </Helmet>
             <h1 className="text-center font-semibold text-2xl">My Campaigns</h1>
             <hr />
 

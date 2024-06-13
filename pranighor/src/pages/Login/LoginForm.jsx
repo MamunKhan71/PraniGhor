@@ -9,6 +9,7 @@ import UseAuth from "@/hooks/useAuth"
 import { ErrorMessage } from "@hookform/error-message"
 import { useState } from "react"
 import { useToast } from "@/components/ui/use-toast"
+import { Helmet } from "react-helmet"
 
 export default function LoginForm({ switchToRegister }) {
     const location = useLocation()
@@ -85,7 +86,10 @@ export default function LoginForm({ switchToRegister }) {
             }))
     }
     return (
-        <div className="mx-auto">
+        <div className="mx-auto">.
+            <Helmet>
+                <title>Pranighor | Login</title>
+            </Helmet>
             <Card>
                 <CardHeader className="space-y-1">
                     <CardTitle className="text-2xl font-bold">Login</CardTitle>

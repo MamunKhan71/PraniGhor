@@ -15,6 +15,7 @@ import axios from "axios"
 import { useParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import useAxiosSecure from "@/hooks/useAxiosSecure"
+import { Helmet } from "react-helmet"
 const options = [
     { value: 'adoption', label: 'Adoption & Rescue' },
     { value: 'wellbeing', label: 'campaign Wellbeing' },
@@ -89,6 +90,9 @@ export default function EditDonation() {
     }
     return (
         <>
+            <Helmet>
+                <title>Pranighor | edit {data?.campaignName}</title>
+            </Helmet>
             {
                 isLoading ? <></> : <>
                     <div className="flex gap-6 w-full">

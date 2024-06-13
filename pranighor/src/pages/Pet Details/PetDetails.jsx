@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import UseAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { toast } from "@/components/ui/use-toast";
+import { Helmet } from "react-helmet";
 export default function PetDetails() {
     const { user } = UseAuth()
     const petId = useParams()
@@ -63,6 +64,9 @@ export default function PetDetails() {
     }
     return (
         <div className="w-full max-w-6xl mx-auto px-4 py-12 md:px-6 md:py-16 lg:px-8 lg:py-20">
+            <Helmet>
+                <title>Pranighor | {`${pet?.name}`}</title>
+            </Helmet>
             <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
                 <div className="relative rounded-2xl overflow-hidden">
                     <img src={pet?.image} alt={pet?.name} className="w-full h-full object-cover" />

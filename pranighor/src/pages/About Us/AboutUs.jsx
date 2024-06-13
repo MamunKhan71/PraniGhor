@@ -1,7 +1,12 @@
+import { Helmet } from "react-helmet"
 
 export default function AboutUs() {
     return (
         <section className="w-full py-12 md:py-24 lg:py-32 ">
+            <Helmet>
+                <title>Pranighor | About Us</title>
+                <meta name="pranighor-about-us" content="Helmet application" />
+            </Helmet>
             <div className="container grid items-center justify-center gap-4 px-4 space-y-16 text-center md:px-6">
                 <div className="space-y-3">
                     <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">About PraniGhor</h2>

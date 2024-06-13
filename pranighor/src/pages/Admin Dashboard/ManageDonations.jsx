@@ -18,6 +18,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useState } from "react"
 import useAxiosSecure from "@/hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const ManageDonations = () => {
 
@@ -144,6 +145,9 @@ const ManageDonations = () => {
 
     return (
         <div className="w-full">
+            <Helmet>
+                <title>Pranighor | Admin - Manage Donations</title>
+            </Helmet>
             <h1 className="text-center font-semibold text-2xl">My Donations</h1>
             <hr />
 

@@ -16,6 +16,7 @@ import ReactSearchBox from "react-search-box";
 import { useEffect, useRef, useState } from "react";
 import { GrPowerReset } from "react-icons/gr";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Helmet } from "react-helmet";
 const AllPets = () => {
     const axiosPublic = useAxiosPublic()
     const [search, setSearch] = useState([])
@@ -37,7 +38,7 @@ const AllPets = () => {
         }
     }
     const fetchMoreItems = async () => {
-        const response = await axiosPublic.get(`pets?limit=3&skip=${page * 3}`, {withCredentials: true})
+        const response = await axiosPublic.get(`pets?limit=3&skip=${page * 3}`, { withCredentials: true })
         const data = await response.data
         if (data.length === 0) {
             setHasMore(false)
@@ -87,6 +88,10 @@ const AllPets = () => {
     }
     return (
         <div className="w-full space-y-4">
+            <Helmet>
+                <title>Pranighor | All Pets</title>
+                <meta name="pranighor-all pets" content="Helmet application" />
+            </Helmet>
             <div className="bg-primary dark:bg-black h-48 rounded-lg flex flex-col items-center justify-center">
                 <h1 className="text-5xl text-white font-bold text-center">Available Pets</h1>
                 <p className=" text-gray-400 text-center">Browse the list of available pets</p>
@@ -121,6 +126,7 @@ const AllPets = () => {
                 </Select>
             </div> */}
             <div className="flex flex-col lg:flex-row gap-8 font-primary">
+
                 <div className="basis-1/5 w-full">
                     <FilterSection setFilteredSearch={setFilteredSearch} handleAge={handleAge} />
                 </div>

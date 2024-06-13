@@ -17,6 +17,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { ErrorMessage } from "@hookform/error-message";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import Editor from 'react-simple-wysiwyg';
+import { Helmet } from "react-helmet";
 const AddPet = () => {
     const [html, setHtml] = useState('my <b>HTML</b>');
     function onChange(e) {
@@ -120,6 +121,9 @@ const AddPet = () => {
 
     return (
         <div className="w-full">
+            <Helmet>
+                <title>Pranighor | Add pet</title>
+            </Helmet>
             <h1 className="text-2xl font-bold text-center">Add Pet</h1>
             <hr />
             <div className="flex flex-col lg:flex-row py-4 gap-6">
