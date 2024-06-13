@@ -1,5 +1,4 @@
 # Pranighor - Online Pet Adoption Platform
-## Assignment Variant: Assignment12_category_0009
 
 ## Live Link
 [Pranighor Live Site](https://pranighor-1658d.web.app/)
