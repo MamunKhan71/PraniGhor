@@ -52,9 +52,15 @@ To run the project locally, follow these steps:
 2. Clone the server-side repository:
    ```bash
    git clone https://github.com/programming-hero-web-course1/b9a12-server-side-MamunKhan71.git
-3. Install dependencies for both client and server::
+3. Install dependencies for both client and server:
    ```bash
-   cd b9a12-client-side-MamunKhan71 npm install cd ../b9a12-server-side-MamunKhan71 npm install
+   npm install
+4. Run The Server:
+   ```bash
+   node index.js
+5. Run the Client:
+   ```bash
+   npm run dev
 ## Admin Credentials
 #### Email: admin@pranighor.com
 ##### Password: Admin123
