@@ -4,37 +4,18 @@
 [Pranighor Live Site](https://pranighor-1658d.web.app/)
 
 ## Description
-Pranighor is an online platform dedicated to facilitating the adoption of pets. The website aims to connect potential pet adopters with pets in need of a home, providing an easy and efficient way for users to find and adopt pets. The platform also supports managing pet details, updating their status, and more.
+Pranighor connects potential pet adopters with pets in need of homes, offering a user-friendly platform for finding and adopting pets. Users can manage pet details and adoption statuses efficiently.
 
-## Features and Characteristics
-- **Pet Listings**: View a list of available pets with detailed information.
-- **Pet Details**: Each pet has a dedicated page with more information and a contact option.
-- **User Authentication**: Secure login and registration for users and administrators.
-- **Pet Management**: Admins can add, update, or remove pet listings.
-- **Status Updates**: Easily update the adoption status of pets.
-- **Real-time Notifications**: Get notified of updates and new pet listings.
-- **Responsive Design**: The website is optimized for use on various devices.
+## Features
+- **Pet Listings**: Browse detailed pet profiles.
+- **User Authentication**: Secure login for users and admins.
+- **Pet Management**: Admins manage pet listings and update statuses.
+- **Real-time Notifications**: Stay updated on pet statuses and new listings.
+- **Responsive Design**: Optimized for various devices.
 
 ## Technologies Used
-- **Frontend**:
-  - React.js
-  - Tailwind CSS
-  - React Router
-  - Lucide Icons
-  - Google Fonts
-  - Vite
-  - LottieFiles
-  - Swiper
-  - Radix UI
-  - styled-components
-  - Emotion
-
-- **Backend**:
-  - Firebase (for authentication, database, and real-time updates)
-  - ExpressJS
-  - MongoDB
-  - JWT Token
-  - Stripe (for payment processing)
+- **Frontend**: React.js, Tailwind CSS, React Router, LottieFiles, Swiper, styled-components.
+- **Backend**: Firebase (auth, database), ExpressJS, MongoDB, JWT, Stripe (payments).
 
 ## Screenshots
 ### Home Page
